@@ -1,10 +1,7 @@
 library(tidyverse)
 library(pmxTools)
-
-## ensure nm_unzip has been loaded
-
-getOption("nmDir")
-#options(nmDir = "inst/extdata/NONMEM")
+library(qptools)
+options(nmDir = system.file(package = 'qptools', 'extdata','NONMEM'))
 
 mod1298 = read_nm_qp("run1298",path = getOption("nmDir"))
 mod1298 = read_nm_qp("run1298",path = getOption("nmDir"), quiet = TRUE, clear_zip=FALSE)

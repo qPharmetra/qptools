@@ -18,17 +18,21 @@
 #' names(xml1$nonmem$problem)
 #' names(xml1$nonmem$problem$estimation)
 
-read_nm_qp = function(run,
-                      path = getOption("nmDir"),
-                      clear_zip = TRUE,
-                      quiet = FALSE)
-{
-  xmlFile = file.path(path, run, paste0(run, ".xml"))
-  if (!file.exists(xmlFile))
-    nm_unzip(run = run,
-             path = file.path(path, run),
-             quiet = T)
-  result = pmxTools::read_nm(fileName = xmlFile, quiet = quiet)
+read_nm_qp = function(
+  run,
+  path = getOption("nmDir", getwd()),
+  clear_zip = TRUE,
+  quiet = FALSE
+){
+  xmlFile <- file.path(path, run, paste0(run, ".xml"))
+  if(!(file.exists(xmlFile))){
+    nm_unzip(
+       run = run,
+       path = file.path(path, run),
+       quiet = TRUE
+    )
+  }
+  result = read_nm(fileName = xmlFile, quiet = quiet)
   if (clear_zip)
     file.remove(xmlFile)
   return(result)

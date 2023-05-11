@@ -9,5 +9,6 @@ Description: More about what it does (maybe more than one line)
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-Imports: Hmisc, tidyselect, tidyr, dplyr, ggplot2, pmxTools, yamlet, tablet, magrittr, stringr, MASS, xtable, tibble
-RoxygenNote: 7.1.1
+Imports: Hmisc, tidyselect, tidyr, dplyr, pmxTools, magrittr, stringr, MASS, xtable
+Suggests: ggplot2, tablet, tibble, tidyverse, yamlet
+RoxygenNote: 7.2.3

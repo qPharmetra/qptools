@@ -4,7 +4,12 @@
 \alias{read_nm_qp}
 \title{Read the entire XML output of a Converged NONMEM Run}
 \usage{
-read_nm_qp(run, path = getOption("nmDir"), clear_zip = TRUE, quiet = FALSE)
+read_nm_qp(
+  run,
+  path = getOption("nmDir", getwd()),
+  clear_zip = TRUE,
+  quiet = FALSE
+)
 }
 \arguments{
 \item{run}{character string in the form of 'run1'}

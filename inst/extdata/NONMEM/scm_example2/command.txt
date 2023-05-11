@@ -1,0 +1,1 @@
+C:\Perl64\bin/scm scm_config2.scm -threads=2 -do_not_drop=AGE,GNDR

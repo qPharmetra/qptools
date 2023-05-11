@@ -1,0 +1,1 @@
+C:\Perl64\bin/bootstrap bs4011.mod -dir=bs4011 -seed=87634 -stratify_on=stdo -samples=1000 -threads=16 -nodes=1

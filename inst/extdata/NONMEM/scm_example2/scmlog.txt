@@ -1,0 +1,113 @@
+Model directory C:\Projects\Software\ToolDevelopment\qpToolkit\inst\NONMEM\scm_example2/m1
+
+MODEL            TEST     BASE OFV     NEW OFV         TEST OFV (DROP)    GOAL     dDF    SIGNIFICANT PVAL
+CLAGE-5          PVAL  -5494.54612 -8791.87219           3297.32607  >   6.63490    1        YES!  0.00e+000
+CLGNDR-2         PVAL  -5494.54612 -9557.26778           4062.72165  >   6.63490    1        YES!  0.00e+000
+QAGE-5           PVAL  -5494.54612 -6123.02759            628.48146  >   6.63490    1        YES!  0.00e+000
+QGNDR-2          PVAL  -5494.54612 -8789.92425           3295.37813  >   6.63490    1        YES!  0.00e+000
+V1AGE-5          PVAL  -5494.54612 -9145.80806           3651.26194  >   6.63490    1        YES!  0.00e+000
+V1GNDR-2         PVAL  -5494.54612 -9049.80401           3555.25789  >   6.63490    1        YES!  0.00e+000
+V2AGE-5          PVAL  -5494.54612 -8810.11497           3315.56884  >   6.63490    1        YES!  0.00e+000
+V2GNDR-2         PVAL  -5494.54612 -8790.22236           3295.67624  >   6.63490    1        YES!  0.00e+000
+
+Parameter-covariate relation chosen in this forward step: CL-GNDR-2
+CRITERION              PVAL < 0.01
+BASE_MODEL_OFV       -5494.54612
+CHOSEN_MODEL_OFV     -9557.26778
+Relations included after this step:
+CL      GNDR-2  
+Q       
+V1      
+V2      
+--------------------
+
+Model directory C:\Projects\Software\ToolDevelopment\qpToolkit\inst\NONMEM\scm_example2\forward_scm_dir1/m1
+
+MODEL            TEST     BASE OFV     NEW OFV         TEST OFV (DROP)    GOAL     dDF    SIGNIFICANT PVAL
+CLAGE-5          PVAL  -9557.26778 -9746.45167            189.18389  >   6.63490    1        YES!  4.79e-043
+QAGE-5           PVAL  -9557.26778 -9560.03803              2.77025  >   6.63490    1              0.096031 
+QGNDR-2          PVAL  -9557.26778 -9559.48159              2.21381  >   6.63490    1              0.136780 
+V1AGE-5          PVAL  -9557.26778 -9658.18083            100.91305  >   6.63490    1        YES!  9.61e-024
+V1GNDR-2         PVAL  -9557.26778 -9565.89594              8.62816  >   6.63490    1        YES!  0.003310 
+V2AGE-5          PVAL  -9557.26778 -9570.10781             12.84003  >   6.63490    1        YES!  0.000339 
+V2GNDR-2         PVAL  -9557.26778 -9557.27151              0.00373  >   6.63490    1              0.951300 
+
+Parameter-covariate relation chosen in this forward step: CL-AGE-5
+CRITERION              PVAL < 0.01
+BASE_MODEL_OFV       -9557.26778
+CHOSEN_MODEL_OFV     -9746.45167
+Relations included after this step:
+CL      AGE-5   GNDR-2  
+Q       
+V1      
+V2      
+--------------------
+
+Model directory C:\Projects\Software\ToolDevelopment\qpToolkit\inst\NONMEM\scm_example2\forward_scm_dir1\scm_dir1/m1
+
+MODEL            TEST     BASE OFV     NEW OFV         TEST OFV (DROP)    GOAL     dDF    SIGNIFICANT PVAL
+QAGE-5           PVAL  -9746.45167 -9746.70201              0.25034  >   6.63490    1              0.616840 
+QGNDR-2          PVAL  -9746.45167 -9748.51641              2.06474  >   6.63490    1              0.150740 
+V1AGE-5          PVAL  -9746.45167-10176.09933            429.64766  >   6.63490    1        YES!  0.00e+000
+V1GNDR-2         PVAL  -9746.45167 -9752.87439              6.42272  >   6.63490    1              0.011267 
+V2AGE-5          PVAL  -9746.45167 -9771.67246             25.22079  >   6.63490    1        YES!  0.000001 
+V2GNDR-2         PVAL  -9746.45167 -9746.47287              0.02120  >   6.63490    1              0.884220 
+
+Parameter-covariate relation chosen in this forward step: V1-AGE-5
+CRITERION              PVAL < 0.01
+BASE_MODEL_OFV       -9746.45167
+CHOSEN_MODEL_OFV    -10176.09933
+Relations included after this step:
+CL      AGE-5   GNDR-2  
+Q       
+V1      AGE-5   
+V2      
+--------------------
+
+Model directory C:\Projects\Software\ToolDevelopment\qpToolkit\inst\NONMEM\scm_example2\forward_scm_dir1\scm_dir1\scm_dir1/m1
+
+MODEL            TEST     BASE OFV     NEW OFV         TEST OFV (DROP)    GOAL     dDF    SIGNIFICANT PVAL
+QAGE-5           PVAL -10176.09933-10176.10022              0.00089  >   6.63490    1              0.976180 
+QGNDR-2          PVAL -10176.09933-10177.77454              1.67521  >   6.63490    1              0.195560 
+V1GNDR-2         PVAL -10176.09933-10195.27729             19.17797  >   6.63490    1        YES!  0.000012 
+V2AGE-5          PVAL -10176.09933-10176.87352              0.77419  >   6.63490    1              0.378920 
+V2GNDR-2         PVAL -10176.09933-10176.22978              0.13045  >   6.63490    1              0.717960 
+
+Parameter-covariate relation chosen in this forward step: V1-GNDR-2
+CRITERION              PVAL < 0.01
+BASE_MODEL_OFV      -10176.09933
+CHOSEN_MODEL_OFV    -10195.27729
+Relations included after this step:
+CL      AGE-5   GNDR-2  
+Q       
+V1      AGE-5   GNDR-2  
+V2      
+--------------------
+
+Model directory C:\Projects\Software\ToolDevelopment\qpToolkit\inst\NONMEM\scm_example2\forward_scm_dir1\scm_dir1\scm_dir1\scm_dir1/m1
+
+MODEL            TEST     BASE OFV     NEW OFV         TEST OFV (DROP)    GOAL     dDF    SIGNIFICANT PVAL
+QAGE-5           PVAL -10195.27729-10195.28010              0.00280  >   6.63490    1              0.957780 
+QGNDR-2          PVAL -10195.27729-10197.79434              2.51704  >   6.63490    1              0.112620 
+V2AGE-5          PVAL -10195.27729-10195.87791              0.60062  >   6.63490    1              0.438340 
+V2GNDR-2         PVAL -10195.27729-10195.82365              0.54635  >   6.63490    1              0.459810 
+
+Parameter-covariate relation chosen in this forward step: --
+CRITERION              PVAL < 0.01
+--------------------
+
+
+--------------------
+Forward search done. Starting backward search inside forward top level directory
+Model directory C:\Projects\Software\ToolDevelopment\qpToolkit\inst\NONMEM\scm_example2\backward_scm_dir1/m1
+
+MODEL            TEST     BASE OFV     NEW OFV         TEST OFV (DROP)    GOAL     dDF  INSIGNIFICANT PVAL
+CLAGE-1          PVAL -10195.27729 -9671.86259           -523.41471  > -10.82800   -1              0.00e+000
+CLGNDR-1         PVAL -10195.27729 -9250.32382           -944.95348  > -10.82800   -1              0.00e+000
+V1AGE-1          PVAL -10195.27729 -9752.87438           -442.40292  > -10.82800   -1              0.00e+000
+V1GNDR-1         PVAL -10195.27729-10169.00284            -26.27446  > -10.82800   -1              2.96e-007
+
+Parameter-covariate relation chosen in this backward step: --
+CRITERION              PVAL > 0.001
+--------------------
+

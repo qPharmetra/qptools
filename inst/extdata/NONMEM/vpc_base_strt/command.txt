@@ -1,0 +1,1 @@
+C:\Perl64\bin/vpc base.mod -lst=base.lst -samples=300 -dir=vpc_base_strt -stratify_on=STRT -dv=CONC

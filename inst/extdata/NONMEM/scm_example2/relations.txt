@@ -1,0 +1,324 @@
+$VAR1 = {
+          'Q' => {
+                   'GNDR' => {
+                               'nthetas' => {
+                                              '1' => 0,
+                                              '2' => 1
+                                            },
+                               'ofv_changes' => {
+                                                  '6' => '22.46',
+                                                  '3' => '16.27',
+                                                  '7' => '24.32',
+                                                  '9' => '27.88',
+                                                  '2' => '13.82',
+                                                  '8' => '26.12',
+                                                  '1' => '10.83',
+                                                  '4' => '18.47',
+                                                  '10' => '29.59',
+                                                  '5' => '20.52'
+                                                },
+                               'inits' => {
+                                            '1' => [],
+                                            '2' => [
+                                                     '-0.001'
+                                                   ]
+                                          },
+                               'continuous' => 0,
+                               'bounds' => {
+                                             '1' => {},
+                                             '2' => {
+                                                      'upper' => [
+                                                                   5
+                                                                 ],
+                                                      'lower' => [
+                                                                   -1
+                                                                 ]
+                                                    }
+                                           },
+                               'code' => {
+                                           '1' => [
+                                                    '   QGNDR = 1
+'
+                                                  ],
+                                           '2' => [
+                                                    'IF(GNDR.EQ.1) QGNDR = 1  ; Most common
+',
+                                                    'IF(GNDR.EQ.0) QGNDR = ( 1 + THETA(1))
+'
+                                                  ]
+                                         },
+                               'state' => 1
+                             },
+                   'AGE' => {
+                              'nthetas' => {
+                                             '1' => 0,
+                                             '5' => 1
+                                           },
+                              'ofv_changes' => {},
+                              'inits' => {
+                                           '1' => [],
+                                           '5' => [
+                                                    '0.001'
+                                                  ]
+                                         },
+                              'continuous' => 1,
+                              'bounds' => {
+                                            '1' => {},
+                                            '5' => {
+                                                     'upper' => [
+                                                                  1000000
+                                                                ],
+                                                     'lower' => [
+                                                                  -1000000
+                                                                ]
+                                                   }
+                                          },
+                              'code' => {
+                                          '1' => [
+                                                   '   QAGE = 1
+'
+                                                 ],
+                                          '5' => [
+                                                   '   QAGE = ((AGE/33.72)**THETA(1))
+'
+                                                 ]
+                                        },
+                              'state' => 1
+                            }
+                 },
+          'V2' => {
+                    'GNDR' => {
+                                'nthetas' => {
+                                               '1' => 0,
+                                               '2' => 1
+                                             },
+                                'ofv_changes' => {},
+                                'inits' => {
+                                             '1' => [],
+                                             '2' => [
+                                                      '-0.001'
+                                                    ]
+                                           },
+                                'continuous' => 0,
+                                'bounds' => {
+                                              '1' => {},
+                                              '2' => {
+                                                       'upper' => [
+                                                                    5
+                                                                  ],
+                                                       'lower' => [
+                                                                    -1
+                                                                  ]
+                                                     }
+                                            },
+                                'code' => {
+                                            '1' => [
+                                                     '   V2GNDR = 1
+'
+                                                   ],
+                                            '2' => [
+                                                     'IF(GNDR.EQ.1) V2GNDR = 1  ; Most common
+',
+                                                     'IF(GNDR.EQ.0) V2GNDR = ( 1 + THETA(1))
+'
+                                                   ]
+                                          },
+                                'state' => 1
+                              },
+                    'AGE' => {
+                               'nthetas' => {
+                                              '1' => 0,
+                                              '5' => 1
+                                            },
+                               'ofv_changes' => {},
+                               'inits' => {
+                                            '1' => [],
+                                            '5' => [
+                                                     '0.001'
+                                                   ]
+                                          },
+                               'continuous' => 1,
+                               'bounds' => {
+                                             '1' => {},
+                                             '5' => {
+                                                      'upper' => [
+                                                                   1000000
+                                                                 ],
+                                                      'lower' => [
+                                                                   -1000000
+                                                                 ]
+                                                    }
+                                           },
+                               'code' => {
+                                           '1' => [
+                                                    '   V2AGE = 1
+'
+                                                  ],
+                                           '5' => [
+                                                    '   V2AGE = ((AGE/33.72)**THETA(1))
+'
+                                                  ]
+                                         },
+                               'state' => 1
+                             }
+                  },
+          'V1' => {
+                    'GNDR' => {
+                                'nthetas' => {
+                                               '1' => 0,
+                                               '2' => 1
+                                             },
+                                'ofv_changes' => {},
+                                'inits' => {
+                                             '1' => [],
+                                             '2' => [
+                                                      '-0.001'
+                                                    ]
+                                           },
+                                'continuous' => 0,
+                                'bounds' => {
+                                              '1' => {},
+                                              '2' => {
+                                                       'upper' => [
+                                                                    5
+                                                                  ],
+                                                       'lower' => [
+                                                                    -1
+                                                                  ]
+                                                     }
+                                            },
+                                'code' => {
+                                            '1' => [
+                                                     '   V1GNDR = 1
+'
+                                                   ],
+                                            '2' => [
+                                                     'IF(GNDR.EQ.1) V1GNDR = 1  ; Most common
+',
+                                                     'IF(GNDR.EQ.0) V1GNDR = ( 1 + THETA(1))
+'
+                                                   ]
+                                          },
+                                'state' => 1
+                              },
+                    'AGE' => {
+                               'nthetas' => {
+                                              '1' => 0,
+                                              '5' => 1
+                                            },
+                               'ofv_changes' => {},
+                               'inits' => {
+                                            '1' => [],
+                                            '5' => [
+                                                     '0.001'
+                                                   ]
+                                          },
+                               'continuous' => 1,
+                               'bounds' => {
+                                             '1' => {},
+                                             '5' => {
+                                                      'upper' => [
+                                                                   1000000
+                                                                 ],
+                                                      'lower' => [
+                                                                   -1000000
+                                                                 ]
+                                                    }
+                                           },
+                               'code' => {
+                                           '1' => [
+                                                    '   V1AGE = 1
+'
+                                                  ],
+                                           '5' => [
+                                                    '   V1AGE = ((AGE/33.72)**THETA(1))
+'
+                                                  ]
+                                         },
+                               'state' => 1
+                             }
+                  },
+          'CL' => {
+                    'GNDR' => {
+                                'nthetas' => {
+                                               '1' => 0,
+                                               '2' => 1
+                                             },
+                                'ofv_changes' => {},
+                                'inits' => {
+                                             '1' => [],
+                                             '2' => [
+                                                      '-0.001'
+                                                    ]
+                                           },
+                                'continuous' => 0,
+                                'bounds' => {
+                                              '1' => {},
+                                              '2' => {
+                                                       'upper' => [
+                                                                    5
+                                                                  ],
+                                                       'lower' => [
+                                                                    -1
+                                                                  ]
+                                                     }
+                                            },
+                                'code' => {
+                                            '1' => [
+                                                     '   CLGNDR = 1
+'
+                                                   ],
+                                            '2' => [
+                                                     'IF(GNDR.EQ.1) CLGNDR = 1  ; Most common
+',
+                                                     'IF(GNDR.EQ.0) CLGNDR = ( 1 + THETA(1))
+'
+                                                   ]
+                                          },
+                                'state' => 1
+                              },
+                    'AGE' => {
+                               'nthetas' => {
+                                              '1' => 0,
+                                              '5' => 1
+                                            },
+                               'ofv_changes' => {},
+                               'inits' => {
+                                            '1' => [],
+                                            '5' => [
+                                                     '0.001'
+                                                   ]
+                                          },
+                               'continuous' => 1,
+                               'bounds' => {
+                                             '1' => {},
+                                             '5' => {
+                                                      'upper' => [
+                                                                   1000000
+                                                                 ],
+                                                      'lower' => [
+                                                                   -1000000
+                                                                 ]
+                                                    }
+                                           },
+                               'code' => {
+                                           '1' => [
+                                                    '   CLAGE = 1
+'
+                                                  ],
+                                           '5' => [
+                                                    '   CLAGE = ((AGE/33.72)**THETA(1))
+'
+                                                  ]
+                                         },
+                               'state' => 1
+                             }
+                  }
+        };
+$VAR1->{'Q'}{'AGE'}{'ofv_changes'} = $VAR1->{'Q'}{'GNDR'}{'ofv_changes'};
+$VAR1->{'V2'}{'GNDR'}{'ofv_changes'} = $VAR1->{'Q'}{'GNDR'}{'ofv_changes'};
+$VAR1->{'V2'}{'AGE'}{'ofv_changes'} = $VAR1->{'Q'}{'GNDR'}{'ofv_changes'};
+$VAR1->{'V1'}{'GNDR'}{'ofv_changes'} = $VAR1->{'Q'}{'GNDR'}{'ofv_changes'};
+$VAR1->{'V1'}{'AGE'}{'ofv_changes'} = $VAR1->{'Q'}{'GNDR'}{'ofv_changes'};
+$VAR1->{'CL'}{'GNDR'}{'ofv_changes'} = $VAR1->{'Q'}{'GNDR'}{'ofv_changes'};
+$VAR1->{'CL'}{'AGE'}{'ofv_changes'} = $VAR1->{'Q'}{'GNDR'}{'ofv_changes'};

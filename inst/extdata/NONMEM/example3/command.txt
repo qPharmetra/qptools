@@ -1,0 +1,10 @@
+<<<<<<< .mine
+C:\Perl64\bin/execute example3.ctl -output_dir=example3 -dir=example3 -nodes=2
+C:\Perl64\bin/execute example3.ctl -output_dir=example3 -dir=example3 -nodes=2
+C:\Perl64\bin/execute example3.ctl -output_dir=example3 -dir=example3 -nodes=2
+C:\Perl64\bin/execute example3.ctl -output_dir=example3 -dir=example3 -nodes=2
+C:\Perl64\bin/execute example3.ctl -output_dir=example3 -dir=example3 -nodes=2
+C:\Perl64\bin/execute example3.ctl -output_dir=example3 -dir=example3 -nodes=2
+=======
+C:\Perl64\bin/execute example3.ctl -output_dir=example3 -dir=example3 -nodes=6
+>>>>>>> .r33433

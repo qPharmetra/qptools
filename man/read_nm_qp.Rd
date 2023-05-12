@@ -21,7 +21,7 @@ read_nm_qp(
 \item{quiet}{suppresses the messages (defaults to not suppressing)}
 }
 \value{
-List of all elements of the XML output of a NONMEM model run
+pmx_nm: List of all elements of the XML output of a NONMEM model run
 }
 \description{
 Extracts the output of a completed NONMEM run that is stored in an XML file.
@@ -36,7 +36,12 @@ names(xml1$nonmem$problem$estimation)
 }
 \seealso{
 Other nm: 
+\code{\link{as_pmx_canonical}()},
+\code{\link{definitions.nonmem}()},
 \code{\link{extract_varcov}()},
+\code{\link{get_est_table.default}()},
+\code{\link{get_est_table.nonmem}()},
+\code{\link{get_est_table}()},
 \code{\link{nm_cov_table}()},
 \code{\link{nm_covmat_extract}()},
 \code{\link{nm_unzip}()},

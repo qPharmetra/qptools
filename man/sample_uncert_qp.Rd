@@ -43,7 +43,12 @@ dim(unc1)
 }
 \seealso{
 Other nm: 
+\code{\link{as_pmx_canonical}()},
+\code{\link{definitions.nonmem}()},
 \code{\link{extract_varcov}()},
+\code{\link{get_est_table.default}()},
+\code{\link{get_est_table.nonmem}()},
+\code{\link{get_est_table}()},
 \code{\link{nm_cov_table}()},
 \code{\link{nm_covmat_extract}()},
 \code{\link{nm_unzip}()},

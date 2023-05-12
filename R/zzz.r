@@ -28,5 +28,5 @@
   #packageStartupMessage(paste(R.installation.validation()$IQ.message))
   #packageStartupMessage("Installation Qualification disabled.  Unvalidated System.")
   #packageStartupMessage("setting stringsAsFactors to FALSE as qPharmetra default.")
-  if(is.null(getOption("qpExampleDir"))) options(qpExampleDir = file.path(path.package("nmParse"),"extdata/NONMEM"))
+  if(is.null(getOption("qpExampleDir"))) options(qpExampleDir = file.path(path.package("qptools"),"extdata", "NONMEM"))
 }

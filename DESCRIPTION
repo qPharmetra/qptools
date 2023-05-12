@@ -2,13 +2,12 @@ Package: qptools
 Type: Package
 Title: What the Package Does (Title Case)
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Author: Klaas Prins
+Maintainer: Klaas Prins <klaas.prins@qpharmetra.com>
+Description: Integrative tools for pharmacometrics.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-Imports: Hmisc, tidyselect, tidyr, dplyr, pmxTools, magrittr, stringr, MASS, xtable
+Imports: Hmisc, tidyselect, tidyr, dplyr, pmxTools, magrittr, stringr, MASS, xtable, nonmemica
 Suggests: ggplot2, tablet, tibble, tidyverse, yamlet
 RoxygenNote: 7.2.3

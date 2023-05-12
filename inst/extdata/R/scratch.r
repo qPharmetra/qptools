@@ -1,24 +1,33 @@
 library(tidyverse)
 library(pmxTools)
 library(qptools)
-options(nmDir = system.file(package = 'qptools', 'extdata','NONMEM'))
+library(nonmemica)
+
+nonmem <- system.file(package = 'qptools', 'extdata','NONMEM')
+fields <- c('symbol','number','transform','unit') # as in run1298, revised
+
+# harmonization of nonmemica and qptools depends on project == nmDir
+psn_options(project = nonmem, fields = fields)
+options(nmDir = nonmem)
 
 mod1298 = read_nm_qp("run1298",path = getOption("nmDir"))
-mod1298 = read_nm_qp("run1298",path = getOption("nmDir"), quiet = TRUE, clear_zip=FALSE)
-mod1298 %>% filter(!is.na())
+#mod1298 = read_nm_qp("run1298",path = getOption("nmDir"), quiet = TRUE, clear_zip=FALSE)
 mod1298 %>% get_theta()
 mod1298 %>% get_omega()
 mod1298 %>% get_sigma()
-mod1298 %>% get_est_table()
+mod1298 %>% get_est_table %>% head
 mod1298 %>% get_est_table() %>% slice(5:12,99:107,197:202)
+# 'run1298' %>% definitions
+
+
 
 
 #greek=paste0(toupper(paste0(substring(item, 1,5)))
-nm_definitions_conversion = function(run
-                                     , path = getOption("nmDir")
-                                     , extension="mod"
-)
-{
+nm_definitions_conversion = function(
+  run, 
+  path = getOption("nmDir"), 
+  extension="mod"
+){
   nonmemica::definitions(paste0(run,fxs(extension,".   "))
                          , project = file.path(path)
   ) %>%

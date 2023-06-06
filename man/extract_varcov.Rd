@@ -53,7 +53,11 @@ Other nm:
 \code{\link{nm_cov_table}()},
 \code{\link{nm_covmat_extract}()},
 \code{\link{nm_unzip}()},
-\code{\link{read_nm_qp}()},
+\code{\link{read_nm.character}()},
+\code{\link{read_nm.file}()},
+\code{\link{read_nm.run}()},
+\code{\link{read_nm.xml}()},
+\code{\link{read_nm}()},
 \code{\link{sample_uncert_qp}()}
 }
 \concept{nm}

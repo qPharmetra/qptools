@@ -6,14 +6,15 @@
 \usage{
 nm_unzip(
   run,
+  rundir = normalizePath(getOption("nmDir", getwd())),
+  path = file.path(rundir, run),
   extension = ".xml",
   filename = paste0(run, fxs(extension, ".   ")),
-  path = file.path(normalizePath(getOption("nmDir", getwd())), run),
+  zipped = file.path(path, filename),
   tmpdir = tempdir(),
   temp = FALSE,
-  outdir = ifelse(temp, tmpdir, path),
-  zip.filename = file.path(path, filename),
-  zip.call = getOption("unzip.call"),
+  outdir = ifelse(temp, tmpdir, dirname(zipped)),
+  call = getOption("unzip.call"),
   quiet = TRUE,
   ...
 )
@@ -21,21 +22,21 @@ nm_unzip(
 \arguments{
 \item{run}{character (run name)}
 
+\item{path}{path to directory enclosing the NONMEM run directory}
+
 \item{extension}{character: extension to append to run}
 
 \item{filename}{character: supersedes run, extension}
 
-\item{path}{path to directory enclosing the NONMEM run directory}
+\item{zipped}{character: path and source filename, supersedes extension, filename, and path}
+
+\item{temp}{whether to unzip to a temporary directory}
 
 \item{outdir}{character: one of \code{path} or \code{tempdir}}
 
-\item{zip.call}{character: system unzip invocation}
+\item{call}{character: system unzip invocation}
 
 \item{tempdir}{character: path to temporary working directory if \code{temp} is true}
-
-\item{temp:}{whether to unzip to a temporary directory}
-
-\item{zip.filename:}{character: path and source filename, supersedes extension, filename, and path}
 }
 \description{
 Unzips a NONMEM file, by default the xml output
@@ -51,7 +52,11 @@ Other nm:
 \code{\link{get_est_table}()},
 \code{\link{nm_cov_table}()},
 \code{\link{nm_covmat_extract}()},
-\code{\link{read_nm_qp}()},
+\code{\link{read_nm.character}()},
+\code{\link{read_nm.file}()},
+\code{\link{read_nm.run}()},
+\code{\link{read_nm.xml}()},
+\code{\link{read_nm}()},
 \code{\link{sample_uncert_qp}()}
 }
 \concept{nm}

@@ -47,7 +47,6 @@ paste.function = paste0)
 }
 \seealso{
 Other format: 
-\code{\link{formatted_signif}()},
 \code{\link{repeat_nth}()},
 \code{\link{swap}()}
 }

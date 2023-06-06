@@ -8,6 +8,6 @@ Description: Integrative tools for pharmacometrics.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-Imports: Hmisc, tidyselect, tidyr, dplyr, pmxTools, magrittr, stringr, MASS, xtable, nonmemica
+Imports: Hmisc, tidyselect, tidyr, dplyr, pmxTools, magrittr, stringr, MASS, nonmemica
 Suggests: ggplot2, tablet, tibble, tidyverse, yamlet
 RoxygenNote: 7.2.3

@@ -42,7 +42,6 @@ repeat_nth(c(1,1,1,1,2,2,2), before = "BI", after = "CYCLE", pos = 1)
 }
 \seealso{
 Other format: 
-\code{\link{formatted_signif}()},
 \code{\link{orderedNumeric}()},
 \code{\link{swap}()}
 }

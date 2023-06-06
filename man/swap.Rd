@@ -25,7 +25,6 @@ swap(my.vect,c(1,2,3,4),c(11,22,33,44))
 }
 \seealso{
 Other format: 
-\code{\link{formatted_signif}()},
 \code{\link{orderedNumeric}()},
 \code{\link{repeat_nth}()}
 }

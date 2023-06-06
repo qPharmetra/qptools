@@ -52,6 +52,6 @@ Other nm:
 \code{\link{read_nm.file}()},
 \code{\link{read_nm.xml}()},
 \code{\link{read_nm}()},
-\code{\link{sample_uncert_qp}()}
+\code{\link{sample_uncert}()}
 }
 \concept{nm}

@@ -24,6 +24,7 @@ read_nm <- function(x, ...)UseMethod('read_nm')
 #' @export
 #' @family nm
 #' @importFrom pmxTools read_nm
+#' @importFrom utils file_test
 #' @param x character: a file path, or the name of a run in 'directory', or xml content
 #' @param directory character: optional location of x
 #' @param quiet logical: flag for displaying intermediate output
@@ -40,12 +41,23 @@ read_nm <- function(x, ...)UseMethod('read_nm')
 #'# consider multiple ways of addressing an xml file
 #'
 #' dir <- getOption("qpExampleDir")
+#' options(nmDir = dir)
 #' run <- 'example1'
-#' zip <- 'example1.xml.7z'
-#' path <- file.path(dir, run, file)
+#' file <- 'example1.xml'
+#' zipped <- 'example1.xml.7z'
+#' path <- file.path(dir, run, zipped)
 #' file.exists(path)
-#' to <- nm_unzip(zip.filename = path)
-#' xml <- readLines(path)
+#' xmlfile <- nm_unzip(zipped = path)
+#' xml <- readLines(xmlfile)
+#' 
+#' nm1 <- read_nm(run)
+#' nm2 <- read_nm(run, directory = dir)
+#' nm3 <- read_nm(file) #
+#' nm4 <- read_nm(file, directory = dir) #
+#' nm5 <- read_nm(xmlfile)
+#' nm6 <- read_nm(xml) # 
+#' 
+#' unlink(xmlfile)
 
 
 read_nm.character <- function(
@@ -59,9 +71,28 @@ read_nm.character <- function(
    stopifnot(is.logical(quiet), length(quiet) == 1)
    stopifnot(is.logical(clean), length(clean) == 1)
    if(length(x) > 1) x <- paste(x, collapse = '\n')
-   class(x) <- 'xml'
-   if(file_test('-f', x) || file_test('-f', file.path(directory, x))) class(x) <- 'file'
-   if(file_test('-d', x) || file_test('-d', file.path(directory, x))) class(x) <- 'run'
+   run <- sub('\\.xml$', '', x)
+   file <- x
+   filepath <- file.path(directory, run, file)
+   dirpath <- file.path(directory, x)
+   isXml <- FALSE
+   isFile <- FALSE
+   isDir <- FALSE
+   if(grepl('</nm:output>', x)) isXml <- TRUE
+   try(silent = TRUE, if(file_test('-f', x)) isFile <- TRUE)
+   try(silent = TRUE, if(file_test('-f', filepath)) isFile <- TRUE)
+   try(silent = TRUE, if(file_test('-d', x)) isDir <- TRUE)
+   try(silent = TRUE, if(file_test('-d', dirpath)) isDir <- TRUE)
+   if(sum(isXml, isFile, isDir) == 0){
+      message('input assumed to be xml')
+      isXml <- TRUE
+   }
+   if(sum(isXml, isFile, isDir) > 1){
+      stop('input not clearly xml, file, or directory')
+   }
+   if(isXml) class(x) <- 'xml'
+   if(isFile) class(x) <- 'file'
+   if(isDir) class(x) <- 'run'
    read_nm(x, directory = directory, quiet = quiet, clean = clean, ...)
 }
 
@@ -112,7 +143,11 @@ read_nm.file <- function(
    stopifnot(length(x) == 1)
    stopifnot(is.character(directory), length(directory) == 1)
    stopifnot(is.logical(quiet), length(quiet) == 1)
-   if(file_test('-f', file.path(directory, x))) x <- file.path(directory, x)
+   run <- sub('\\.xml$', '', x)
+   file <- x
+   filepath <- file.path(directory, run, file)
+   if(!file.exists(x)) x <- filepath
+   if(!file.exists(x))stop('could not find ', file, ' or ', filepath)
    x <- as.character(x)
    y <- pmxTools::read_nm(x, quiet = quiet, ...)
    class(y) <- 'nonmem'
@@ -128,8 +163,8 @@ read_nm.file <- function(
 #' 
 #' @param x character string in the form of 'run1'
 #' @param directory parent directory of the run folder where .xml file resides
-#' @param clean should the unzipped file be removed when done (defaults to TRUE, but ignored if file was already present)
 #' @param quiet suppresses the messages (defaults to not suppressing)
+#' @param clean should the unzipped file be removed when done (defaults to TRUE, but ignored if file was already present)
 #' @param ... passed arguments
 #' @return nonmem: List of all elements of the XML output of a NONMEM model run
 #' @export

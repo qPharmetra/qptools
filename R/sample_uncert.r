@@ -1,6 +1,5 @@
 globalVariables(c('seed', 'est.step', 'nm_object', 'no_steps'))
 
-# ROXYGEN Documentation
 #' Draw Samples from the Quasi-Posterior Parameter Estimate Distribution.
 #' @description Read point estimates and the variance-covariance matrix of a model run and create a distribution of parameter estimates forming a sample of the quasi-posterior parameter distribution
 #' @param run character string in the form of 'run1'
@@ -22,11 +21,11 @@ globalVariables(c('seed', 'est.step', 'nm_object', 'no_steps'))
 #' @importFrom stringr str_count
 #' @examples
 #'
-#' unc1 = sample_uncert_qp(run = "example1", path = getOption("qpExampleDir"))
-#' unc1 = sample_uncert_qp(run = "example1", path = getOption("qpExampleDir"), quiet=TRUE, n=100)
+#' unc1 = sample_uncert(run = "example1", path = getOption("qpExampleDir"))
+#' unc1 = sample_uncert(run = "example1", path = getOption("qpExampleDir"), quiet=TRUE, n=100)
 #' dim(unc1)
 
-sample_uncert_qp = function(run,
+sample_uncert = function(run,
                             path = getOption("nmDir"),
                             n = 10,
                             seed = 1234,
@@ -34,9 +33,9 @@ sample_uncert_qp = function(run,
                             clear_zip = TRUE,
                             quiet = FALSE)
 {
-  nm_object = read_nm_qp(
-    run = run,
-    path = path,
+  nm_object = read_nm(
+    run,
+    directory = path,
     clear_zip = clear_zip,
     quiet = quiet
   )

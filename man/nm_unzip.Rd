@@ -28,7 +28,7 @@ nm_unzip(
 
 \item{filename}{character: supersedes run, extension}
 
-\item{zipped}{character: path and source filename, supersedes extension, filename, and path}
+\item{zipped}{character: full path to zipped file (7z extension is optional); supersedes other arguments if supplied}
 
 \item{temp}{whether to unzip to a temporary directory}
 
@@ -38,9 +38,32 @@ nm_unzip(
 
 \item{tempdir}{character: path to temporary working directory if \code{temp} is true}
 }
+\value{
+invisible path to unzipped file
+}
 \description{
 Unzips a NONMEM file, by default the xml output
 of a NONMEM run.  Uses 7z decompression.
+}
+\examples{
+options(nmDir = getOption('qpExampleDir'))
+dir <- getOption("qpExampleDir")
+unz <- nm_unzip('example1')
+unz
+unlink(unz)
+run <- 'example1'
+file <- 'example1.xml'
+zipped <- 'example1.xml.7z'
+path <- file.path(dir, run, file)
+zpath <-file.path(dir, run, zipped)
+file.exists(path)
+file.exists(zpath)
+to <- nm_unzip(zipped = path)
+file.exists(to)
+unlink(to)
+to <- nm_unzip(zipped = zpath)
+file.exists(to)
+unlink(to)
 }
 \seealso{
 Other nm: 
@@ -57,7 +80,7 @@ Other nm:
 \code{\link{read_nm.run}()},
 \code{\link{read_nm.xml}()},
 \code{\link{read_nm}()},
-\code{\link{sample_uncert_qp}()}
+\code{\link{sample_uncert}()}
 }
 \concept{nm}
 \keyword{internal}

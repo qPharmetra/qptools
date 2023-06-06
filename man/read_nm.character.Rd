@@ -44,12 +44,23 @@ names(nm$nonmem$problem$estimation)
 # consider multiple ways of addressing an xml file
 
 dir <- getOption("qpExampleDir")
+options(nmDir = dir)
 run <- 'example1'
-zip <- 'example1.xml.7z'
-path <- file.path(dir, run, file)
+file <- 'example1.xml'
+zipped <- 'example1.xml.7z'
+path <- file.path(dir, run, zipped)
 file.exists(path)
-to <- nm_unzip(zip.filename = path)
-xml <- readLines(path)
+xmlfile <- nm_unzip(zipped = path)
+xml <- readLines(xmlfile)
+
+nm1 <- read_nm(run)
+nm2 <- read_nm(run, directory = dir)
+nm3 <- read_nm(file) #
+nm4 <- read_nm(file, directory = dir) #
+nm5 <- read_nm(xmlfile)
+nm6 <- read_nm(xml) # 
+
+unlink(xmlfile)
 }
 \seealso{
 Other nm: 
@@ -66,6 +77,6 @@ Other nm:
 \code{\link{read_nm.run}()},
 \code{\link{read_nm.xml}()},
 \code{\link{read_nm}()},
-\code{\link{sample_uncert_qp}()}
+\code{\link{sample_uncert}()}
 }
 \concept{nm}

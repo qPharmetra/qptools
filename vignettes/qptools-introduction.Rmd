@@ -1,0 +1,319 @@
+---
+title: "Introduction to qptools"
+author: "Klaas Prins & Tim Bergsma"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    code_folding: show
+    keep_md : TRUE
+    fig.width: 8
+    fig.height: 6
+    theme: united
+    highlight: tango
+vignette: >
+  %\VignetteIndexEntry{An Introduction to qptools}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE)
+```
+
+# Set things up
+
+```{r}
+library(qptools) 
+library(nonmemica)
+library(pmxTools)
+library(dplyr)
+library(magrittr)
+library(yamlet)
+library(wrangle)
+
+options(qpExampleDir = system.file(package="qptools") %>% file.path(., "extdata/NONMEM")) 
+
+getOption("qpExampleDir")
+getOption("qpExampleDir") %>% dir
+
+```
+
+# Show LIBRARY functions
+
+Forces library calls to be based on declared version or higher, or R will stop.
+
+```{r}
+LIBRARY("qptools")
+```
+
+# Show 'base' functions
+
+Non-exhaustive. Check others in the INDEX.
+
+```{r}
+
+example(fxs)
+example(aadp)
+example(repeat_nth)
+example("asNumeric")
+example("isNumeric")
+
+```
+
+# NONMEM post-processing tools
+
+Arguments in the nm_xxx function base has changed. Previously we had 'run' and 'path', this is now replaced by 'x' and 'directory'. This was chosen as this is largely in sync with packages 'nonmemica' and 'pmsTools' with which 'qptools' collaborates or that it draws from or refers to.
+
+We simply state the run as a character and let the 'nm_xxx' tool do its work on it. Tool is able to figure out of it's character text (e.g. "run1"), or if it's already pre-processed by another 'qptools' function.
+
+
+## Example Directory
+
+Let's first check out the example directory that comes with 'qptools'.
+
+```{r}
+getOption("qpExampleDir") %>% file.path(., "run105") %>% dir() ## no xml file, only zipped file
+getOption("qpExampleDir") %>% file.path(.) %>% nm_unzip("run105", rundir=., extension = "xml")
+getOption("qpExampleDir") %>% file.path(., "run105") %>% dir() ## there it is
+```
+
+## Set default NONMEM directory
+
+```{r}
+options(nmDir = getOption("qpExampleDir"))
+```
+
+Now we do not have to specify directory anymore -it's automatically used throughout `nm_xxx`.
+
+## The read_xxx function base
+
+The NONMEM tools `nm_xxx` also feature `read_xxx` base and call these under the hood for parameter tables for example. See for yourself what this does.
+
+```{r}
+
+"run105" %>% read_lst()
+"run105" %>% read_lst() %>% writeLines()
+
+"run105" %>% read_mod()
+"run105" %>% read_mod() %>% writeLines()
+
+"run105" %>% read_ext() 
+"run105" %>% read_ext() %>% as.list
+"run105" %>% read_ext() %>% as.list %>% names
+"run105" %>% read_ext() %>% as.matrix
+"run105" %>% get_ext() 
+
+```
+
+Function `get_ext` reads ext file, strips iterations, then creates backbone par table.
+
+When you read the ext file and turn it into `as.list` or `as matrix  it turns the 1 line character input ext file into a understandable matrix.
+
+## lol - last-of-list
+
+Everything that is based on output from a NONMEM run is a list of length equal to the number of iterations you did. One iteration? Still a list. Use `lol` to get the last (or nth) of that list returned (as a data.frame in case of `nm_xxx`)..
+
+```{r lol}
+
+"run105" %>% get_ext() %>% lol
+"run105" %>% get_ext() %>% lol(n=2)
+
+```
+
+## Parameter Tables
+
+Extensive post-processing for easy-to-include parameter tables using the function `nm_params_table`.
+
+### PsN naming recap
+
+name; unit; transformation
+
+Alternatives that OK: 
+
+$THETA 1 ; Absorption Rate Constant ; 1/h ; LIN 
+
+$THETA 1 ; KA                       ; 1/h ; LIN ; Absorption Rate Constant
+
+$THETA 1 ; Absorption Rate Constant ; 1/h ; LIN ; KA
+
+Will all work.
+
+$THETA 1 ; KA  
+
+$THETA 1 ; KA                       ; 1/h ; LIN ; 
+
+$THETA 1 ; KA                       ; 1/h ; LIN ; Absorption Rate Constant
+
+Note that PsN will paste together whatever comes after the 2nd semi-colon, so the transformation may become the paste of position 3 and whatever comes after. This will make PsN's sumo -trans option fail, so you know. `nm_params_table()` will work just fine.
+
+### Functions supporting nm_params_tables()
+
+Shrinkage (`nm_shrinkage` and (off-)diagonals (`find_diag`).
+
+```{r shrinkage and diagonals}
+
+## functions underneath that may be of interest
+"run103" %>% nm_shrinkage()
+"run103" %>% nm_shrinkage(eta.shrinkage.clue = "ETASHRINKVR") # check eps.shrinkage.clue = "EPSSHRINKVR"
+"run105" %>% find_diag()
+
+```
+
+### Simple parameter tables 
+
+Explore the examples.
+
+```{r simple parameter tables}
+
+"run103" %>% nm_params_table()
+"run103" %>% nm_params_table() %>% names
+"run103" %>% nm_params_table() %>% lol
+
+"run103" %>% nm_params_table_short() %>% lol
+"run103" %>% nm_params_table() %>% format 
+"run103" %>% nm_params_table() %>% format()
+
+```
+
+You're getting a parameter table for each estimation method. So the output is a list!
+
+Function `lol`  - see explanation above. All 'qptools' functions are methods able to work with list of data frames or data frames themselves. No worries.
+
+### Formatting parameter tables
+
+```{r format nm_param_table}
+
+"run103" %>% nm_params_table %>% 
+  lol %>% 
+  format(paste_label_unit='label')
+
+## doing lol either before or after works
+"run103" %>% nm_params_table %>% 
+  format(paste_label_unit='label') %>% 
+  lol
+
+## rename columns as you desire - super-easy
+"run103" %>% nm_params_table %>% 
+   lol %>% 
+   format(paste_label_unit='symbol') %>%
+  select(-Parameter) %>%
+  rename(Parameter = Description)
+
+## formatting, AND preserve all intermediate material created using argument 'pretty=FALSE'
+"run103" %>% nm_params_table %>% 
+   lol %>% 
+   format(paste_label_unit='label', pretty = FALSE)
+
+## use the 4th labeling element instead of the 1st 
+"run103" %>% nm_params_table %>% 
+   format(paste_label_unit='symbol') %>%
+  lol # does not matter when you select the estimation method. Before, after none (defaulting to last). all good
+
+```
+
+Check the results and understand the differences.
+
+### parameter tables - extra
+
+```{r}
+
+"run103" %>% nm_params_table %>% 
+  lol %>% 
+  format(paste_label_unit='symbol', pretty=FALSE) %>%
+  filter(on==0)
+  
+```
+
+format with pretty = FALSE ensures that the formatting is performed but no column is removed. This leaves one with everything one can imagine, even the functions used for transformation. 
+Explore the table provided and see how one can shrink it using `filter(on==0 or 1)` (include / exclude off-diagonals while keeping the THETAs of course) or `filter(fix=0 or 1)` to focus on (non-)estimated parameters.
+
+Check `?format.nmpartab` for useful arguments and examples.
+
+## Show the modeled data
+
+Looking at the NONMEM analysis data with or without the `$IGNORE` and `$ACCEPT` components applied.
+
+```{r}
+
+"run105" %>% nm_parse_dollar_data
+"run105" %>% load_modeled_dataset() %>% as_tibble()
+"run105" %>% load_modeled_dataset(visibility = TRUE) %>% as_tibble()
+
+"run105" %>% load_modeled_dataset(visibility = TRUE) %>% decorations
+## VISIBLE shows original dataset marked for included (VISIBLE=1) or excluded (VISIBLE=0) in the NONMEM model.
+
+
+1001 %>% get_xpose_tables(x=.,directory=system.file('project/model',package='nonmemica'))
+try(1001 %>% superset(project=system.file('project/model',package='nonmemica'))) # no
+1001 %>% superset(project=system.file('project/model',package='nonmemica'),ext="ctl") %>% as_tibble # yes
+
+```
+
+The difference between superset() (nonmemica) and load_modeled_dataset() is the former returns a data.frame with columns of class character while the latter returns a tibble with exclusively double class.
+
+## Load output dataset using get_xpose_tables()
+
+```{r get_xpose_table}
+
+"run103" %>% get_xpose_tables
+
+paste0("run", c(100,103,105)) %>% lapply(., function(x) get_xpose_tables(x))
+
+library(ggplot2)
+library(tidyr)
+
+paste0("run", c(100,103,105)) %>% lapply(., function(x) get_xpose_tables(x) %>% mutate(model=x)) -> tmp
+do.call("rbind", tmp) %>%
+  pivot_longer(cols = c(IPRED,PRED)) %>%
+  ggplot(aes(y=DV,x=value)) +
+  geom_point(col = "darkslategrey") +
+  stat_smooth(method='loess', alpha=0.33) +
+  facet_grid(name~model)
+
+```
+
+`get_xpose_tables` is like get.xpose.tables from qpToolkit, but even more foolproof (non-xpose table names, column names nearly similar) and this returning a tibble for clear print results / overview.
+
+## Make a Runrecord 
+
+Using `nm_runrecord`.
+
+By default the last estimation method from each run is used to compile the runrecord.
+
+```{r}
+
+paste0("run", 100:105) %>% nm_runrecord()
+paste0("run", 100:105) %>% nm_runrecord(. ,index = c(1,3,3))
+paste0("run", 100:105) %>% nm_runrecord(. ,index = c(1,3,3,2,1))
+
+paste0("run", c(100,103,105)) %>% nm_runrecord_graph()
+
+```
+
+## Process an SCM table
+
+There is a 17-character limit to the covariate effect name! So consider using 'short' names.
+
+```{r}
+
+getOption("qpExampleDir") %>% dir
+
+## full SCM forward backward and final
+nm_process_scm(directory = file.path(getOption("nmDir"),"scm_example2")) %>% as_tibble()
+
+#now play with chosen, direction to get what you want.
+
+## forward steps
+nm_process_scm(directory = file.path(getOption("nmDir"),"scm_example2")) %>% filter(chosen==0&direction==1)
+## backward steps
+nm_process_scm(directory = file.path(getOption("nmDir"),"scm_example2")) %>% filter(direction==-1)
+nm_process_scm(directory = file.path(getOption("nmDir"),"scm_example2")) %>% filter(chosen==0&direction==-1)
+
+## final model
+nm_process_scm(directory = file.path(getOption("nmDir"),"scm_example2")) %>% filter(chosen==1)
+
+```
+

@@ -1,0 +1,32 @@
+CLGNDR-2         PVAL  -5494.54612 -9557.26778           4062.72165  >   6.63490    1        YES!  0.00e+000
+CLAGE-5          PVAL  -9557.26778 -9746.45167            189.18389  >   6.63490    1        YES!  4.79e-043
+V1AGE-5          PVAL  -9746.45167-10176.09933            429.64766  >   6.63490    1        YES!  0.00e+000
+V1GNDR-2         PVAL -10176.09933-10195.27729             19.17797  >   6.63490    1        YES!  0.000012 
+Relations included after final step:
+CL      AGE-5   GNDR-2  
+Q       
+V1      AGE-5   GNDR-2  
+V2      
+--------------------
+
+Relations included after final step:
+CL      AGE-5   GNDR-2  
+Q       
+V1      AGE-5   GNDR-2  
+V2      
+--------------------
+
+Relations included after final step:
+CL      AGE-5   GNDR-2  
+Q       
+V1      AGE-5   GNDR-2  
+V2      
+--------------------
+
+Relations included after final step:
+CL      AGE-5   GNDR-2  
+Q       
+V1      AGE-5   GNDR-2  
+V2      
+--------------------
+

@@ -1,7 +1,7 @@
 Package: qptools
 Type: Package
 Title: Integrative Tools for Pharmacometrics
-Version: 0.4.5
+Version: 0.4.8
 Author: Klaas Prins, Tim Bergsma, Max Lagraauw 
 Maintainer: Klaas Prins <klaas.prins@qpharmetra.com>
 Description: Integrative tools for pharmacometrics.

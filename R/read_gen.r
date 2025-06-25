@@ -19,9 +19,7 @@ read_gen <- function(x, ...)UseMethod('read_gen')
 #' If x is a file, possibly in \code{directory}, it is read with \code{\link{read_gen.file}}.
 #' If x implies a zipped file, possibly in \code{directory}, it is unzipped first.
 #' If x is a directory, possibly in \code{directory}, it is read with \code{\link{read_gen.run}}.
-#' Requesting a 7z file ALWAYS gives the unzipped version if it already exists!
-#' (Any 7z extension is removed automatically, and the 7z version of the file is 
-#' sought only if the regular version is missing.)
+#' If an unzipped version of the file already exists in the target directory (local or temporary) it is removed before unzipping proceeds.
  
 #' @export
 #' @family gen
@@ -31,7 +29,7 @@ read_gen <- function(x, ...)UseMethod('read_gen')
 #' @param clue character: a text fragment that ought to occur in files with this extension
 #' @param directory character: optional location of x
 #' @param quiet logical: flag for displaying intermediate output
-#' @param clean should the unzipped file be removed when done (defaults to TRUE)
+#' @param clean should the occur in a temporary directory?
 #' @param nested is the file nested within the run directory?
 # @param zipped is the file zipped using 7z?
 #' @param ... passed arguments

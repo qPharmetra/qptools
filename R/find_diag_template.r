@@ -111,13 +111,13 @@ find_diag_template = function(x,
   }
     # TTB 2024-10-31 Normally sg would be numeric.
     # Here problematic results are flagged as dummy integer, for removal.
-  if(length(sg) == 0){
-     sg <- integer(1)
-  }else{
-     if(sg == 0){
-        sg <- integer(1)
-     }
-  }
+
+  if(length(sg) == 0)sg <- integer(1)
+  if(length(sg) > 1) stop('not expecting sg to be longer than 1')
+  if(is.na(sg)) sg <- integer(1) 
+  if(sg == 0) sg <- integer(1)
+  if(is.infinite(sg)) sg <- integer(1)
+
 ## currently running on block[1] only
 ## should be sufficient
   
@@ -127,8 +127,13 @@ find_diag_template = function(x,
       paste0("OMEGA(", fr(om), ",", sr(om), ")")
     )) %>%
       mutate(pclass = parameter %>% substring(., 1, 5), on = 0)
-  diag_df %<>% mutate(idx = c(rep(1,th),fr(sg)*10+sr(sg),fr(om)*10+sr(om))) 
-  diag_df %<>% mutate(on=as.numeric((idx%%11)==0)) %>% select(-idx)
+  
+  # diag_df %<>% mutate(idx = c(rep(1,th),fr(sg)*10+sr(sg),fr(om)*10+sr(om)))
+  # diag_df %<>% mutate(on=as.numeric((idx%%11)==0)) # mod 11 gives false positives
+  # diag_df %<>% select(-idx)
+
+    diag_df %<>% mutate_cond(pclass %in% c('SIGMA','OMEGA'), on = c(fr(sg), fr(om)) == c(sr(sg), sr(om)))
+  
   
   # TTB 2024-10-31 remove dummy value of sigma, if present.  See above.
   if(identical(sg, integer(1))){

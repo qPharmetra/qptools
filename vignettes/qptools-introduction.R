@@ -1,7 +1,7 @@
-## ----setup, include=FALSE-----------------------------------------------
+## ----setup, include=FALSE-----------------------------------------------------
 knitr::opts_chunk$set(echo = TRUE, eval = TRUE)
 
-## -----------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 library(qptools) 
 library(nonmemica)
 library(pmxTools)
@@ -16,10 +16,10 @@ getOption("qpExampleDir")
 getOption("qpExampleDir") %>% dir
 
 
-## -----------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 LIBRARY("qptools")
 
-## -----------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 
 example(fxs)
 example(aadp)
@@ -28,15 +28,15 @@ example("asNumeric")
 example("isNumeric")
 
 
-## -----------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 getOption("qpExampleDir") %>% file.path(., "run105") %>% dir() ## no xml file, only zipped file
 getOption("qpExampleDir") %>% file.path(.) %>% nm_unzip("run105", rundir=., extension = "xml")
 getOption("qpExampleDir") %>% file.path(., "run105") %>% dir() ## there it is
 
-## -----------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 options(nmDir = getOption("qpExampleDir"))
 
-## -----------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 
 "run105" %>% read_lst()
 "run105" %>% read_lst() %>% writeLines()
@@ -51,13 +51,13 @@ options(nmDir = getOption("qpExampleDir"))
 "run105" %>% get_ext() 
 
 
-## ----lol----------------------------------------------------------------
+## ----lol----------------------------------------------------------------------
 
 "run105" %>% get_ext() %>% lol
 "run105" %>% get_ext() %>% lol(n=2)
 
 
-## ----shrinkage and diagonals--------------------------------------------
+## ----shrinkage and diagonals--------------------------------------------------
 
 ## functions underneath that may be of interest
 "run103" %>% nm_shrinkage()
@@ -65,7 +65,7 @@ options(nmDir = getOption("qpExampleDir"))
 "run105" %>% find_diag()
 
 
-## ----simple parameter tables--------------------------------------------
+## ----simple parameter tables--------------------------------------------------
 
 "run103" %>% nm_params_table()
 "run103" %>% nm_params_table() %>% names
@@ -76,7 +76,7 @@ options(nmDir = getOption("qpExampleDir"))
 "run103" %>% nm_params_table() %>% format()
 
 
-## ----format nm_param_table----------------------------------------------
+## ----format nm_param_table----------------------------------------------------
 
 "run103" %>% nm_params_table %>% 
   lol %>% 
@@ -105,7 +105,7 @@ options(nmDir = getOption("qpExampleDir"))
   lol # does not matter when you select the estimation method. Before, after none (defaulting to last). all good
 
 
-## -----------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 
 "run103" %>% nm_params_table %>% 
   lol %>% 
@@ -113,7 +113,7 @@ options(nmDir = getOption("qpExampleDir"))
   filter(on==0)
   
 
-## -----------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 
 "run105" %>% nm_parse_dollar_data
 "run105" %>% load_modeled_dataset() %>% as_tibble()
@@ -128,7 +128,7 @@ try(1001 %>% superset(project=system.file('project/model',package='nonmemica')))
 1001 %>% superset(project=system.file('project/model',package='nonmemica'),ext="ctl") %>% as_tibble # yes
 
 
-## ----get_xpose_table----------------------------------------------------
+## ----get_xpose_table----------------------------------------------------------
 
 "run103" %>% get_xpose_tables
 
@@ -146,7 +146,7 @@ do.call("rbind", tmp) %>%
   facet_grid(name~model)
 
 
-## -----------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 
 paste0("run", 100:105) %>% nm_runrecord()
 paste0("run", 100:105) %>% nm_runrecord(. ,index = c(1,3,3))
@@ -155,7 +155,7 @@ paste0("run", 100:105) %>% nm_runrecord(. ,index = c(1,3,3,2,1))
 paste0("run", c(100,103,105)) %>% nm_runrecord_graph()
 
 
-## -----------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 
 getOption("qpExampleDir") %>% dir
 

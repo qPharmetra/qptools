@@ -33,6 +33,7 @@ nm_params_table <- function(x, ...)UseMethod('nm_params_table')
 #' @param keep_type a text fragment indicating whether to take shrinkage 'EBV' or 'ETA' (default)
 #' @param ci.sep character: character to separate confidence intervals by
 #' @param fields character: names of semicolon-delimited fields to expect in control streams
+#' @param digits numeric: number of significant digits to display
 #' @param ... passed to \code{\link{read_ext.character}}
 #' @importFrom magrittr %>% %<>%
 #' @importFrom dplyr mutate select left_join
@@ -82,6 +83,7 @@ nm_params_table.character <- function(
       keep_type = "ETA",
       ci.sep = " - ",
       fields = getOption('fields', c('symbol', 'unit', 'transform', 'label')),
+      digits = 3,
       ...
 ){
    stopifnot(is.logical(nested))
@@ -194,10 +196,12 @@ nm_params_table.character <- function(
      }, par_table=par_table, shrink=shrink, whats = whats)
    }
    
-   my_fun <- function(x, pardef) {
-     if (length(x$se_est) == 0 | all(is.na(x$se_est)))
-     x %<>% mutate(RSE = NA) else {
-     x %<>% mutate(RSE = signif(as.numeric(se_est) / abs(as.numeric(estimate)) * 100, 3))}
+   my_fun <- function(x, pardef, digits) {
+     if (length(x$se_est) == 0 | all(is.na(x$se_est))) {
+        x %<>% mutate(RSE = NA) 
+     } else {
+        x %<>% mutate(RSE = signif(as.numeric(se_est) / abs(as.numeric(estimate)) * 100, digits = digits))
+     }
      x %<>% select(parameter, pclass, on, everything())
      x %<>% mutate(across(-all_of(c('parameter','on', 'type', 'pclass', 'shrinksd')), as.numeric))
      x %<>% mutate(CI95 = "-")
@@ -205,9 +209,9 @@ nm_params_table.character <- function(
        x %<>% mutate(CI95 = NA) else {
        x %<>% mutate_cond(fix == 0
                           , CI95 = paste0(
-                            signif(estimate - se_est * 1.96, 3),
+                            signif(estimate - se_est * 1.96, digits = digits),
                             ci.sep,
-                            signif(estimate + se_est * 1.96, 3)
+                            signif(estimate + se_est * 1.96, digits = digits)
                           ))
        }
      x %<>% left_join(pardef, by = 'parameter')
@@ -224,7 +228,7 @@ nm_params_table.character <- function(
      x$parameter %<>% as_nms_nonmem # parameter is THETA(1), OMEGA(2,2), etc.
      x
    }
-   par_table = lapply(par_table, my_fun, pardef=pardef)
+   par_table = lapply(par_table, my_fun, pardef=pardef, digits = digits)
    names(par_table) = nms
    par_table[] <- lapply(par_table, function(t)structure(t, class = union('nmpartab_', class(t))))
    class(par_table) <- union('nmpartab', class(par_table))
@@ -512,7 +516,7 @@ format.nmpartab = function(
 #' @param x data.frame
 #' @param align.dot logical: align dots around decimal point, defaults to TRUE, but only effective when latex=TRUE
 #' @param latex logical: creates escaped \LaTeX output and effectuates align.dot argument. Defaults to FALSE.
-#' @param digits numeric: number of significant digits assed to (formatted_)signif. Defaults to 3.
+#' @param digits numeric: number of significant digits passed to (formatted_)signif. Defaults to 3.
 #' @param fixed.text character: string used as suffix after a fixed parameter estimate. 
 #' @param paste_label_unit character: Must be either "none" (default) keeping label and unit separate columns or "label" which glue label and bracketed unit together. Defaults to "none"
 #' @param ci.sep character: character to separate confidence intervals by; only updates where transform is LOG or LOGIT; coordinate with usage in \code{\link{nm_params_table}}
@@ -540,9 +544,9 @@ format.nmpartab_ = function(
             !is.na(paste_label_unit), 
             paste_label_unit %in% c('none','label','symbol')
   )
-  myFormat = function(x, ...){
+  myFormat = function(x, digits, ...){
     if(!any(isNumeric(x))) return(x)
-    x[isNumeric(x)] = formatted_signif(x[isNumeric(x)], ...)
+    x[isNumeric(x)] = formatted_signif(digits = digits, x[isNumeric(x)], ...)
     return(x)
   }
   
@@ -561,37 +565,37 @@ format.nmpartab_ = function(
   {
     y %<>% mutate_cond(transform=="LOG", 
                        estimate=exp(estimate_untransf) ,
-                       RSE = (sqrt(exp(se_est_untransf^2)-1) * 100) %>% myFormat,
-                       CI95 = paste0(exp(estimate_untransf-se_est_untransf*1.96)%>% myFormat,ci.sep,
-                                     exp(estimate_untransf+se_est_untransf*1.96)%>% myFormat
+                       RSE = (sqrt(exp(se_est_untransf^2)-1) * 100) %>% myFormat(digits = digits),
+                       CI95 = paste0(exp(estimate_untransf-se_est_untransf*1.96)%>% myFormat(digits = digits),ci.sep,
+                                     exp(estimate_untransf+se_est_untransf*1.96)%>% myFormat(digits = digits)
                        ),
                        equation="est=exp(est); CI95=exp(est+/-se*1.96); RSE=sqrt(exp(se^2)-1)*100",
                        trnsfd=1
     )
     y %<>% mutate_cond(transform=="LOGIT", 
                        estimate=logit_inv(estimate_untransf),
-                       CI95 = paste0(logit_inv(estimate_untransf-se_est_untransf)%>% myFormat,ci.sep,
-                                     logit_inv(estimate_untransf+se_est_untransf)%>% myFormat),
+                       CI95 = paste0(logit_inv(estimate_untransf-se_est_untransf)%>% myFormat(digits = digits),ci.sep,
+                                     logit_inv(estimate_untransf+se_est_untransf)%>% myFormat(digits = digits)),
                        RSE = "-",
                        equation="est=logit_inv(est); CI95=logit_inv(est+/-se*1.96):RSE=-",
                        trnsfd=1
     )
     y %<>% mutate_cond(transform %in% c("LOG", "LOGIT"), 
-                       estimate = as.numeric(estimate) %>% myFormat, 
+                       estimate = as.numeric(estimate) %>% myFormat(digits = digits), 
                        se_est = "---"
     )
   }
 
-  y %<>% mutate(shrinksd = ifelse(is.na(shrinksd), "-", shrinksd %>% myFormat)) 
+  y %<>% mutate(shrinksd = ifelse(is.na(shrinksd), "-", shrinksd %>% myFormat(digits = digits))) 
   y %<>% rename(shrink = shrinksd)
   
   y %<>% mutate_cond(fix==0&transform=="-", 
-                     estimate = estimate_untransf %>% myFormat)
+                     estimate = estimate_untransf %>% myFormat(digits = digits))
   y %<>% mutate_cond(fix==1&transform!="-", 
                      estimate = estimate %>% paste(.,fixed.text),
                      RSE = "-", se_est= '-')
   y %<>% mutate_cond(fix==1&transform=="-", 
-                     estimate = estimate_untransf %>% myFormat %>% paste(.,fixed.text),
+                     estimate = estimate_untransf %>% myFormat(digits = digits) %>% paste(.,fixed.text),
                      RSE = "-", se_est= '-')
 
   if(paste_label_unit != "none") {

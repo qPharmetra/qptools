@@ -30,24 +30,26 @@ nm_unzip(
 
 \item{zipped}{character: full path to zipped file (7z extension is optional); supersedes other arguments if supplied}
 
-\item{temp}{whether to unzip to a temporary directory}
+\item{tmpdir}{character: path to temporary working directory if \code{temp} is true}
+
+\item{temp}{whether to unzip in a temporary directory}
 
 \item{outdir}{character: one of \code{path} or \code{tempdir}}
 
 \item{call}{character: system unzip invocation}
-
-\item{tempdir}{character: path to temporary working directory if \code{temp} is true}
 }
 \value{
 invisible path to unzipped file
 }
 \description{
 Unzips a NONMEM file, by default the xml output
-of a NONMEM run.  Uses 7z decompression.
+of a NONMEM run.  Uses 7z decompression. If an unzipped
+file with the corresponding name already exists, it is removed
+before unzipping.
 }
 \examples{
 options(nmDir = getOption('qpExampleDir'))
-dir <- getOption("qpExampleDir")
+dir <- getOption('qpExampleDir')
 unz <- nm_unzip('example1')
 unz
 unlink(unz)

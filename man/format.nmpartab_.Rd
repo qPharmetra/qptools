@@ -24,7 +24,7 @@
 
 \item{latex}{logical: creates escaped \LaTeX output and effectuates align.dot argument. Defaults to FALSE.}
 
-\item{digits}{numeric: number of significant digits assed to (formatted_)signif. Defaults to 3.}
+\item{digits}{numeric: number of significant digits passed to (formatted_)signif. Defaults to 3.}
 
 \item{fixed.text}{character: string used as suffix after a fixed parameter estimate.}
 

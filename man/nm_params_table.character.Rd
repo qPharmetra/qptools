@@ -16,6 +16,7 @@
   keep_type = "ETA",
   ci.sep = " - ",
   fields = getOption("fields", c("symbol", "unit", "transform", "label")),
+  digits = 3,
   ...
 )
 }
@@ -41,6 +42,8 @@
 \item{ci.sep}{character: character to separate confidence intervals by}
 
 \item{fields}{character: names of semicolon-delimited fields to expect in control streams}
+
+\item{digits}{numeric: number of significant digits to display}
 
 \item{...}{passed to \code{\link{read_ext.character}}}
 }

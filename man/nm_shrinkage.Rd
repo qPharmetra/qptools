@@ -45,7 +45,7 @@ data.frame
 Gets NONMEM shrinkage estimates from the LST file.
 }
 \examples{
-dir <- getOption("qpExampleDir")
+dir <- getOption('qpExampleDir')
 options(nmDir = dir)
 # nm_shrinkage('example1') # old-style lst file not supported
 nm_shrinkage('run103')

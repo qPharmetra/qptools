@@ -33,7 +33,7 @@ nm_params_table <- function(x, ...)UseMethod('nm_params_table')
 #' @param keep_type a text fragment indicating whether to take shrinkage 'EBV' or 'ETA' (default)
 #' @param ci.sep character: character to separate confidence intervals by
 #' @param fields character: names of semicolon-delimited fields to expect in control streams
-#' @param digits numeric: number of significant digits to display
+#' @param digits numeric: number of significant digits to display in 95 percent confidence interval (returned as text); use \code{format(digits=)} to control significance of other variables
 #' @param ... passed to \code{\link{read_ext.character}}
 #' @importFrom magrittr %>% %<>%
 #' @importFrom dplyr mutate select left_join
@@ -200,10 +200,12 @@ nm_params_table.character <- function(
      if (length(x$se_est) == 0 | all(is.na(x$se_est))) {
         x %<>% mutate(RSE = NA) 
      } else {
-        x %<>% mutate(RSE = signif(as.numeric(se_est) / abs(as.numeric(estimate)) * 100, digits = digits))
+      # x %<>% mutate(RSE = signif(as.numeric(se_est) / abs(as.numeric(estimate)) * 100, digits = digits)) TTB 6/26/2025
+        x %<>% mutate(RSE = as.numeric(se_est) / abs(as.numeric(estimate)) * 100)
      }
      x %<>% select(parameter, pclass, on, everything())
-     x %<>% mutate(across(-all_of(c('parameter','on', 'type', 'pclass', 'shrinksd')), as.numeric))
+   # x %<>% mutate(across(-all_of(c('parameter','on', 'type', 'pclass', 'shrinksd')), as.numeric)) TTB 6/26/2025
+     x %<>% mutate(across(any_of(c('estimate','se_est','eigen_cor', 'cond', 'om_sg', 'se_om_sg', 'fix','term','part_deriv_LL')), as.numeric))
      x %<>% mutate(CI95 = "-")
      if (length(x$se_est) == 0 | all(is.na(x$se_est)))
        x %<>% mutate(CI95 = NA) else {
@@ -544,7 +546,7 @@ format.nmpartab_ = function(
             !is.na(paste_label_unit), 
             paste_label_unit %in% c('none','label','symbol')
   )
-  myFormat = function(x, digits, ...){
+  myFormat = function(x, digits, ...){ # myFormat takes a numeric argument and returns character
     if(!any(isNumeric(x))) return(x)
     x[isNumeric(x)] = formatted_signif(digits = digits, x[isNumeric(x)], ...)
     return(x)
@@ -561,28 +563,48 @@ format.nmpartab_ = function(
                        transform == "NA", transform = "-")
   y %<>% mutate_cond(is.na(unit) | unit == "NA", unit = "-")
   
-  if(backtransform)
-  {
-    y %<>% mutate_cond(transform=="LOG", 
-                       estimate=exp(estimate_untransf) ,
-                       RSE = (sqrt(exp(se_est_untransf^2)-1) * 100) %>% myFormat(digits = digits),
-                       CI95 = paste0(exp(estimate_untransf-se_est_untransf*1.96)%>% myFormat(digits = digits),ci.sep,
-                                     exp(estimate_untransf+se_est_untransf*1.96)%>% myFormat(digits = digits)
-                       ),
-                       equation="est=exp(est); CI95=exp(est+/-se*1.96); RSE=sqrt(exp(se^2)-1)*100",
-                       trnsfd=1
+  if(backtransform){
+     # anywhere myFormat is called, numeric will be converted to character
+     # therefore ALL cases must be considered, otherwise the chance is lost to signif other elements
+    
+    # LOG
+    y %<>% mutate_cond(
+       transform=="LOG", 
+       estimate=exp(estimate_untransf) ,
+       RSE = (sqrt(exp(se_est_untransf^2)-1) * 100) %>% myFormat(digits = digits),
+       CI95 = 
+          paste0(
+             exp(estimate_untransf-se_est_untransf*1.96) %>% myFormat(digits = digits),
+             ci.sep,
+            exp(estimate_untransf+se_est_untransf*1.96)%>% myFormat(digits = digits)
+         ),
+         equation="est=exp(est); CI95=exp(est+/-se*1.96); RSE=sqrt(exp(se^2)-1)*100",
+         trnsfd=1
     )
-    y %<>% mutate_cond(transform=="LOGIT", 
-                       estimate=logit_inv(estimate_untransf),
-                       CI95 = paste0(logit_inv(estimate_untransf-se_est_untransf)%>% myFormat(digits = digits),ci.sep,
-                                     logit_inv(estimate_untransf+se_est_untransf)%>% myFormat(digits = digits)),
-                       RSE = "-",
-                       equation="est=logit_inv(est); CI95=logit_inv(est+/-se*1.96):RSE=-",
-                       trnsfd=1
+     
+    # LOGIT
+    y %<>% mutate_cond(
+       transform=="LOGIT", 
+       estimate=logit_inv(estimate_untransf),
+       CI95 = paste0(
+          logit_inv(estimate_untransf-se_est_untransf)%>% myFormat(digits = digits),
+          ci.sep,
+          logit_inv(estimate_untransf+se_est_untransf)%>% myFormat(digits = digits)
+      ),
+      RSE = "-",
+      equation="est=logit_inv(est); CI95=logit_inv(est+/-se*1.96):RSE=-",
+      trnsfd=1
     )
-    y %<>% mutate_cond(transform %in% c("LOG", "LOGIT"), 
-                       estimate = as.numeric(estimate) %>% myFormat(digits = digits), 
-                       se_est = "---"
+    
+    y %<>% mutate_cond(
+     # transform %in% c("LOG", "LOGIT"), TTB 6/26/2025 Likely mistake:
+     # since these cases are handled above, and the complimentary case is not.
+       ! transform %in% c("LOG", "LOGIT"), 
+       estimate = as.numeric(estimate) %>% myFormat(digits = digits), 
+       # default CI95 has already been assigned
+       # signif RSE
+       RSE = RSE %>% myFormat(digits = digits),
+       se_est = "---"
     )
   }
 

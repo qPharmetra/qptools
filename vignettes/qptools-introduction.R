@@ -61,7 +61,7 @@ options(nmDir = getOption("qpExampleDir"))
 
 ## functions underneath that may be of interest
 "run103" %>% nm_shrinkage()
-"run103" %>% nm_shrinkage(eta.shrinkage.clue = "ETASHRINKVR") # check eps.shrinkage.clue = "EPSSHRINKVR"
+   "run103" %>% nm_shrinkage(eta.shrinkage.clue = "ETASHRINKVR") # check eps.shrinkage.clue = "EPSSHRINKVR"
 "run105" %>% find_diag()
 
 
@@ -73,7 +73,7 @@ options(nmDir = getOption("qpExampleDir"))
 
 "run103" %>% nm_params_table_short() %>% lol
 "run103" %>% nm_params_table() %>% format 
-"run103" %>% nm_params_table() %>% format()
+"run103" %>% nm_params_table() %>% lol %>% format(digits = 2)
 
 
 ## ----format nm_param_table----------------------------------------------------

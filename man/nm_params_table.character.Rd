@@ -43,7 +43,7 @@
 
 \item{fields}{character: names of semicolon-delimited fields to expect in control streams}
 
-\item{digits}{numeric: number of significant digits to display}
+\item{digits}{numeric: number of significant digits to display in 95 percent confidence interval (returned as text); use \code{format(digits=)} to control significance of other variables}
 
 \item{...}{passed to \code{\link{read_ext.character}}}
 }

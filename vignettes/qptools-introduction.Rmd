@@ -157,7 +157,7 @@ Shrinkage (`nm_shrinkage` and (off-)diagonals (`find_diag`).
 
 ## functions underneath that may be of interest
 "run103" %>% nm_shrinkage()
-"run103" %>% nm_shrinkage(eta.shrinkage.clue = "ETASHRINKVR") # check eps.shrinkage.clue = "EPSSHRINKVR"
+   "run103" %>% nm_shrinkage(eta.shrinkage.clue = "ETASHRINKVR") # check eps.shrinkage.clue = "EPSSHRINKVR"
 "run105" %>% find_diag()
 
 ```
@@ -174,7 +174,7 @@ Explore the examples.
 
 "run103" %>% nm_params_table_short() %>% lol
 "run103" %>% nm_params_table() %>% format 
-"run103" %>% nm_params_table() %>% format()
+"run103" %>% nm_params_table() %>% lol %>% format(digits = 2)
 
 ```
 

@@ -28,11 +28,26 @@ get_xpose_tables = function (
   myPath = file.path(directory, x)
   if(!dir.exists(myPath)) {message(paste(myPath, "does not exist.")); return()}
   
+  
   tabNames = dir(myPath)[grepl(pattern, dir(myPath))]
-  out = lapply(1:length(tabNames), function(i,x,directory,tabNames) 
-    read.table(file.path(directory,x,tabNames[i]), skip = 1, header = TRUE),
-    directory=directory, x=x, tabNames=tabNames
-  )
+  
+  handler <- function(i,x,directory,tabNames){
+     thisTabName <- tabNames[i]
+     thisFilePath <- file.path(directory,x,thisTabName)
+     tab <- read.table(thisFilePath, skip = 1, header = TRUE)
+     if('ID' %in% names(tab)){
+        if(nrow(tab) > 1){
+           first <- tab$ID[[1]]
+           second <- tab$ID[[2]]
+           if(!identical(first, second)){
+              warning('I saw ', first, ' in the first row and ', second, ' in the second row of ', thisFilePath, ': probably first line of the value of get_xpose_tables() is corrupt')
+           }
+        }
+     }
+     tab
+  }
+  
+  out = lapply(1:length(tabNames), handler, directory=directory, x=x, tabNames=tabNames)
   data = out[[1]]
   suppressMessages(
     for(i in seq_along(out)[-1])

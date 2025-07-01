@@ -548,7 +548,7 @@ format.nmpartab_ = function(
   )
   myFormat = function(x, digits, ...){ # myFormat takes a numeric argument and returns character
     if(!any(isNumeric(x))) return(x)
-    x[isNumeric(x)] = formatted_signif(digits = digits, x[isNumeric(x)], ...)
+    x[isNumeric(x)] = formatted_signif(digits = digits, as.numeric(x[isNumeric(x)]), ...)
     return(x)
   }
   

@@ -24,6 +24,11 @@ If multiple blocks of numeric input exist wthin the input, only the first is par
 extract_number("c76")
 extract_number("c76c7")
 extract_number("BLOQ = 0.144")
+extract_number("6.023+23")
+stopifnot(extract_number("6.1973+01") == 61.973)
+extract_number(c('7e1', '7e+1', '7E-1'))
+extract_number(c('-7e1', '+7e+1', '-7E-1'))
+extract_number('E7')
 }
 \seealso{
 Other basic: 

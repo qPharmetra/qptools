@@ -1,8 +1,8 @@
 Package: qptools
 Type: Package
 Title: Integrative Tools for Pharmacometrics
-Version: 4.5.1-00
-Author: Klaas Prins, Tim Bergsma, Max Lagraauw 
+Version: 4.5.1-01
+Author: Klaas Prins, Tim Bergsma, Max Lagraauw, Jan Huisman 
 Maintainer: Klaas Prins <klaas.prins@qpharmetra.com>
 Description: Integrative tools for pharmacometrics.
 License: GPL-3

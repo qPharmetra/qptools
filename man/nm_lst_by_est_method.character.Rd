@@ -48,6 +48,7 @@ nm_lst_by_est_method('run103') \%>\% lapply(., function(x) x[1:10])
 }
 \seealso{
 Other lst: 
+\code{\link{coldex}()},
 \code{\link{find_diag_template}()},
 \code{\link{load_modeled_dataset}()},
 \code{\link{nm_lst_by_est_method}()},
@@ -64,6 +65,7 @@ Other lst:
 \code{\link{nm_version.lst}()},
 \code{\link{read_lst}()},
 \code{\link{read_lst.character}()},
-\code{\link{read_lst.lst}()}
+\code{\link{read_lst.lst}()},
+\code{\link{rowdex}()}
 }
 \concept{lst}

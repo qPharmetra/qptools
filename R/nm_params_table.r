@@ -205,7 +205,10 @@ nm_params_table.character <- function(
      }
      x %<>% select(parameter, pclass, on, everything())
    # x %<>% mutate(across(-all_of(c('parameter','on', 'type', 'pclass', 'shrinksd')), as.numeric)) TTB 6/26/2025
-     x %<>% mutate(across(any_of(c('estimate','se_est','eigen_cor', 'cond', 'om_sg', 'se_om_sg', 'fix','term','part_deriv_LL')), as.numeric))
+     x %<>% mutate(across(any_of(c(
+        'estimate','se_est',
+        # 'eigen_cor', # TTB 2025-08-25 dropped at version 4.5.1-13.  See note in read_ext.r.
+        'cond', 'om_sg', 'se_om_sg', 'fix','term','part_deriv_LL')), as.numeric))
      x %<>% mutate(CI95 = "-")
      if (length(x$se_est) == 0 | all(is.na(x$se_est)))
        x %<>% mutate(CI95 = NA) else {

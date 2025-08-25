@@ -193,6 +193,17 @@ summary.extList <-  function(
       , ITERATION = seq(-1000000000,-1000000008)
    )
    
+   ## TTB 2025-08-25 
+   ## eigen_cor (-1000000002) appears sorted (low to high, excluding zeros)
+   ## and is thus not identifiable.  Removed from output as of qptools 4.5.1-13.
+   
+   my_names <- my_names[my_names$names != 'eigen_cor',]
+   drop_eigen <- function(x){
+      x <- x[x$ITERATION != -1000000002,]
+      x
+   }
+   ext <- lapply(ext, drop_eigen)
+   
    ## which ones are operable?
    msel = lapply(ext, function(x) any(x$ITERATION < {-1e9})) %>% unlist %>% as.logical()
    

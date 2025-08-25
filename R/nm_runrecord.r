@@ -163,7 +163,7 @@ nm_runrecord <- function(
           matdf %<>% t %>% data.frame
           names(matdf) = "estimate"
           matdf %<>% mutate(se_est=NA,
-                            eigen_cor=NA,
+                            # eigen_cor=NA, # TTB 2025-08-25 dropped at version 4.5.1-13.  See note in read_ext.r.
                             cond=NA,
                             om_sg=NA,
                             se_om_sg=NA,

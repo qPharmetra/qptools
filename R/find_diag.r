@@ -54,7 +54,12 @@ find_diag.character = function(
     clue = clue,
     ...
   )
-  lapply(ext %>% as.list %>% summary, find_diag, ...)
+  nms <- names(as.list(ext))
+  out <- lapply(ext %>% as.list %>% summary, find_diag, ...)
+  if(length(nms) == length(out)){
+    names(out) <- nms
+  }
+  return(out)
 }
 
 #' Find Diagonal Elements of a NONMEM Parameter Table for Data Frame

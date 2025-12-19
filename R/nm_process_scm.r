@@ -112,57 +112,36 @@ scm_step <- function(x, direction, ...){
   y
 }
 
-scm_table <- function(x, direction, ...){
-  x <- x[x != '']             # can't be empty
-  x <- x[!grepl('^\\s', x)]   # can't start with whitespace
-  x <- x[!grepl('^-', x)]     # can't start with dash
-  x <- x[!grepl('MODEL', x)]  # drop header, expect 10 columns
-  if(length(x) == 0) return(
-    data.frame(
-      step = integer(0),
-      model = character(0),
-      ofvbase = numeric(0),
-      ofvtest = numeric(0),
-      dofv = numeric(0), 
-      goal = numeric(0),
-      deltadf = integer(0), 
-      significant = integer(0),
-      pvalue = numeric(0), 
-      chosen = integer(0), 
-      direction = character(0)
-    )
+scm_table = function (x, direction, ...){
+  x <- x[x != ""]
+  x <- x[!grepl("^\\s", x)]
+  x <- x[!grepl("^-", x)]
+  x <- x[!grepl("MODEL", x)]
+  # TTB 12/19/2025 Sometimes V3 and V4 have no separation;
+  # perhaps recoverable if V4 shows negative:
+  x %<>% sub('(\\d)-(\\d)','\\1 -\\2',.)
+  if (length(x) == 0) 
+    return(data.frame(step = integer(0), model = character(0), 
+                      ofvbase = numeric(0), ofvtest = numeric(0), dofv = numeric(0), 
+                      goal = numeric(0), deltadf = integer(0), significant = integer(0), 
+                      pvalue = numeric(0), chosen = integer(0), direction = character(0)))
+  x <- paste0(x, "\n")
+  tmp <- read.table(text = x, fill = TRUE, stringsAsFactors = FALSE, header = FALSE)
+  data.frame(
+    step        = 0L,
+    model      = tmp$V1,
+    ofvbase    = as.numeric(tmp$V3),
+    ofvtest    = as.numeric(tmp$V4),
+    dofv       = as.numeric(tmp$V5),
+    goal       = as.numeric(tmp$V7),
+    deltadf    = as.integer(tmp$V8),
+    significant = as.integer(tmp$V9 == "YES!"),
+    pvalue      = as.numeric(ifelse(tmp$V9 == "YES!", tmp$V10, tmp$V9)),
+    chosen      = 0L,
+    direction   = direction,
+    stringsAsFactors = FALSE
   )
-  #if(length(x) == 1) x <- paste0(x,'\n')
-  # paste unconditionally to work around error in readr 1.1.1 (1.3.1 okay)
-  x <- paste0(x,'\n') 
-  z <- read_fwf(
-    x,
-    col_positions = fwf_positions(
-      col_names = c( 
-        'model','test',  'ofvbase',  'ofvtest',  
-        'dofv','gt' , 'goal',  'deltadf',
-        'significant', 'pvalue'
-      ),
-      start = c(1, 18, 22, 35, 48, 69, 72, 82, 87, 99),
-      end =   c(   17, 21, 34, 47, 68, 71, 81, 86, 98, NA)
-    ),
-    col_types = c('ccnnncnicn')
-  )
-  
-  z <- data.frame(z)
-  z$gt <- NULL
-  z$step <- 0L
-  z$chosen <- 0L
-  z$direction <- direction
-  z <- z[,c(
-    'step','model','ofvbase','ofvtest',
-    'dofv','goal','deltadf','significant',
-    'pvalue', 'chosen','direction'
-  )]
-  z$significant <- as.integer(!is.na(z$significant))
-  z
 }
-
 
 scm_chosen <- function(x, ...){
   if(!length(x)) return('')

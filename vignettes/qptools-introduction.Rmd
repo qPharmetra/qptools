@@ -295,7 +295,7 @@ paste0("run", c(100,103,105)) %>% nm_runrecord_graph()
 
 ## Process an SCM table
 
-There is a 17-character limit to the covariate effect name! So consider using 'short' names.
+There is a 17-character limit to the covariate effect name! So consider using 'short' names. As of version 4.5.2, we try to accommodate longer names.
 
 ```{r}
 

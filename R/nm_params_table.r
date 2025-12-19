@@ -182,7 +182,7 @@ nm_params_table.character <- function(
    if(nrow(pardef)==0) pardef = par_table[[1]] %>% 
      select(parameter) %>% mutate(symbol=NA,unit=NA,transform=NA,label=NA,item=NA) 
 
-   nms = names(par_table)
+   nms = names(ext)
    if(!is.list(shrink)) {
      if(!quiet) print("No shrinkage information available.")
      par_table = lapply(par_table, function(x) x %>% left_join(whats, by = 'parameter') %>% mutate(shrinksd=NULL))

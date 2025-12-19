@@ -298,7 +298,12 @@ get_ext.character <- function(
       clue = clue,
       ...
    )
-   get_ext(y, final = final, ...)
+   nms <- names(as.list(y))
+   out <- get_ext(y, final = final, ...)
+   if(length(nms) == length(out)){
+     names(out) <- nms
+   }
+   return(out)
 }
 
 #' Get EXT Summary for EXT

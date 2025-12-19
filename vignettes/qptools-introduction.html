@@ -1748,14 +1748,14 @@ function.</p>
 <p>Let’s first check out the example directory that comes with
 ‘qptools’.</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a><span class="fu">getOption</span>(<span class="st">&quot;qpExampleDir&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">file.path</span>(., <span class="st">&quot;run105&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">dir</span>() <span class="do">## no xml file, only zipped file</span></span></code></pre></div>
-<pre><code>##  [1] &quot;_run105.xml&quot;   &quot;catab105&quot;      &quot;cotab105&quot;      &quot;patab105&quot;     
-##  [5] &quot;run105.coi.7z&quot; &quot;run105.cor.7z&quot; &quot;run105.cov.7z&quot; &quot;run105.ext&quot;   
-##  [9] &quot;run105.xml&quot;    &quot;run105.xml.7z&quot; &quot;sdtab105&quot;</code></pre>
+<pre><code>## [1] &quot;catab105&quot;      &quot;cotab105&quot;      &quot;patab105&quot;      &quot;run105.coi.7z&quot;
+## [5] &quot;run105.cor.7z&quot; &quot;run105.cov.7z&quot; &quot;run105.ext&quot;    &quot;run105.xml.7z&quot;
+## [9] &quot;sdtab105&quot;</code></pre>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a><span class="fu">getOption</span>(<span class="st">&quot;qpExampleDir&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">file.path</span>(.) <span class="sc">%&gt;%</span> <span class="fu">nm_unzip</span>(<span class="st">&quot;run105&quot;</span>, <span class="at">rundir=</span>., <span class="at">extension =</span> <span class="st">&quot;xml&quot;</span>)</span>
 <span id="cb33-2"><a href="#cb33-2" tabindex="-1"></a><span class="fu">getOption</span>(<span class="st">&quot;qpExampleDir&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">file.path</span>(., <span class="st">&quot;run105&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">dir</span>() <span class="do">## there it is</span></span></code></pre></div>
-<pre><code>##  [1] &quot;_run105.xml&quot;   &quot;catab105&quot;      &quot;cotab105&quot;      &quot;patab105&quot;     
-##  [5] &quot;run105.coi.7z&quot; &quot;run105.cor.7z&quot; &quot;run105.cov.7z&quot; &quot;run105.ext&quot;   
-##  [9] &quot;run105.xml&quot;    &quot;run105.xml.7z&quot; &quot;sdtab105&quot;</code></pre>
+<pre><code>##  [1] &quot;catab105&quot;      &quot;cotab105&quot;      &quot;patab105&quot;      &quot;run105.coi.7z&quot;
+##  [5] &quot;run105.cor.7z&quot; &quot;run105.cov.7z&quot; &quot;run105.ext&quot;    &quot;run105.xml&quot;   
+##  [9] &quot;run105.xml.7z&quot; &quot;sdtab105&quot;</code></pre>
 </div>
 <div id="set-default-nonmem-directory" class="section level2">
 <h2>Set default NONMEM directory</h2>
@@ -3715,83 +3715,83 @@ tables for example. See for yourself what this does.</p>
 ## attr(,&quot;class&quot;)
 ## [1] &quot;extList&quot;</code></pre>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" tabindex="-1"></a><span class="st">&quot;run105&quot;</span> <span class="sc">%&gt;%</span> <span class="fu">get_ext</span>() </span></code></pre></div>
-<pre><code>## [[1]]
-##                estimate       se_est    eigen_cor         cond        om_sg
-## THETA1        2.2644200    0.0647988    0.0915105   24.0150000    0.0000000
-## THETA2       72.6364000    5.3637600    0.2118300    0.0915105    0.0000000
-## THETA3     480.36300000  32.25300000   0.48485500   2.19762000   0.00000000
-## THETA4       0.07171270   0.00765275   0.94273300   0.00000000   0.00000000
-## THETA5         1.087330     0.100186     1.050460     0.000000     0.000000
-## THETA6          0.75000      0.00000      1.24309      0.00000      0.00000
-## THETA7        0.6003590    0.0509554    1.7779000    0.0000000    0.0000000
-## SIGMA(1,1)  1.00000e+00  0.00000e+00  2.19762e+00  0.00000e+00  1.00000e+00
-## OMEGA(1,1)    0.0370303    0.0131737    0.0000000    0.0000000    0.1924330
-## OMEGA(2,1)        0e+00        0e+00        0e+00        0e+00        0e+00
-## OMEGA(2,2)   0.14992300   0.05001130   0.00000000   0.00000000   0.38720000
-##                se_om_sg          fix         term part_deriv_LL
-## THETA1        0.0000000    0.0000000    2.0000000     1.4441800
-## THETA2        0.0000000    0.0000000    0.0000000     0.0716468
-## THETA3       0.00000000   0.00000000   0.00000000   -0.00337735
-## THETA4       0.00000000   0.00000000   0.00000000    2.78362000
-## THETA5         0.000000     0.000000     0.000000      1.151150
-## THETA6          0.00000      1.00000      0.00000       0.00000
-## THETA7        0.0000000    0.0000000    0.0000000    -4.1444800
-## SIGMA(1,1)  1.00000e+10  1.00000e+00  0.00000e+00   0.00000e+00
-## OMEGA(1,1)    0.0342293    0.0000000    0.0000000    -0.0114510
-## OMEGA(2,1)        1e+10        1e+00        0e+00         0e+00
-## OMEGA(2,2)   0.06458080   0.00000000   0.00000000    0.00174146
+<pre><code>## $`Stochastic Approximation Expectation-Maximization`
+##                estimate       se_est         cond        om_sg     se_om_sg
+## THETA1        2.2644200    0.0647988   24.0150000    0.0000000    0.0000000
+## THETA2       72.6364000    5.3637600    0.0915105    0.0000000    0.0000000
+## THETA3     480.36300000  32.25300000   2.19762000   0.00000000   0.00000000
+## THETA4       0.07171270   0.00765275   0.00000000   0.00000000   0.00000000
+## THETA5         1.087330     0.100186     0.000000     0.000000     0.000000
+## THETA6             0.75         0.00         0.00         0.00         0.00
+## THETA7        0.6003590    0.0509554    0.0000000    0.0000000    0.0000000
+## SIGMA(1,1)        1e+00        0e+00        0e+00        1e+00        1e+10
+## OMEGA(1,1)    0.0370303    0.0131737    0.0000000    0.1924330    0.0342293
+## OMEGA(2,1)        0e+00        0e+00        0e+00        0e+00        1e+10
+## OMEGA(2,2)   0.14992300   0.05001130   0.00000000   0.38720000   0.06458080
+##                     fix         term part_deriv_LL
+## THETA1        0.0000000    2.0000000     1.4441800
+## THETA2        0.0000000    0.0000000     0.0716468
+## THETA3       0.00000000   0.00000000   -0.00337735
+## THETA4       0.00000000   0.00000000    2.78362000
+## THETA5         0.000000     0.000000      1.151150
+## THETA6             1.00         0.00          0.00
+## THETA7        0.0000000    0.0000000    -4.1444800
+## SIGMA(1,1)        1e+00        0e+00         0e+00
+## OMEGA(1,1)    0.0000000    0.0000000    -0.0114510
+## OMEGA(2,1)        1e+00        0e+00         0e+00
+## OMEGA(2,2)   0.00000000   0.00000000    0.00174146
 ## 
-## [[2]]
-##               estimate      se_est   eigen_cor        cond       om_sg
-## THETA1       2.2644200   0.0794444   0.1245650  18.5242000   0.0000000
-## THETA2      72.6364000   3.0647800   0.3308980   0.1245650   0.0000000
-## THETA3     480.3630000  25.2242000   0.5591130   2.3074700   0.0000000
-## THETA4      0.07171270  0.00819953  0.84471200  0.00000000  0.00000000
-## THETA5       1.0873300   0.0851449   0.9564580   0.0000000   0.0000000
-## THETA6         0.75000     0.00000     1.14255     0.00000     0.00000
-## THETA7       0.6003590   0.0409449   1.7342300   0.0000000   0.0000000
-## SIGMA(1,1) 1.00000e+00 0.00000e+00 2.30747e+00 0.00000e+00 1.00000e+00
-## OMEGA(1,1)   0.0370303   0.0120055   0.0000000   0.0000000   0.1924330
-## OMEGA(2,1)       0e+00       0e+00       0e+00       0e+00       0e+00
-## OMEGA(2,2)  0.14992300  0.02358690  0.00000000  0.00000000  0.38720000
-##               se_om_sg         fix        term part_deriv_LL
-## THETA1       0.0000000   0.0000000   2.0000000     1.8575200
-## THETA2       0.0000000   0.0000000   0.0000000     0.0390883
-## THETA3       0.0000000   0.0000000   0.0000000    -0.0177468
-## THETA4      0.00000000  0.00000000  0.00000000    2.05010000
-## THETA5       0.0000000   0.0000000   0.0000000     0.8727930
-## THETA6         0.00000     1.00000     0.00000       0.00000
-## THETA7       0.0000000   0.0000000   0.0000000    -5.8033900
-## SIGMA(1,1) 1.00000e+10 1.00000e+00 0.00000e+00   0.00000e+00
-## OMEGA(1,1)   0.0311940   0.0000000   0.0000000     9.1901900
-## OMEGA(2,1)       1e+10       1e+00       0e+00         0e+00
-## OMEGA(2,2)  0.03045830  0.00000000  0.00000000    0.00902989
+## $`Objective Function Evaluation by Importance Sampling (No Prior)`
+##               estimate      se_est        cond       om_sg    se_om_sg
+## THETA1       2.2644200   0.0794444  18.5242000   0.0000000   0.0000000
+## THETA2      72.6364000   3.0647800   0.1245650   0.0000000   0.0000000
+## THETA3     480.3630000  25.2242000   2.3074700   0.0000000   0.0000000
+## THETA4      0.07171270  0.00819953  0.00000000  0.00000000  0.00000000
+## THETA5       1.0873300   0.0851449   0.0000000   0.0000000   0.0000000
+## THETA6            0.75        0.00        0.00        0.00        0.00
+## THETA7       0.6003590   0.0409449   0.0000000   0.0000000   0.0000000
+## SIGMA(1,1)       1e+00       0e+00       0e+00       1e+00       1e+10
+## OMEGA(1,1)   0.0370303   0.0120055   0.0000000   0.1924330   0.0311940
+## OMEGA(2,1)       0e+00       0e+00       0e+00       0e+00       1e+10
+## OMEGA(2,2)  0.14992300  0.02358690  0.00000000  0.38720000  0.03045830
+##                    fix        term part_deriv_LL
+## THETA1       0.0000000   2.0000000     1.8575200
+## THETA2       0.0000000   0.0000000     0.0390883
+## THETA3       0.0000000   0.0000000    -0.0177468
+## THETA4      0.00000000  0.00000000    2.05010000
+## THETA5       0.0000000   0.0000000     0.8727930
+## THETA6            1.00        0.00          0.00
+## THETA7       0.0000000   0.0000000    -5.8033900
+## SIGMA(1,1)       1e+00       0e+00         0e+00
+## OMEGA(1,1)   0.0000000   0.0000000     9.1901900
+## OMEGA(2,1)       1e+00       0e+00         0e+00
+## OMEGA(2,2)  0.00000000  0.00000000    0.00902989
 ## 
-## [[3]]
-##                estimate       se_est    eigen_cor         cond        om_sg
-## THETA1      2.27050e+00  8.05415e-02  1.25021e-01  1.88444e+01  0.00000e+00
-## THETA2      7.43772e+01  2.84600e+00  3.51726e-01  1.25021e-01  0.00000e+00
-## THETA3      4.68147e+02  2.82706e+01  5.91659e-01  2.35594e+00  0.00000e+00
-## THETA4       0.07141530   0.00824789   0.83814800   0.00000000   0.00000000
-## THETA5       1.09317000   0.08601240   0.88420600   0.00000000   0.00000000
-## THETA6      7.50000e-01  1.00000e+10  1.10089e+00  0.00000e+00  0.00000e+00
-## THETA7      0.587380000  0.038672200  1.752410000  0.000000000  0.000000000
-## SIGMA(1,1)  1.00000e+00  1.00000e+10  2.35594e+00  0.00000e+00  1.00000e+00
-## OMEGA(1,1)  0.035787600  0.010927500  0.000000000  0.000000000  0.189176000
-## OMEGA(2,1)        0e+00        1e+10        0e+00        0e+00        0e+00
-## OMEGA(2,2)   0.14519600   0.02339120   0.00000000   0.00000000   0.38104700
-##                se_om_sg          fix         term part_deriv_LL
-## THETA1      0.00000e+00  0.00000e+00  0.00000e+00  -2.64681e-05
-## THETA2      0.00000e+00  0.00000e+00  3.70000e+01   6.04246e-07
-## THETA3      0.00000e+00  0.00000e+00  0.00000e+00   1.35185e-07
-## THETA4       0.00000000   0.00000000   0.00000000    0.04191030
-## THETA5       0.00000000   0.00000000   0.00000000    0.00573174
-## THETA6      0.00000e+00  1.00000e+00  0.00000e+00   0.00000e+00
-## THETA7      0.000000000  0.000000000  0.000000000  -0.000066826
-## SIGMA(1,1)  1.00000e+10  1.00000e+00  0.00000e+00   0.00000e+00
-## OMEGA(1,1)  0.028881900  0.000000000  0.000000000  -0.000260968
-## OMEGA(2,1)        1e+10        1e+00        0e+00         0e+00
-## OMEGA(2,2)   0.03069340   0.00000000   0.00000000    0.00335568</code></pre>
+## $`First Order Conditional Estimation with Interaction (No Prior)`
+##                estimate       se_est         cond        om_sg     se_om_sg
+## THETA1      2.27050e+00  8.05415e-02  1.88444e+01  0.00000e+00  0.00000e+00
+## THETA2      7.43772e+01  2.84600e+00  1.25021e-01  0.00000e+00  0.00000e+00
+## THETA3      4.68147e+02  2.82706e+01  2.35594e+00  0.00000e+00  0.00000e+00
+## THETA4       0.07141530   0.00824789   0.00000000   0.00000000   0.00000000
+## THETA5       1.09317000   0.08601240   0.00000000   0.00000000   0.00000000
+## THETA6          7.5e-01      1.0e+10      0.0e+00      0.0e+00      0.0e+00
+## THETA7      0.587380000  0.038672200  0.000000000  0.000000000  0.000000000
+## SIGMA(1,1)        1e+00        1e+10        0e+00        1e+00        1e+10
+## OMEGA(1,1)  0.035787600  0.010927500  0.000000000  0.189176000  0.028881900
+## OMEGA(2,1)        0e+00        1e+10        0e+00        0e+00        1e+10
+## OMEGA(2,2)   0.14519600   0.02339120   0.00000000   0.38104700   0.03069340
+##                     fix         term part_deriv_LL
+## THETA1      0.00000e+00  0.00000e+00  -2.64681e-05
+## THETA2      0.00000e+00  3.70000e+01   6.04246e-07
+## THETA3      0.00000e+00  0.00000e+00   1.35185e-07
+## THETA4       0.00000000   0.00000000    0.04191030
+## THETA5       0.00000000   0.00000000    0.00573174
+## THETA6          1.0e+00      0.0e+00       0.0e+00
+## THETA7      0.000000000  0.000000000  -0.000066826
+## SIGMA(1,1)        1e+00        0e+00         0e+00
+## OMEGA(1,1)  0.000000000  0.000000000  -0.000260968
+## OMEGA(2,1)        1e+00        0e+00         0e+00
+## OMEGA(2,2)   0.00000000   0.00000000    0.00335568</code></pre>
 <p>Function <code>get_ext</code> reads ext file, strips iterations, then
 creates backbone par table.</p>
 <p>When you read the ext file and turn it into <code>as.list</code> or
@@ -3805,55 +3805,55 @@ length equal to the number of iterations you did. One iteration? Still a
 list. Use <code>lol</code> to get the last (or nth) of that list
 returned (as a data.frame in case of <code>nm_xxx</code>)..</p>
 <div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" tabindex="-1"></a><span class="st">&quot;run105&quot;</span> <span class="sc">%&gt;%</span> <span class="fu">get_ext</span>() <span class="sc">%&gt;%</span> lol</span></code></pre></div>
-<pre><code>##                estimate       se_est    eigen_cor         cond        om_sg
-## THETA1      2.27050e+00  8.05415e-02  1.25021e-01  1.88444e+01  0.00000e+00
-## THETA2      7.43772e+01  2.84600e+00  3.51726e-01  1.25021e-01  0.00000e+00
-## THETA3      4.68147e+02  2.82706e+01  5.91659e-01  2.35594e+00  0.00000e+00
-## THETA4       0.07141530   0.00824789   0.83814800   0.00000000   0.00000000
-## THETA5       1.09317000   0.08601240   0.88420600   0.00000000   0.00000000
-## THETA6      7.50000e-01  1.00000e+10  1.10089e+00  0.00000e+00  0.00000e+00
-## THETA7      0.587380000  0.038672200  1.752410000  0.000000000  0.000000000
-## SIGMA(1,1)  1.00000e+00  1.00000e+10  2.35594e+00  0.00000e+00  1.00000e+00
-## OMEGA(1,1)  0.035787600  0.010927500  0.000000000  0.000000000  0.189176000
-## OMEGA(2,1)        0e+00        1e+10        0e+00        0e+00        0e+00
-## OMEGA(2,2)   0.14519600   0.02339120   0.00000000   0.00000000   0.38104700
-##                se_om_sg          fix         term part_deriv_LL
-## THETA1      0.00000e+00  0.00000e+00  0.00000e+00  -2.64681e-05
-## THETA2      0.00000e+00  0.00000e+00  3.70000e+01   6.04246e-07
-## THETA3      0.00000e+00  0.00000e+00  0.00000e+00   1.35185e-07
-## THETA4       0.00000000   0.00000000   0.00000000    0.04191030
-## THETA5       0.00000000   0.00000000   0.00000000    0.00573174
-## THETA6      0.00000e+00  1.00000e+00  0.00000e+00   0.00000e+00
-## THETA7      0.000000000  0.000000000  0.000000000  -0.000066826
-## SIGMA(1,1)  1.00000e+10  1.00000e+00  0.00000e+00   0.00000e+00
-## OMEGA(1,1)  0.028881900  0.000000000  0.000000000  -0.000260968
-## OMEGA(2,1)        1e+10        1e+00        0e+00         0e+00
-## OMEGA(2,2)   0.03069340   0.00000000   0.00000000    0.00335568</code></pre>
+<pre><code>##                estimate       se_est         cond        om_sg     se_om_sg
+## THETA1      2.27050e+00  8.05415e-02  1.88444e+01  0.00000e+00  0.00000e+00
+## THETA2      7.43772e+01  2.84600e+00  1.25021e-01  0.00000e+00  0.00000e+00
+## THETA3      4.68147e+02  2.82706e+01  2.35594e+00  0.00000e+00  0.00000e+00
+## THETA4       0.07141530   0.00824789   0.00000000   0.00000000   0.00000000
+## THETA5       1.09317000   0.08601240   0.00000000   0.00000000   0.00000000
+## THETA6          7.5e-01      1.0e+10      0.0e+00      0.0e+00      0.0e+00
+## THETA7      0.587380000  0.038672200  0.000000000  0.000000000  0.000000000
+## SIGMA(1,1)        1e+00        1e+10        0e+00        1e+00        1e+10
+## OMEGA(1,1)  0.035787600  0.010927500  0.000000000  0.189176000  0.028881900
+## OMEGA(2,1)        0e+00        1e+10        0e+00        0e+00        1e+10
+## OMEGA(2,2)   0.14519600   0.02339120   0.00000000   0.38104700   0.03069340
+##                     fix         term part_deriv_LL
+## THETA1      0.00000e+00  0.00000e+00  -2.64681e-05
+## THETA2      0.00000e+00  3.70000e+01   6.04246e-07
+## THETA3      0.00000e+00  0.00000e+00   1.35185e-07
+## THETA4       0.00000000   0.00000000    0.04191030
+## THETA5       0.00000000   0.00000000    0.00573174
+## THETA6          1.0e+00      0.0e+00       0.0e+00
+## THETA7      0.000000000  0.000000000  -0.000066826
+## SIGMA(1,1)        1e+00        0e+00         0e+00
+## OMEGA(1,1)  0.000000000  0.000000000  -0.000260968
+## OMEGA(2,1)        1e+00        0e+00         0e+00
+## OMEGA(2,2)   0.00000000   0.00000000    0.00335568</code></pre>
 <div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" tabindex="-1"></a><span class="st">&quot;run105&quot;</span> <span class="sc">%&gt;%</span> <span class="fu">get_ext</span>() <span class="sc">%&gt;%</span> <span class="fu">lol</span>(<span class="at">n=</span><span class="dv">2</span>)</span></code></pre></div>
-<pre><code>##               estimate      se_est   eigen_cor        cond       om_sg
-## THETA1       2.2644200   0.0794444   0.1245650  18.5242000   0.0000000
-## THETA2      72.6364000   3.0647800   0.3308980   0.1245650   0.0000000
-## THETA3     480.3630000  25.2242000   0.5591130   2.3074700   0.0000000
-## THETA4      0.07171270  0.00819953  0.84471200  0.00000000  0.00000000
-## THETA5       1.0873300   0.0851449   0.9564580   0.0000000   0.0000000
-## THETA6         0.75000     0.00000     1.14255     0.00000     0.00000
-## THETA7       0.6003590   0.0409449   1.7342300   0.0000000   0.0000000
-## SIGMA(1,1) 1.00000e+00 0.00000e+00 2.30747e+00 0.00000e+00 1.00000e+00
-## OMEGA(1,1)   0.0370303   0.0120055   0.0000000   0.0000000   0.1924330
-## OMEGA(2,1)       0e+00       0e+00       0e+00       0e+00       0e+00
-## OMEGA(2,2)  0.14992300  0.02358690  0.00000000  0.00000000  0.38720000
-##               se_om_sg         fix        term part_deriv_LL
-## THETA1       0.0000000   0.0000000   2.0000000     1.8575200
-## THETA2       0.0000000   0.0000000   0.0000000     0.0390883
-## THETA3       0.0000000   0.0000000   0.0000000    -0.0177468
-## THETA4      0.00000000  0.00000000  0.00000000    2.05010000
-## THETA5       0.0000000   0.0000000   0.0000000     0.8727930
-## THETA6         0.00000     1.00000     0.00000       0.00000
-## THETA7       0.0000000   0.0000000   0.0000000    -5.8033900
-## SIGMA(1,1) 1.00000e+10 1.00000e+00 0.00000e+00   0.00000e+00
-## OMEGA(1,1)   0.0311940   0.0000000   0.0000000     9.1901900
-## OMEGA(2,1)       1e+10       1e+00       0e+00         0e+00
-## OMEGA(2,2)  0.03045830  0.00000000  0.00000000    0.00902989</code></pre>
+<pre><code>##               estimate      se_est        cond       om_sg    se_om_sg
+## THETA1       2.2644200   0.0794444  18.5242000   0.0000000   0.0000000
+## THETA2      72.6364000   3.0647800   0.1245650   0.0000000   0.0000000
+## THETA3     480.3630000  25.2242000   2.3074700   0.0000000   0.0000000
+## THETA4      0.07171270  0.00819953  0.00000000  0.00000000  0.00000000
+## THETA5       1.0873300   0.0851449   0.0000000   0.0000000   0.0000000
+## THETA6            0.75        0.00        0.00        0.00        0.00
+## THETA7       0.6003590   0.0409449   0.0000000   0.0000000   0.0000000
+## SIGMA(1,1)       1e+00       0e+00       0e+00       1e+00       1e+10
+## OMEGA(1,1)   0.0370303   0.0120055   0.0000000   0.1924330   0.0311940
+## OMEGA(2,1)       0e+00       0e+00       0e+00       0e+00       1e+10
+## OMEGA(2,2)  0.14992300  0.02358690  0.00000000  0.38720000  0.03045830
+##                    fix        term part_deriv_LL
+## THETA1       0.0000000   2.0000000     1.8575200
+## THETA2       0.0000000   0.0000000     0.0390883
+## THETA3       0.0000000   0.0000000    -0.0177468
+## THETA4      0.00000000  0.00000000    2.05010000
+## THETA5       0.0000000   0.0000000     0.8727930
+## THETA6            1.00        0.00          0.00
+## THETA7       0.0000000   0.0000000    -5.8033900
+## SIGMA(1,1)       1e+00       0e+00         0e+00
+## OMEGA(1,1)   0.0000000   0.0000000     9.1901900
+## OMEGA(2,1)       1e+00       0e+00         0e+00
+## OMEGA(2,2)  0.00000000  0.00000000    0.00902989</code></pre>
 </div>
 <div id="parameter-tables" class="section level2">
 <h2>Parameter Tables</h2>
@@ -3884,40 +3884,40 @@ you know. <code>nm_params_table()</code> will work just fine.</p>
 <pre><code>## $`Stochastic Approximation Expectation-Maximization`
 ##   fr sr  parameter pclass   on type shrinksd
 ## 1  1  1 SIGMA(1,1)  SIGMA TRUE  EPS   4.5195
-## 2  1  1 OMEGA(1,1)  OMEGA TRUE  ETA   1.3018
+## 2  1  1 OMEGA(1,1)  OMEGA TRUE  ETA  13.0180
 ## 3  2  2 OMEGA(2,2)  OMEGA TRUE  ETA   1.3341
 ## 
 ## $`Objective Function Evaluation by Importance Sampling (No Prior)`
 ##   fr sr  parameter pclass   on type shrinksd
 ## 1  1  1 SIGMA(1,1)  SIGMA TRUE  EPS   4.6529
-## 2  1  1 OMEGA(1,1)  OMEGA TRUE  ETA   1.2131
+## 2  1  1 OMEGA(1,1)  OMEGA TRUE  ETA  12.1310
 ## 3  2  2 OMEGA(2,2)  OMEGA TRUE  ETA   1.2890
 ## 
 ## $`First Order Conditional Estimation with Interaction (No Prior)`
-##   fr sr  parameter pclass   on type shrinksd
-## 1  1  1 SIGMA(1,1)  SIGMA TRUE  EPS   4.6579
-## 2  1  1 OMEGA(1,1)  OMEGA TRUE  ETA   1.2523
-## 3  2  2 OMEGA(2,2)  OMEGA TRUE  ETA   1.0000</code></pre>
+##   fr sr  parameter pclass   on type   shrinksd
+## 1  1  1 SIGMA(1,1)  SIGMA TRUE  EPS 4.6579e+00
+## 2  1  1 OMEGA(1,1)  OMEGA TRUE  ETA 1.2523e+01
+## 3  2  2 OMEGA(2,2)  OMEGA TRUE  ETA 1.0000e-10</code></pre>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" tabindex="-1"></a>   <span class="st">&quot;run103&quot;</span> <span class="sc">%&gt;%</span> <span class="fu">nm_shrinkage</span>(<span class="at">eta.shrinkage.clue =</span> <span class="st">&quot;ETASHRINKVR&quot;</span>) <span class="co"># check eps.shrinkage.clue = &quot;EPSSHRINKVR&quot;</span></span></code></pre></div>
 <pre><code>## $`Stochastic Approximation Expectation-Maximization`
 ##   fr sr  parameter pclass   on type shrinksd
 ## 1  1  1 SIGMA(1,1)  SIGMA TRUE  EPS   4.5195
-## 2  1  1 OMEGA(1,1)  OMEGA TRUE  ETA   1.3018
+## 2  1  1 OMEGA(1,1)  OMEGA TRUE  ETA  13.0180
 ## 3  2  2 OMEGA(2,2)  OMEGA TRUE  ETA   1.3341
 ## 
 ## $`Objective Function Evaluation by Importance Sampling (No Prior)`
 ##   fr sr  parameter pclass   on type shrinksd
 ## 1  1  1 SIGMA(1,1)  SIGMA TRUE  EPS   4.6529
-## 2  1  1 OMEGA(1,1)  OMEGA TRUE  ETA   1.2131
+## 2  1  1 OMEGA(1,1)  OMEGA TRUE  ETA  12.1310
 ## 3  2  2 OMEGA(2,2)  OMEGA TRUE  ETA   1.2890
 ## 
 ## $`First Order Conditional Estimation with Interaction (No Prior)`
-##   fr sr  parameter pclass   on type shrinksd
-## 1  1  1 SIGMA(1,1)  SIGMA TRUE  EPS   4.6579
-## 2  1  1 OMEGA(1,1)  OMEGA TRUE  ETA   1.2523
-## 3  2  2 OMEGA(2,2)  OMEGA TRUE  ETA   1.0000</code></pre>
+##   fr sr  parameter pclass   on type   shrinksd
+## 1  1  1 SIGMA(1,1)  SIGMA TRUE  EPS 4.6579e+00
+## 2  1  1 OMEGA(1,1)  OMEGA TRUE  ETA 1.2523e+01
+## 3  2  2 OMEGA(2,2)  OMEGA TRUE  ETA 1.0000e-10</code></pre>
 <div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" tabindex="-1"></a><span class="st">&quot;run105&quot;</span> <span class="sc">%&gt;%</span> <span class="fu">find_diag</span>()</span></code></pre></div>
-<pre><code>## [[1]]
+<pre><code>## $`Stochastic Approximation Expectation-Maximization`
 ##     parameter pclass on
 ## 1      THETA1  THETA  0
 ## 2      THETA2  THETA  0
@@ -3931,7 +3931,7 @@ you know. <code>nm_params_table()</code> will work just fine.</p>
 ## 10 OMEGA(2,1)  OMEGA  0
 ## 11 OMEGA(2,2)  OMEGA  1
 ## 
-## [[2]]
+## $`Objective Function Evaluation by Importance Sampling (No Prior)`
 ##     parameter pclass on
 ## 1      THETA1  THETA  0
 ## 2      THETA2  THETA  0
@@ -3945,7 +3945,7 @@ you know. <code>nm_params_table()</code> will work just fine.</p>
 ## 10 OMEGA(2,1)  OMEGA  0
 ## 11 OMEGA(2,2)  OMEGA  1
 ## 
-## [[3]]
+## $`First Order Conditional Estimation with Interaction (No Prior)`
 ##     parameter pclass on
 ## 1      THETA1  THETA  0
 ## 2      THETA2  THETA  0
@@ -3963,236 +3963,190 @@ you know. <code>nm_params_table()</code> will work just fine.</p>
 <h3>Simple parameter tables</h3>
 <p>Explore the examples.</p>
 <div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" tabindex="-1"></a><span class="st">&quot;run103&quot;</span> <span class="sc">%&gt;%</span> <span class="fu">nm_params_table</span>()</span></code></pre></div>
-<pre><code>## [[1]]
-##     parameter pclass on    estimate      se_est eigen_cor       cond    om_sg
-## 1      THETA1  THETA  0   2.2598500  0.06434490 0.0271756 85.2782000 0.000000
-## 2      THETA2  THETA  0  72.5917000 10.59310000 0.1633420  0.0271756 0.000000
-## 3      THETA3  THETA  0 448.5460000 30.74240000 0.4862410  2.3174800 0.000000
-## 4      THETA4  THETA  0   0.0720032  0.00815036 0.6783080  0.0000000 0.000000
-## 5      THETA5  THETA  0   1.0833100  0.09797250 0.8478870  0.0000000 0.000000
-## 6      THETA6  THETA  0   0.7395590  0.36384100 1.1534300  0.0000000 0.000000
-## 7      THETA7  THETA  0   0.5946970  0.05058200 1.5473700  0.0000000 0.000000
-## 8  SIGMA(1,1)  SIGMA  1   1.0000000  0.00000000 1.7787700  0.0000000 1.000000
-## 9  OMEGA(1,1)  OMEGA  1   0.0369896  0.01334860 2.3174800  0.0000000 0.192327
-## 10 OMEGA(2,1)  OMEGA  0   0.0000000  0.00000000 0.0000000  0.0000000 0.000000
-## 11 OMEGA(2,2)  OMEGA  1   0.1508320  0.05159710 0.0000000  0.0000000 0.388371
-##       se_om_sg fix term part_deriv_LL fr sr type shrinksd       RSE
-## 1  0.00000e+00   0    2    1.53102000 NA NA        0.0000  2.847308
-## 2  0.00000e+00   0    0    0.13829700 NA NA        0.0000 14.592715
-## 3  0.00000e+00   0    0    0.04954420 NA NA        0.0000  6.853790
-## 4  0.00000e+00   0    0   -1.43472000 NA NA        0.0000 11.319441
-## 5  0.00000e+00   0    0    1.39039000 NA NA        0.0000  9.043810
-## 6  0.00000e+00   0    0   -3.03716000 NA NA        0.0000 49.197021
-## 7  0.00000e+00   0    0    6.69407000 NA NA        0.0000  8.505508
-## 8  1.00000e+10   1    0    0.00000000  1  1  EPS   4.5195  0.000000
-## 9  3.47030e-02   0    0   -0.16907500  1  1  ETA   1.3018 36.087441
-## 10 1.00000e+10   1    0    0.00000000 NA NA        0.0000  0.000000
-## 11 6.64276e-02   0    0    0.00650042  2  2  ETA   1.3341 34.208324
-##               CI95        item     symbol  unit transform
-## 1      2.13 - 2.39    theta_01         KA   1/h       LIN
-## 2      51.8 - 93.4    theta_02         CL   L/h       LIN
-## 3        388 - 509    theta_03         V2     L       LIN
-## 4    0.056 - 0.088    theta_04       RUVp  &lt;NA&gt;       LIN
-## 5     0.891 - 1.28    theta_05       RUVa ng/mL       LIN
-## 6    0.0264 - 1.45    theta_06      CL-WT  &lt;NA&gt;       LIN
-## 7    0.496 - 0.694    theta_07     CL-SEX  &lt;NA&gt;       LIN
-## 8                - sigma_01_01       EPS1  &lt;NA&gt;      &lt;NA&gt;
-## 9  0.0108 - 0.0632 omega_01_01     iiv CL  &lt;NA&gt;      &lt;NA&gt;
-## 10               - omega_02_01 OMEGA(2,1)  &lt;NA&gt;      &lt;NA&gt;
-## 11  0.0497 - 0.252 omega_02_02     iiv V2  &lt;NA&gt;      &lt;NA&gt;
-##                       label
-## 1  Absorption Rate Constant
-## 2                 Clearance
-## 3    Volume of Distribution
-## 4        Proportional Error
-## 5            Additive Error
-## 6        Power Scalar CL-WT
-## 7          Female CL Change
-## 8                       RUV
-## 9                   IIV(CL)
-## 10               OMEGA(2,1)
-## 11                  IIV(V2)
+<pre><code>## $`Stochastic Approximation Expectation-Maximization`
+##     parameter pclass on    estimate      se_est       cond    om_sg    se_om_sg
+## 1      THETA1  THETA  0   2.2598500  0.06434490 85.2782000 0.000000 0.00000e+00
+## 2      THETA2  THETA  0  72.5917000 10.59310000  0.0271756 0.000000 0.00000e+00
+## 3      THETA3  THETA  0 448.5460000 30.74240000  2.3174800 0.000000 0.00000e+00
+## 4      THETA4  THETA  0   0.0720032  0.00815036  0.0000000 0.000000 0.00000e+00
+## 5      THETA5  THETA  0   1.0833100  0.09797250  0.0000000 0.000000 0.00000e+00
+## 6      THETA6  THETA  0   0.7395590  0.36384100  0.0000000 0.000000 0.00000e+00
+## 7      THETA7  THETA  0   0.5946970  0.05058200  0.0000000 0.000000 0.00000e+00
+## 8  SIGMA(1,1)  SIGMA  1   1.0000000  0.00000000  0.0000000 1.000000 1.00000e+10
+## 9  OMEGA(1,1)  OMEGA  1   0.0369896  0.01334860  0.0000000 0.192327 3.47030e-02
+## 10 OMEGA(2,1)  OMEGA  0   0.0000000  0.00000000  0.0000000 0.000000 1.00000e+10
+## 11 OMEGA(2,2)  OMEGA  1   0.1508320  0.05159710  0.0000000 0.388371 6.64276e-02
+##    fix term part_deriv_LL fr sr type shrinksd       RSE            CI95
+## 1    0    2    1.53102000 NA NA        0.0000  2.847308     2.13 - 2.39
+## 2    0    0    0.13829700 NA NA        0.0000 14.592715     51.8 - 93.4
+## 3    0    0    0.04954420 NA NA        0.0000  6.853790       388 - 509
+## 4    0    0   -1.43472000 NA NA        0.0000 11.319441   0.056 - 0.088
+## 5    0    0    1.39039000 NA NA        0.0000  9.043810    0.891 - 1.28
+## 6    0    0   -3.03716000 NA NA        0.0000 49.197021   0.0264 - 1.45
+## 7    0    0    6.69407000 NA NA        0.0000  8.505508   0.496 - 0.694
+## 8    1    0    0.00000000  1  1  EPS   4.5195  0.000000               -
+## 9    0    0   -0.16907500  1  1  ETA  13.0180 36.087441 0.0108 - 0.0632
+## 10   1    0    0.00000000 NA NA        0.0000  0.000000               -
+## 11   0    0    0.00650042  2  2  ETA   1.3341 34.208324  0.0497 - 0.252
+##           item     symbol  unit transform                    label
+## 1     theta_01         KA   1/h       LIN Absorption Rate Constant
+## 2     theta_02         CL   L/h       LIN                Clearance
+## 3     theta_03         V2     L       LIN   Volume of Distribution
+## 4     theta_04       RUVp  &lt;NA&gt;       LIN       Proportional Error
+## 5     theta_05       RUVa ng/mL       LIN           Additive Error
+## 6     theta_06      CL-WT  &lt;NA&gt;       LIN       Power Scalar CL-WT
+## 7     theta_07     CL-SEX  &lt;NA&gt;       LIN         Female CL Change
+## 8  sigma_01_01       EPS1  &lt;NA&gt;      &lt;NA&gt;                      RUV
+## 9  omega_01_01     iiv CL  &lt;NA&gt;      &lt;NA&gt;                  IIV(CL)
+## 10 omega_02_01 OMEGA(2,1)  &lt;NA&gt;      &lt;NA&gt;               OMEGA(2,1)
+## 11 omega_02_02     iiv V2  &lt;NA&gt;      &lt;NA&gt;                  IIV(V2)
 ## 
-## [[2]]
-##     parameter pclass on    estimate      se_est eigen_cor       cond    om_sg
-## 1      THETA1  THETA  0   2.2598500  0.07954000 0.0973847 25.5667000 0.000000
-## 2      THETA2  THETA  0  72.5917000  3.87839000 0.1542600  0.0973847 0.000000
-## 3      THETA3  THETA  0 448.5460000 22.68500000 0.6112300  2.4898000 0.000000
-## 4      THETA4  THETA  0   0.0720032  0.00811598 0.7310460  0.0000000 0.000000
-## 5      THETA5  THETA  0   1.0833100  0.08445940 0.8697180  0.0000000 0.000000
-## 6      THETA6  THETA  0   0.7395590  0.12324600 1.0470100  0.0000000 0.000000
-## 7      THETA7  THETA  0   0.5946970  0.04052430 1.4154900  0.0000000 0.000000
-## 8  SIGMA(1,1)  SIGMA  1   1.0000000  0.00000000 1.5840600  0.0000000 1.000000
-## 9  OMEGA(1,1)  OMEGA  1   0.0369896  0.01233160 2.4898000  0.0000000 0.192327
-## 10 OMEGA(2,1)  OMEGA  0   0.0000000  0.00000000 0.0000000  0.0000000 0.000000
-## 11 OMEGA(2,2)  OMEGA  1   0.1508320  0.02428140 0.0000000  0.0000000 0.388371
-##       se_om_sg fix term part_deriv_LL fr sr type shrinksd       RSE
-## 1  0.00000e+00   0    2     1.5027400 NA NA        0.0000  3.519703
-## 2  0.00000e+00   0    0     0.0770840 NA NA        0.0000  5.342746
-## 3  0.00000e+00   0    0     0.0208706 NA NA        0.0000  5.057452
-## 4  0.00000e+00   0    0    -1.4271200 NA NA        0.0000 11.271693
-## 5  0.00000e+00   0    0     1.2411700 NA NA        0.0000  7.796420
-## 6  0.00000e+00   0    0    -1.3443000 NA NA        0.0000 16.664796
-## 7  0.00000e+00   0    0    -0.2305750 NA NA        0.0000  6.814277
-## 8  1.00000e+10   1    0     0.0000000  1  1  EPS   4.6529  0.000000
-## 9  3.20591e-02   0    0     9.5243200  1  1  ETA   1.2131 33.338019
-## 10 1.00000e+10   1    0     0.0000000 NA NA        0.0000  0.000000
-## 11 3.12607e-02   0    0    -0.0144470  2  2  ETA   1.2890 16.098308
-##               CI95        item     symbol  unit transform
-## 1       2.1 - 2.42    theta_01         KA   1/h       LIN
-## 2        65 - 80.2    theta_02         CL   L/h       LIN
-## 3        404 - 493    theta_03         V2     L       LIN
-## 4  0.0561 - 0.0879    theta_04       RUVp  &lt;NA&gt;       LIN
-## 5     0.918 - 1.25    theta_05       RUVa ng/mL       LIN
-## 6    0.498 - 0.981    theta_06      CL-WT  &lt;NA&gt;       LIN
-## 7    0.515 - 0.674    theta_07     CL-SEX  &lt;NA&gt;       LIN
-## 8                - sigma_01_01       EPS1  &lt;NA&gt;      &lt;NA&gt;
-## 9  0.0128 - 0.0612 omega_01_01     iiv CL  &lt;NA&gt;      &lt;NA&gt;
-## 10               - omega_02_01 OMEGA(2,1)  &lt;NA&gt;      &lt;NA&gt;
-## 11   0.103 - 0.198 omega_02_02     iiv V2  &lt;NA&gt;      &lt;NA&gt;
-##                       label
-## 1  Absorption Rate Constant
-## 2                 Clearance
-## 3    Volume of Distribution
-## 4        Proportional Error
-## 5            Additive Error
-## 6        Power Scalar CL-WT
-## 7          Female CL Change
-## 8                       RUV
-## 9                   IIV(CL)
-## 10               OMEGA(2,1)
-## 11                  IIV(V2)
+## $`Objective Function Evaluation by Importance Sampling (No Prior)`
+##     parameter pclass on    estimate      se_est       cond    om_sg    se_om_sg
+## 1      THETA1  THETA  0   2.2598500  0.07954000 25.5667000 0.000000 0.00000e+00
+## 2      THETA2  THETA  0  72.5917000  3.87839000  0.0973847 0.000000 0.00000e+00
+## 3      THETA3  THETA  0 448.5460000 22.68500000  2.4898000 0.000000 0.00000e+00
+## 4      THETA4  THETA  0   0.0720032  0.00811598  0.0000000 0.000000 0.00000e+00
+## 5      THETA5  THETA  0   1.0833100  0.08445940  0.0000000 0.000000 0.00000e+00
+## 6      THETA6  THETA  0   0.7395590  0.12324600  0.0000000 0.000000 0.00000e+00
+## 7      THETA7  THETA  0   0.5946970  0.04052430  0.0000000 0.000000 0.00000e+00
+## 8  SIGMA(1,1)  SIGMA  1   1.0000000  0.00000000  0.0000000 1.000000 1.00000e+10
+## 9  OMEGA(1,1)  OMEGA  1   0.0369896  0.01233160  0.0000000 0.192327 3.20591e-02
+## 10 OMEGA(2,1)  OMEGA  0   0.0000000  0.00000000  0.0000000 0.000000 1.00000e+10
+## 11 OMEGA(2,2)  OMEGA  1   0.1508320  0.02428140  0.0000000 0.388371 3.12607e-02
+##    fix term part_deriv_LL fr sr type shrinksd       RSE            CI95
+## 1    0    2     1.5027400 NA NA        0.0000  3.519703      2.1 - 2.42
+## 2    0    0     0.0770840 NA NA        0.0000  5.342746       65 - 80.2
+## 3    0    0     0.0208706 NA NA        0.0000  5.057452       404 - 493
+## 4    0    0    -1.4271200 NA NA        0.0000 11.271693 0.0561 - 0.0879
+## 5    0    0     1.2411700 NA NA        0.0000  7.796420    0.918 - 1.25
+## 6    0    0    -1.3443000 NA NA        0.0000 16.664796   0.498 - 0.981
+## 7    0    0    -0.2305750 NA NA        0.0000  6.814277   0.515 - 0.674
+## 8    1    0     0.0000000  1  1  EPS   4.6529  0.000000               -
+## 9    0    0     9.5243200  1  1  ETA  12.1310 33.338019 0.0128 - 0.0612
+## 10   1    0     0.0000000 NA NA        0.0000  0.000000               -
+## 11   0    0    -0.0144470  2  2  ETA   1.2890 16.098308   0.103 - 0.198
+##           item     symbol  unit transform                    label
+## 1     theta_01         KA   1/h       LIN Absorption Rate Constant
+## 2     theta_02         CL   L/h       LIN                Clearance
+## 3     theta_03         V2     L       LIN   Volume of Distribution
+## 4     theta_04       RUVp  &lt;NA&gt;       LIN       Proportional Error
+## 5     theta_05       RUVa ng/mL       LIN           Additive Error
+## 6     theta_06      CL-WT  &lt;NA&gt;       LIN       Power Scalar CL-WT
+## 7     theta_07     CL-SEX  &lt;NA&gt;       LIN         Female CL Change
+## 8  sigma_01_01       EPS1  &lt;NA&gt;      &lt;NA&gt;                      RUV
+## 9  omega_01_01     iiv CL  &lt;NA&gt;      &lt;NA&gt;                  IIV(CL)
+## 10 omega_02_01 OMEGA(2,1)  &lt;NA&gt;      &lt;NA&gt;               OMEGA(2,1)
+## 11 omega_02_02     iiv V2  &lt;NA&gt;      &lt;NA&gt;                  IIV(V2)
 ## 
-## [[3]]
-##     parameter pclass on    estimate      se_est eigen_cor       cond    om_sg
-## 1      THETA1  THETA  0   2.2705000 8.05467e-02 0.0964827 25.9927000 0.000000
-## 2      THETA2  THETA  0  74.2674000 3.76134e+00 0.1516630  0.0964827 0.000000
-## 3      THETA3  THETA  0 468.1450000 2.82716e+01 0.5382020  2.5078500 0.000000
-## 4      THETA4  THETA  0   0.0714092 8.19589e-03 0.8350520  0.0000000 0.000000
-## 5      THETA5  THETA  0   1.0932500 8.58609e-02 0.8630220  0.0000000 0.000000
-## 6      THETA6  THETA  0   0.7451050 1.27530e-01 1.0370800  0.0000000 0.000000
-## 7      THETA7  THETA  0   0.5872060 4.00082e-02 1.3480700  0.0000000 0.000000
-## 8  SIGMA(1,1)  SIGMA  1   1.0000000 1.00000e+10 1.6225800  0.0000000 1.000000
-## 9  OMEGA(1,1)  OMEGA  1   0.0357831 1.09243e-02 2.5078500  0.0000000 0.189164
-## 10 OMEGA(2,1)  OMEGA  0   0.0000000 1.00000e+10 0.0000000  0.0000000 0.000000
-## 11 OMEGA(2,2)  OMEGA  1   0.1451950 2.33885e-02 0.0000000  0.0000000 0.381044
-##       se_om_sg fix term part_deriv_LL fr sr type shrinksd          RSE
-## 1  0.00000e+00   0    0   5.48200e-06 NA NA        0.0000 3.547531e+00
-## 2  0.00000e+00   0   37   9.29421e-06 NA NA        0.0000 5.064591e+00
-## 3  0.00000e+00   0    0   1.49913e-06 NA NA        0.0000 6.039069e+00
-## 4  0.00000e+00   0    0   4.28314e-02 NA NA        0.0000 1.147736e+01
-## 5  0.00000e+00   0    0   5.83685e-03 NA NA        0.0000 7.853730e+00
-## 6  0.00000e+00   0    0  -1.71198e-03 NA NA        0.0000 1.711571e+01
-## 7  0.00000e+00   0    0   1.51473e-03 NA NA        0.0000 6.813316e+00
-## 8  1.00000e+10   1    0   0.00000e+00  1  1  EPS   4.6579 1.000000e+12
-## 9  2.88751e-02   0    0   5.77672e-03  1  1  ETA   1.2523 3.052922e+01
-## 10 1.00000e+10   1    0   0.00000e+00 NA NA        0.0000          Inf
-## 11 3.06900e-02   0    0   3.64906e-03  2  2  ETA   1.0000 1.610834e+01
-##               CI95        item     symbol  unit transform
-## 1      2.11 - 2.43    theta_01         KA   1/h       LIN
-## 2      66.9 - 81.6    theta_02         CL   L/h       LIN
-## 3        413 - 524    theta_03         V2     L       LIN
-## 4  0.0553 - 0.0875    theta_04       RUVp  &lt;NA&gt;       LIN
-## 5     0.925 - 1.26    theta_05       RUVa ng/mL       LIN
-## 6    0.495 - 0.995    theta_06      CL-WT  &lt;NA&gt;       LIN
-## 7    0.509 - 0.666    theta_07     CL-SEX  &lt;NA&gt;       LIN
-## 8                - sigma_01_01       EPS1  &lt;NA&gt;      &lt;NA&gt;
-## 9  0.0144 - 0.0572 omega_01_01     iiv CL  &lt;NA&gt;      &lt;NA&gt;
-## 10               - omega_02_01 OMEGA(2,1)  &lt;NA&gt;      &lt;NA&gt;
-## 11  0.0994 - 0.191 omega_02_02     iiv V2  &lt;NA&gt;      &lt;NA&gt;
-##                       label
-## 1  Absorption Rate Constant
-## 2                 Clearance
-## 3    Volume of Distribution
-## 4        Proportional Error
-## 5            Additive Error
-## 6        Power Scalar CL-WT
-## 7          Female CL Change
-## 8                       RUV
-## 9                   IIV(CL)
-## 10               OMEGA(2,1)
-## 11                  IIV(V2)
+## $`First Order Conditional Estimation with Interaction (No Prior)`
+##     parameter pclass on    estimate      se_est       cond    om_sg    se_om_sg
+## 1      THETA1  THETA  0   2.2705000 8.05467e-02 25.9927000 0.000000 0.00000e+00
+## 2      THETA2  THETA  0  74.2674000 3.76134e+00  0.0964827 0.000000 0.00000e+00
+## 3      THETA3  THETA  0 468.1450000 2.82716e+01  2.5078500 0.000000 0.00000e+00
+## 4      THETA4  THETA  0   0.0714092 8.19589e-03  0.0000000 0.000000 0.00000e+00
+## 5      THETA5  THETA  0   1.0932500 8.58609e-02  0.0000000 0.000000 0.00000e+00
+## 6      THETA6  THETA  0   0.7451050 1.27530e-01  0.0000000 0.000000 0.00000e+00
+## 7      THETA7  THETA  0   0.5872060 4.00082e-02  0.0000000 0.000000 0.00000e+00
+## 8  SIGMA(1,1)  SIGMA  1   1.0000000 1.00000e+10  0.0000000 1.000000 1.00000e+10
+## 9  OMEGA(1,1)  OMEGA  1   0.0357831 1.09243e-02  0.0000000 0.189164 2.88751e-02
+## 10 OMEGA(2,1)  OMEGA  0   0.0000000 1.00000e+10  0.0000000 0.000000 1.00000e+10
+## 11 OMEGA(2,2)  OMEGA  1   0.1451950 2.33885e-02  0.0000000 0.381044 3.06900e-02
+##    fix term part_deriv_LL fr sr type   shrinksd          RSE            CI95
+## 1    0    0   5.48200e-06 NA NA      0.0000e+00 3.547531e+00     2.11 - 2.43
+## 2    0   37   9.29421e-06 NA NA      0.0000e+00 5.064591e+00     66.9 - 81.6
+## 3    0    0   1.49913e-06 NA NA      0.0000e+00 6.039069e+00       413 - 524
+## 4    0    0   4.28314e-02 NA NA      0.0000e+00 1.147736e+01 0.0553 - 0.0875
+## 5    0    0   5.83685e-03 NA NA      0.0000e+00 7.853730e+00    0.925 - 1.26
+## 6    0    0  -1.71198e-03 NA NA      0.0000e+00 1.711571e+01   0.495 - 0.995
+## 7    0    0   1.51473e-03 NA NA      0.0000e+00 6.813316e+00   0.509 - 0.666
+## 8    1    0   0.00000e+00  1  1  EPS 4.6579e+00 1.000000e+12               -
+## 9    0    0   5.77672e-03  1  1  ETA 1.2523e+01 3.052922e+01 0.0144 - 0.0572
+## 10   1    0   0.00000e+00 NA NA      0.0000e+00          Inf               -
+## 11   0    0   3.64906e-03  2  2  ETA 1.0000e-10 1.610834e+01  0.0994 - 0.191
+##           item     symbol  unit transform                    label
+## 1     theta_01         KA   1/h       LIN Absorption Rate Constant
+## 2     theta_02         CL   L/h       LIN                Clearance
+## 3     theta_03         V2     L       LIN   Volume of Distribution
+## 4     theta_04       RUVp  &lt;NA&gt;       LIN       Proportional Error
+## 5     theta_05       RUVa ng/mL       LIN           Additive Error
+## 6     theta_06      CL-WT  &lt;NA&gt;       LIN       Power Scalar CL-WT
+## 7     theta_07     CL-SEX  &lt;NA&gt;       LIN         Female CL Change
+## 8  sigma_01_01       EPS1  &lt;NA&gt;      &lt;NA&gt;                      RUV
+## 9  omega_01_01     iiv CL  &lt;NA&gt;      &lt;NA&gt;                  IIV(CL)
+## 10 omega_02_01 OMEGA(2,1)  &lt;NA&gt;      &lt;NA&gt;               OMEGA(2,1)
+## 11 omega_02_02     iiv V2  &lt;NA&gt;      &lt;NA&gt;                  IIV(V2)
 ## 
 ## attr(,&quot;class&quot;)
 ## [1] &quot;nmpartab&quot; &quot;list&quot;</code></pre>
 <div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" tabindex="-1"></a><span class="st">&quot;run103&quot;</span> <span class="sc">%&gt;%</span> <span class="fu">nm_params_table</span>() <span class="sc">%&gt;%</span> names</span></code></pre></div>
-<pre><code>## NULL</code></pre>
+<pre><code>## [1] &quot;Stochastic Approximation Expectation-Maximization&quot;              
+## [2] &quot;Objective Function Evaluation by Importance Sampling (No Prior)&quot;
+## [3] &quot;First Order Conditional Estimation with Interaction (No Prior)&quot;</code></pre>
 <div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" tabindex="-1"></a><span class="st">&quot;run103&quot;</span> <span class="sc">%&gt;%</span> <span class="fu">nm_params_table</span>() <span class="sc">%&gt;%</span> lol</span></code></pre></div>
-<pre><code>##     parameter pclass on    estimate      se_est eigen_cor       cond    om_sg
-## 1      THETA1  THETA  0   2.2705000 8.05467e-02 0.0964827 25.9927000 0.000000
-## 2      THETA2  THETA  0  74.2674000 3.76134e+00 0.1516630  0.0964827 0.000000
-## 3      THETA3  THETA  0 468.1450000 2.82716e+01 0.5382020  2.5078500 0.000000
-## 4      THETA4  THETA  0   0.0714092 8.19589e-03 0.8350520  0.0000000 0.000000
-## 5      THETA5  THETA  0   1.0932500 8.58609e-02 0.8630220  0.0000000 0.000000
-## 6      THETA6  THETA  0   0.7451050 1.27530e-01 1.0370800  0.0000000 0.000000
-## 7      THETA7  THETA  0   0.5872060 4.00082e-02 1.3480700  0.0000000 0.000000
-## 8  SIGMA(1,1)  SIGMA  1   1.0000000 1.00000e+10 1.6225800  0.0000000 1.000000
-## 9  OMEGA(1,1)  OMEGA  1   0.0357831 1.09243e-02 2.5078500  0.0000000 0.189164
-## 10 OMEGA(2,1)  OMEGA  0   0.0000000 1.00000e+10 0.0000000  0.0000000 0.000000
-## 11 OMEGA(2,2)  OMEGA  1   0.1451950 2.33885e-02 0.0000000  0.0000000 0.381044
-##       se_om_sg fix term part_deriv_LL fr sr type shrinksd          RSE
-## 1  0.00000e+00   0    0   5.48200e-06 NA NA        0.0000 3.547531e+00
-## 2  0.00000e+00   0   37   9.29421e-06 NA NA        0.0000 5.064591e+00
-## 3  0.00000e+00   0    0   1.49913e-06 NA NA        0.0000 6.039069e+00
-## 4  0.00000e+00   0    0   4.28314e-02 NA NA        0.0000 1.147736e+01
-## 5  0.00000e+00   0    0   5.83685e-03 NA NA        0.0000 7.853730e+00
-## 6  0.00000e+00   0    0  -1.71198e-03 NA NA        0.0000 1.711571e+01
-## 7  0.00000e+00   0    0   1.51473e-03 NA NA        0.0000 6.813316e+00
-## 8  1.00000e+10   1    0   0.00000e+00  1  1  EPS   4.6579 1.000000e+12
-## 9  2.88751e-02   0    0   5.77672e-03  1  1  ETA   1.2523 3.052922e+01
-## 10 1.00000e+10   1    0   0.00000e+00 NA NA        0.0000          Inf
-## 11 3.06900e-02   0    0   3.64906e-03  2  2  ETA   1.0000 1.610834e+01
-##               CI95        item     symbol  unit transform
-## 1      2.11 - 2.43    theta_01         KA   1/h       LIN
-## 2      66.9 - 81.6    theta_02         CL   L/h       LIN
-## 3        413 - 524    theta_03         V2     L       LIN
-## 4  0.0553 - 0.0875    theta_04       RUVp  &lt;NA&gt;       LIN
-## 5     0.925 - 1.26    theta_05       RUVa ng/mL       LIN
-## 6    0.495 - 0.995    theta_06      CL-WT  &lt;NA&gt;       LIN
-## 7    0.509 - 0.666    theta_07     CL-SEX  &lt;NA&gt;       LIN
-## 8                - sigma_01_01       EPS1  &lt;NA&gt;      &lt;NA&gt;
-## 9  0.0144 - 0.0572 omega_01_01     iiv CL  &lt;NA&gt;      &lt;NA&gt;
-## 10               - omega_02_01 OMEGA(2,1)  &lt;NA&gt;      &lt;NA&gt;
-## 11  0.0994 - 0.191 omega_02_02     iiv V2  &lt;NA&gt;      &lt;NA&gt;
-##                       label
-## 1  Absorption Rate Constant
-## 2                 Clearance
-## 3    Volume of Distribution
-## 4        Proportional Error
-## 5            Additive Error
-## 6        Power Scalar CL-WT
-## 7          Female CL Change
-## 8                       RUV
-## 9                   IIV(CL)
-## 10               OMEGA(2,1)
-## 11                  IIV(V2)</code></pre>
+<pre><code>##     parameter pclass on    estimate      se_est       cond    om_sg    se_om_sg
+## 1      THETA1  THETA  0   2.2705000 8.05467e-02 25.9927000 0.000000 0.00000e+00
+## 2      THETA2  THETA  0  74.2674000 3.76134e+00  0.0964827 0.000000 0.00000e+00
+## 3      THETA3  THETA  0 468.1450000 2.82716e+01  2.5078500 0.000000 0.00000e+00
+## 4      THETA4  THETA  0   0.0714092 8.19589e-03  0.0000000 0.000000 0.00000e+00
+## 5      THETA5  THETA  0   1.0932500 8.58609e-02  0.0000000 0.000000 0.00000e+00
+## 6      THETA6  THETA  0   0.7451050 1.27530e-01  0.0000000 0.000000 0.00000e+00
+## 7      THETA7  THETA  0   0.5872060 4.00082e-02  0.0000000 0.000000 0.00000e+00
+## 8  SIGMA(1,1)  SIGMA  1   1.0000000 1.00000e+10  0.0000000 1.000000 1.00000e+10
+## 9  OMEGA(1,1)  OMEGA  1   0.0357831 1.09243e-02  0.0000000 0.189164 2.88751e-02
+## 10 OMEGA(2,1)  OMEGA  0   0.0000000 1.00000e+10  0.0000000 0.000000 1.00000e+10
+## 11 OMEGA(2,2)  OMEGA  1   0.1451950 2.33885e-02  0.0000000 0.381044 3.06900e-02
+##    fix term part_deriv_LL fr sr type   shrinksd          RSE            CI95
+## 1    0    0   5.48200e-06 NA NA      0.0000e+00 3.547531e+00     2.11 - 2.43
+## 2    0   37   9.29421e-06 NA NA      0.0000e+00 5.064591e+00     66.9 - 81.6
+## 3    0    0   1.49913e-06 NA NA      0.0000e+00 6.039069e+00       413 - 524
+## 4    0    0   4.28314e-02 NA NA      0.0000e+00 1.147736e+01 0.0553 - 0.0875
+## 5    0    0   5.83685e-03 NA NA      0.0000e+00 7.853730e+00    0.925 - 1.26
+## 6    0    0  -1.71198e-03 NA NA      0.0000e+00 1.711571e+01   0.495 - 0.995
+## 7    0    0   1.51473e-03 NA NA      0.0000e+00 6.813316e+00   0.509 - 0.666
+## 8    1    0   0.00000e+00  1  1  EPS 4.6579e+00 1.000000e+12               -
+## 9    0    0   5.77672e-03  1  1  ETA 1.2523e+01 3.052922e+01 0.0144 - 0.0572
+## 10   1    0   0.00000e+00 NA NA      0.0000e+00          Inf               -
+## 11   0    0   3.64906e-03  2  2  ETA 1.0000e-10 1.610834e+01  0.0994 - 0.191
+##           item     symbol  unit transform                    label
+## 1     theta_01         KA   1/h       LIN Absorption Rate Constant
+## 2     theta_02         CL   L/h       LIN                Clearance
+## 3     theta_03         V2     L       LIN   Volume of Distribution
+## 4     theta_04       RUVp  &lt;NA&gt;       LIN       Proportional Error
+## 5     theta_05       RUVa ng/mL       LIN           Additive Error
+## 6     theta_06      CL-WT  &lt;NA&gt;       LIN       Power Scalar CL-WT
+## 7     theta_07     CL-SEX  &lt;NA&gt;       LIN         Female CL Change
+## 8  sigma_01_01       EPS1  &lt;NA&gt;      &lt;NA&gt;                      RUV
+## 9  omega_01_01     iiv CL  &lt;NA&gt;      &lt;NA&gt;                  IIV(CL)
+## 10 omega_02_01 OMEGA(2,1)  &lt;NA&gt;      &lt;NA&gt;               OMEGA(2,1)
+## 11 omega_02_02     iiv V2  &lt;NA&gt;      &lt;NA&gt;                  IIV(V2)</code></pre>
 <div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" tabindex="-1"></a><span class="st">&quot;run103&quot;</span> <span class="sc">%&gt;%</span> <span class="fu">nm_params_table_short</span>() <span class="sc">%&gt;%</span> lol</span></code></pre></div>
-<pre><code>##     parameter    estimate          RSE            CI95 fix shrinksd     symbol
-## 1      THETA1   2.2705000 3.547531e+00     2.11 - 2.43   0   0.0000         KA
-## 2      THETA2  74.2674000 5.064591e+00     66.9 - 81.6   0   0.0000         CL
-## 3      THETA3 468.1450000 6.039069e+00       413 - 524   0   0.0000         V2
-## 4      THETA4   0.0714092 1.147736e+01 0.0553 - 0.0875   0   0.0000       RUVp
-## 5      THETA5   1.0932500 7.853730e+00    0.925 - 1.26   0   0.0000       RUVa
-## 6      THETA6   0.7451050 1.711571e+01   0.495 - 0.995   0   0.0000      CL-WT
-## 7      THETA7   0.5872060 6.813316e+00   0.509 - 0.666   0   0.0000     CL-SEX
-## 8  SIGMA(1,1)   1.0000000 1.000000e+12               -   1   4.6579       EPS1
-## 9  OMEGA(1,1)   0.0357831 3.052922e+01 0.0144 - 0.0572   0   1.2523     iiv CL
-## 10 OMEGA(2,1)   0.0000000          Inf               -   1   0.0000 OMEGA(2,1)
-## 11 OMEGA(2,2)   0.1451950 1.610834e+01  0.0994 - 0.191   0   1.0000     iiv V2
-##     unit transform                    label      se_est
-## 1    1/h       LIN Absorption Rate Constant 8.05467e-02
-## 2    L/h       LIN                Clearance 3.76134e+00
-## 3      L       LIN   Volume of Distribution 2.82716e+01
-## 4   &lt;NA&gt;       LIN       Proportional Error 8.19589e-03
-## 5  ng/mL       LIN           Additive Error 8.58609e-02
-## 6   &lt;NA&gt;       LIN       Power Scalar CL-WT 1.27530e-01
-## 7   &lt;NA&gt;       LIN         Female CL Change 4.00082e-02
-## 8   &lt;NA&gt;      &lt;NA&gt;                      RUV 1.00000e+10
-## 9   &lt;NA&gt;      &lt;NA&gt;                  IIV(CL) 1.09243e-02
-## 10  &lt;NA&gt;      &lt;NA&gt;               OMEGA(2,1) 1.00000e+10
-## 11  &lt;NA&gt;      &lt;NA&gt;                  IIV(V2) 2.33885e-02</code></pre>
+<pre><code>##     parameter    estimate          RSE            CI95 fix   shrinksd
+## 1      THETA1   2.2705000 3.547531e+00     2.11 - 2.43   0 0.0000e+00
+## 2      THETA2  74.2674000 5.064591e+00     66.9 - 81.6   0 0.0000e+00
+## 3      THETA3 468.1450000 6.039069e+00       413 - 524   0 0.0000e+00
+## 4      THETA4   0.0714092 1.147736e+01 0.0553 - 0.0875   0 0.0000e+00
+## 5      THETA5   1.0932500 7.853730e+00    0.925 - 1.26   0 0.0000e+00
+## 6      THETA6   0.7451050 1.711571e+01   0.495 - 0.995   0 0.0000e+00
+## 7      THETA7   0.5872060 6.813316e+00   0.509 - 0.666   0 0.0000e+00
+## 8  SIGMA(1,1)   1.0000000 1.000000e+12               -   1 4.6579e+00
+## 9  OMEGA(1,1)   0.0357831 3.052922e+01 0.0144 - 0.0572   0 1.2523e+01
+## 10 OMEGA(2,1)   0.0000000          Inf               -   1 0.0000e+00
+## 11 OMEGA(2,2)   0.1451950 1.610834e+01  0.0994 - 0.191   0 1.0000e-10
+##        symbol  unit transform                    label      se_est
+## 1          KA   1/h       LIN Absorption Rate Constant 8.05467e-02
+## 2          CL   L/h       LIN                Clearance 3.76134e+00
+## 3          V2     L       LIN   Volume of Distribution 2.82716e+01
+## 4        RUVp  &lt;NA&gt;       LIN       Proportional Error 8.19589e-03
+## 5        RUVa ng/mL       LIN           Additive Error 8.58609e-02
+## 6       CL-WT  &lt;NA&gt;       LIN       Power Scalar CL-WT 1.27530e-01
+## 7      CL-SEX  &lt;NA&gt;       LIN         Female CL Change 4.00082e-02
+## 8        EPS1  &lt;NA&gt;      &lt;NA&gt;                      RUV 1.00000e+10
+## 9      iiv CL  &lt;NA&gt;      &lt;NA&gt;                  IIV(CL) 1.09243e-02
+## 10 OMEGA(2,1)  &lt;NA&gt;      &lt;NA&gt;               OMEGA(2,1) 1.00000e+10
+## 11     iiv V2  &lt;NA&gt;      &lt;NA&gt;                  IIV(V2) 2.33885e-02</code></pre>
 <div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" tabindex="-1"></a><span class="st">&quot;run103&quot;</span> <span class="sc">%&gt;%</span> <span class="fu">nm_params_table</span>() <span class="sc">%&gt;%</span> format </span></code></pre></div>
-<pre><code>## [[1]]
+<pre><code>## $`Stochastic Approximation Expectation-Maximization`
 ##     Parameter              Description       Name     Estimate  RSE
 ## 1          KA Absorption Rate Constant     THETA1         2.26 2.85
 ## 2          CL                Clearance     THETA2         72.6 14.6
@@ -4214,11 +4168,11 @@ you know. <code>nm_params_table()</code> will work just fine.</p>
 ## 6    0.0264 - 1.45      0.00     -       LIN      0   0
 ## 7    0.496 - 0.694      0.00     -       LIN      0   0
 ## 8                -      4.52     -         -      0   1
-## 9  0.0108 - 0.0632      1.30     -         -      0   0
+## 9  0.0108 - 0.0632      13.0     -         -      0   0
 ## 10               -      0.00     -         -      0   1
 ## 11  0.0497 - 0.252      1.33     -         -      0   0
 ## 
-## [[2]]
+## $`Objective Function Evaluation by Importance Sampling (No Prior)`
 ##     Parameter              Description       Name     Estimate  RSE
 ## 1          KA Absorption Rate Constant     THETA1         2.26 3.52
 ## 2          CL                Clearance     THETA2         72.6 5.34
@@ -4240,11 +4194,11 @@ you know. <code>nm_params_table()</code> will work just fine.</p>
 ## 6    0.498 - 0.981      0.00     -       LIN      0   0
 ## 7    0.515 - 0.674      0.00     -       LIN      0   0
 ## 8                -      4.65     -         -      0   1
-## 9  0.0128 - 0.0612      1.21     -         -      0   0
+## 9  0.0128 - 0.0612      12.1     -         -      0   0
 ## 10               -      0.00     -         -      0   1
 ## 11   0.103 - 0.198      1.29     -         -      0   0
 ## 
-## [[3]]
+## $`First Order Conditional Estimation with Interaction (No Prior)`
 ##     Parameter              Description       Name     Estimate  RSE
 ## 1          KA Absorption Rate Constant     THETA1         2.27 3.55
 ## 2          CL                Clearance     THETA2         74.3 5.06
@@ -4266,9 +4220,9 @@ you know. <code>nm_params_table()</code> will work just fine.</p>
 ## 6    0.495 - 0.995      0.00     -       LIN      0   0
 ## 7    0.509 - 0.666      0.00     -       LIN      0   0
 ## 8                -      4.66     -         -      0   1
-## 9  0.0144 - 0.0572      1.25     -         -      0   0
+## 9  0.0144 - 0.0572      12.5     -         -      0   0
 ## 10               -      0.00     -         -      0   1
-## 11  0.0994 - 0.191      1.00     -         -      0   0</code></pre>
+## 11  0.0994 - 0.191  1.00e-10     -         -      0   0</code></pre>
 <div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" tabindex="-1"></a><span class="st">&quot;run103&quot;</span> <span class="sc">%&gt;%</span> <span class="fu">nm_params_table</span>() <span class="sc">%&gt;%</span> lol <span class="sc">%&gt;%</span> <span class="fu">format</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>##     Parameter              Description       Name    Estimate RSE
 ## 1          KA Absorption Rate Constant     THETA1         2.3 3.5
@@ -4291,9 +4245,9 @@ you know. <code>nm_params_table()</code> will work just fine.</p>
 ## 6    0.495 - 0.995       0.0     -       LIN      0   0
 ## 7    0.509 - 0.666       0.0     -       LIN      0   0
 ## 8                -       4.7     -         -      0   1
-## 9  0.0144 - 0.0572       1.3     -         -      0   0
+## 9  0.0144 - 0.0572        13     -         -      0   0
 ## 10               -       0.0     -         -      0   1
-## 11  0.0994 - 0.191       1.0     -         -      0   0</code></pre>
+## 11  0.0994 - 0.191   1.0e-10     -         -      0   0</code></pre>
 <p>You’re getting a parameter table for each estimation method. So the
 output is a list!</p>
 <p>Function <code>lol</code> - see explanation above. All ‘qptools’
@@ -4326,9 +4280,9 @@ frames themselves. No worries.</p>
 ## 6    0.495 - 0.995      0.00     -       LIN      0   0
 ## 7    0.509 - 0.666      0.00     -       LIN      0   0
 ## 8                -      4.66     -         -      0   1
-## 9  0.0144 - 0.0572      1.25     -         -      0   0
+## 9  0.0144 - 0.0572      12.5     -         -      0   0
 ## 10               -      0.00     -         -      0   1
-## 11  0.0994 - 0.191      1.00     -         -      0   0</code></pre>
+## 11  0.0994 - 0.191  1.00e-10     -         -      0   0</code></pre>
 <div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" tabindex="-1"></a><span class="do">## doing lol either before or after works</span></span>
 <span id="cb78-2"><a href="#cb78-2" tabindex="-1"></a><span class="st">&quot;run103&quot;</span> <span class="sc">%&gt;%</span> nm_params_table <span class="sc">%&gt;%</span> </span>
 <span id="cb78-3"><a href="#cb78-3" tabindex="-1"></a>  <span class="fu">format</span>(<span class="at">paste_label_unit=</span><span class="st">&#39;label&#39;</span>) <span class="sc">%&gt;%</span> </span>
@@ -4354,9 +4308,9 @@ frames themselves. No worries.</p>
 ## 6    0.495 - 0.995      0.00     -       LIN      0   0
 ## 7    0.509 - 0.666      0.00     -       LIN      0   0
 ## 8                -      4.66     -         -      0   1
-## 9  0.0144 - 0.0572      1.25     -         -      0   0
+## 9  0.0144 - 0.0572      12.5     -         -      0   0
 ## 10               -      0.00     -         -      0   1
-## 11  0.0994 - 0.191      1.00     -         -      0   0</code></pre>
+## 11  0.0994 - 0.191  1.00e-10     -         -      0   0</code></pre>
 <div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" tabindex="-1"></a><span class="do">## rename columns as you desire - super-easy</span></span>
 <span id="cb80-2"><a href="#cb80-2" tabindex="-1"></a><span class="st">&quot;run103&quot;</span> <span class="sc">%&gt;%</span> nm_params_table <span class="sc">%&gt;%</span> </span>
 <span id="cb80-3"><a href="#cb80-3" tabindex="-1"></a>   lol <span class="sc">%&gt;%</span> </span>
@@ -4372,9 +4326,9 @@ frames themselves. No worries.</p>
 ## 6       CL-WT (-)     THETA6        0.745 17.1   0.495 - 0.995      0.00     -
 ## 7      CL-SEX (-)     THETA7        0.587 6.81   0.509 - 0.666      0.00     -
 ## 8        EPS1 (-) SIGMA(1,1) 1.00 (fixed)    -               -      4.66     -
-## 9      iiv CL (-) OMEGA(1,1)       0.0358 30.5 0.0144 - 0.0572      1.25     -
+## 9      iiv CL (-) OMEGA(1,1)       0.0358 30.5 0.0144 - 0.0572      12.5     -
 ## 10 OMEGA(2,1) (-) OMEGA(2,1) 0.00 (fixed)    -               -      0.00     -
-## 11     iiv V2 (-) OMEGA(2,2)        0.145 16.1  0.0994 - 0.191      1.00     -
+## 11     iiv V2 (-) OMEGA(2,2)        0.145 16.1  0.0994 - 0.191  1.00e-10     -
 ##    transform trnsfd fix
 ## 1        LIN      0   0
 ## 2        LIN      0   0
@@ -4391,66 +4345,54 @@ frames themselves. No worries.</p>
 <span id="cb82-2"><a href="#cb82-2" tabindex="-1"></a><span class="st">&quot;run103&quot;</span> <span class="sc">%&gt;%</span> nm_params_table <span class="sc">%&gt;%</span> </span>
 <span id="cb82-3"><a href="#cb82-3" tabindex="-1"></a>   lol <span class="sc">%&gt;%</span> </span>
 <span id="cb82-4"><a href="#cb82-4" tabindex="-1"></a>   <span class="fu">format</span>(<span class="at">paste_label_unit=</span><span class="st">&#39;label&#39;</span>, <span class="at">pretty =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<pre><code>##          Name pclass on     Estimate se_est eigen_cor       cond    om_sg
-## 1      THETA1  THETA  0         2.27    --- 0.0964827 25.9927000 0.000000
-## 2      THETA2  THETA  0         74.3    --- 0.1516630  0.0964827 0.000000
-## 3      THETA3  THETA  0          468    --- 0.5382020  2.5078500 0.000000
-## 4      THETA4  THETA  0       0.0714    --- 0.8350520  0.0000000 0.000000
-## 5      THETA5  THETA  0         1.09    --- 0.8630220  0.0000000 0.000000
-## 6      THETA6  THETA  0        0.745    --- 1.0370800  0.0000000 0.000000
-## 7      THETA7  THETA  0        0.587    --- 1.3480700  0.0000000 0.000000
-## 8  SIGMA(1,1)  SIGMA  1 1.00 (fixed)      - 1.6225800  0.0000000 1.000000
-## 9  OMEGA(1,1)  OMEGA  1       0.0358    --- 2.5078500  0.0000000 0.189164
-## 10 OMEGA(2,1)  OMEGA  0 0.00 (fixed)      - 0.0000000  0.0000000 0.000000
-## 11 OMEGA(2,2)  OMEGA  1        0.145    --- 0.0000000  0.0000000 0.381044
-##       se_om_sg fix term part_deriv_LL fr sr type Shrinkage  RSE        95\\% CI
-## 1  0.00000e+00   0    0   5.48200e-06 NA NA           0.00 3.55     2.11 - 2.43
-## 2  0.00000e+00   0   37   9.29421e-06 NA NA           0.00 5.06     66.9 - 81.6
-## 3  0.00000e+00   0    0   1.49913e-06 NA NA           0.00 6.04       413 - 524
-## 4  0.00000e+00   0    0   4.28314e-02 NA NA           0.00 11.5 0.0553 - 0.0875
-## 5  0.00000e+00   0    0   5.83685e-03 NA NA           0.00 7.85    0.925 - 1.26
-## 6  0.00000e+00   0    0  -1.71198e-03 NA NA           0.00 17.1   0.495 - 0.995
-## 7  0.00000e+00   0    0   1.51473e-03 NA NA           0.00 6.81   0.509 - 0.666
-## 8  1.00000e+10   1    0   0.00000e+00  1  1  EPS      4.66    -               -
-## 9  2.88751e-02   0    0   5.77672e-03  1  1  ETA      1.25 30.5 0.0144 - 0.0572
-## 10 1.00000e+10   1    0   0.00000e+00 NA NA           0.00    -               -
-## 11 3.06900e-02   0    0   3.64906e-03  2  2  ETA      1.00 16.1  0.0994 - 0.191
-##           item  Parameter  unit transform                    Description
-## 1     theta_01         KA   1/h       LIN Absorption Rate Constant (1/h)
-## 2     theta_02         CL   L/h       LIN                Clearance (L/h)
-## 3     theta_03         V2     L       LIN     Volume of Distribution (L)
-## 4     theta_04       RUVp     -       LIN         Proportional Error (-)
-## 5     theta_05       RUVa ng/mL       LIN         Additive Error (ng/mL)
-## 6     theta_06      CL-WT     -       LIN         Power Scalar CL-WT (-)
-## 7     theta_07     CL-SEX     -       LIN           Female CL Change (-)
-## 8  sigma_01_01       EPS1     -         -                        RUV (-)
-## 9  omega_01_01     iiv CL     -         -                    IIV(CL) (-)
-## 10 omega_02_01 OMEGA(2,1)     -         -                 OMEGA(2,1) (-)
-## 11 omega_02_02     iiv V2     -         -                    IIV(V2) (-)
-##    estimate_untransf se_est_untransf RSE_untransf   CI95_untransf equation
-## 1          2.2705000     8.05467e-02 3.547531e+00     2.11 - 2.43        -
-## 2         74.2674000     3.76134e+00 5.064591e+00     66.9 - 81.6        -
-## 3        468.1450000     2.82716e+01 6.039069e+00       413 - 524        -
-## 4          0.0714092     8.19589e-03 1.147736e+01 0.0553 - 0.0875        -
-## 5          1.0932500     8.58609e-02 7.853730e+00    0.925 - 1.26        -
-## 6          0.7451050     1.27530e-01 1.711571e+01   0.495 - 0.995        -
-## 7          0.5872060     4.00082e-02 6.813316e+00   0.509 - 0.666        -
-## 8          1.0000000     1.00000e+10 1.000000e+12               -        -
-## 9          0.0357831     1.09243e-02 3.052922e+01 0.0144 - 0.0572        -
-## 10         0.0000000     1.00000e+10          Inf               -        -
-## 11         0.1451950     2.33885e-02 1.610834e+01  0.0994 - 0.191        -
-##    trnsfd
-## 1       0
-## 2       0
-## 3       0
-## 4       0
-## 5       0
-## 6       0
-## 7       0
-## 8       0
-## 9       0
-## 10      0
-## 11      0</code></pre>
+<pre><code>##          Name pclass on     Estimate se_est       cond    om_sg    se_om_sg fix
+## 1      THETA1  THETA  0         2.27    --- 25.9927000 0.000000 0.00000e+00   0
+## 2      THETA2  THETA  0         74.3    ---  0.0964827 0.000000 0.00000e+00   0
+## 3      THETA3  THETA  0          468    ---  2.5078500 0.000000 0.00000e+00   0
+## 4      THETA4  THETA  0       0.0714    ---  0.0000000 0.000000 0.00000e+00   0
+## 5      THETA5  THETA  0         1.09    ---  0.0000000 0.000000 0.00000e+00   0
+## 6      THETA6  THETA  0        0.745    ---  0.0000000 0.000000 0.00000e+00   0
+## 7      THETA7  THETA  0        0.587    ---  0.0000000 0.000000 0.00000e+00   0
+## 8  SIGMA(1,1)  SIGMA  1 1.00 (fixed)      -  0.0000000 1.000000 1.00000e+10   1
+## 9  OMEGA(1,1)  OMEGA  1       0.0358    ---  0.0000000 0.189164 2.88751e-02   0
+## 10 OMEGA(2,1)  OMEGA  0 0.00 (fixed)      -  0.0000000 0.000000 1.00000e+10   1
+## 11 OMEGA(2,2)  OMEGA  1        0.145    ---  0.0000000 0.381044 3.06900e-02   0
+##    term part_deriv_LL fr sr type Shrinkage  RSE        95\\% CI        item
+## 1     0   5.48200e-06 NA NA           0.00 3.55     2.11 - 2.43    theta_01
+## 2    37   9.29421e-06 NA NA           0.00 5.06     66.9 - 81.6    theta_02
+## 3     0   1.49913e-06 NA NA           0.00 6.04       413 - 524    theta_03
+## 4     0   4.28314e-02 NA NA           0.00 11.5 0.0553 - 0.0875    theta_04
+## 5     0   5.83685e-03 NA NA           0.00 7.85    0.925 - 1.26    theta_05
+## 6     0  -1.71198e-03 NA NA           0.00 17.1   0.495 - 0.995    theta_06
+## 7     0   1.51473e-03 NA NA           0.00 6.81   0.509 - 0.666    theta_07
+## 8     0   0.00000e+00  1  1  EPS      4.66    -               - sigma_01_01
+## 9     0   5.77672e-03  1  1  ETA      12.5 30.5 0.0144 - 0.0572 omega_01_01
+## 10    0   0.00000e+00 NA NA           0.00    -               - omega_02_01
+## 11    0   3.64906e-03  2  2  ETA  1.00e-10 16.1  0.0994 - 0.191 omega_02_02
+##     Parameter  unit transform                    Description estimate_untransf
+## 1          KA   1/h       LIN Absorption Rate Constant (1/h)         2.2705000
+## 2          CL   L/h       LIN                Clearance (L/h)        74.2674000
+## 3          V2     L       LIN     Volume of Distribution (L)       468.1450000
+## 4        RUVp     -       LIN         Proportional Error (-)         0.0714092
+## 5        RUVa ng/mL       LIN         Additive Error (ng/mL)         1.0932500
+## 6       CL-WT     -       LIN         Power Scalar CL-WT (-)         0.7451050
+## 7      CL-SEX     -       LIN           Female CL Change (-)         0.5872060
+## 8        EPS1     -         -                        RUV (-)         1.0000000
+## 9      iiv CL     -         -                    IIV(CL) (-)         0.0357831
+## 10 OMEGA(2,1)     -         -                 OMEGA(2,1) (-)         0.0000000
+## 11     iiv V2     -         -                    IIV(V2) (-)         0.1451950
+##    se_est_untransf RSE_untransf   CI95_untransf equation trnsfd
+## 1      8.05467e-02 3.547531e+00     2.11 - 2.43        -      0
+## 2      3.76134e+00 5.064591e+00     66.9 - 81.6        -      0
+## 3      2.82716e+01 6.039069e+00       413 - 524        -      0
+## 4      8.19589e-03 1.147736e+01 0.0553 - 0.0875        -      0
+## 5      8.58609e-02 7.853730e+00    0.925 - 1.26        -      0
+## 6      1.27530e-01 1.711571e+01   0.495 - 0.995        -      0
+## 7      4.00082e-02 6.813316e+00   0.509 - 0.666        -      0
+## 8      1.00000e+10 1.000000e+12               -        -      0
+## 9      1.09243e-02 3.052922e+01 0.0144 - 0.0572        -      0
+## 10     1.00000e+10          Inf               -        -      0
+## 11     2.33885e-02 1.610834e+01  0.0994 - 0.191        -      0</code></pre>
 <div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" tabindex="-1"></a><span class="do">## use the 4th labeling element instead of the 1st </span></span>
 <span id="cb84-2"><a href="#cb84-2" tabindex="-1"></a><span class="st">&quot;run103&quot;</span> <span class="sc">%&gt;%</span> nm_params_table <span class="sc">%&gt;%</span> </span>
 <span id="cb84-3"><a href="#cb84-3" tabindex="-1"></a>   <span class="fu">format</span>(<span class="at">paste_label_unit=</span><span class="st">&#39;symbol&#39;</span>) <span class="sc">%&gt;%</span></span>
@@ -4476,9 +4418,9 @@ frames themselves. No worries.</p>
 ## 6       0.00     -       LIN      0   0
 ## 7       0.00     -       LIN      0   0
 ## 8       4.66     -         -      0   1
-## 9       1.25     -         -      0   0
+## 9       12.5     -         -      0   0
 ## 10      0.00     -         -      0   1
-## 11      1.00     -         -      0   0</code></pre>
+## 11  1.00e-10     -         -      0   0</code></pre>
 <p>Check the results and understand the differences.</p>
 </div>
 <div id="parameter-tables---extra" class="section level3">
@@ -4487,24 +4429,24 @@ frames themselves. No worries.</p>
 <span id="cb86-2"><a href="#cb86-2" tabindex="-1"></a>  lol <span class="sc">%&gt;%</span> </span>
 <span id="cb86-3"><a href="#cb86-3" tabindex="-1"></a>  <span class="fu">format</span>(<span class="at">paste_label_unit=</span><span class="st">&#39;symbol&#39;</span>, <span class="at">pretty=</span><span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb86-4"><a href="#cb86-4" tabindex="-1"></a>  <span class="fu">filter</span>(on<span class="sc">==</span><span class="dv">0</span>)</span></code></pre></div>
-<pre><code>##         Name pclass on     Estimate se_est eigen_cor       cond om_sg se_om_sg
-## 1     THETA1  THETA  0         2.27    --- 0.0964827 25.9927000     0    0e+00
-## 2     THETA2  THETA  0         74.3    --- 0.1516630  0.0964827     0    0e+00
-## 3     THETA3  THETA  0          468    --- 0.5382020  2.5078500     0    0e+00
-## 4     THETA4  THETA  0       0.0714    --- 0.8350520  0.0000000     0    0e+00
-## 5     THETA5  THETA  0         1.09    --- 0.8630220  0.0000000     0    0e+00
-## 6     THETA6  THETA  0        0.745    --- 1.0370800  0.0000000     0    0e+00
-## 7     THETA7  THETA  0        0.587    --- 1.3480700  0.0000000     0    0e+00
-## 8 OMEGA(2,1)  OMEGA  0 0.00 (fixed)      - 0.0000000  0.0000000     0    1e+10
-##   fix term part_deriv_LL fr sr type Shrinkage  RSE        95\\% CI        item
-## 1   0    0   5.48200e-06 NA NA           0.00 3.55     2.11 - 2.43    theta_01
-## 2   0   37   9.29421e-06 NA NA           0.00 5.06     66.9 - 81.6    theta_02
-## 3   0    0   1.49913e-06 NA NA           0.00 6.04       413 - 524    theta_03
-## 4   0    0   4.28314e-02 NA NA           0.00 11.5 0.0553 - 0.0875    theta_04
-## 5   0    0   5.83685e-03 NA NA           0.00 7.85    0.925 - 1.26    theta_05
-## 6   0    0  -1.71198e-03 NA NA           0.00 17.1   0.495 - 0.995    theta_06
-## 7   0    0   1.51473e-03 NA NA           0.00 6.81   0.509 - 0.666    theta_07
-## 8   1    0   0.00000e+00 NA NA           0.00    -               - omega_02_01
+<pre><code>##         Name pclass on     Estimate se_est       cond om_sg se_om_sg fix term
+## 1     THETA1  THETA  0         2.27    --- 25.9927000     0    0e+00   0    0
+## 2     THETA2  THETA  0         74.3    ---  0.0964827     0    0e+00   0   37
+## 3     THETA3  THETA  0          468    ---  2.5078500     0    0e+00   0    0
+## 4     THETA4  THETA  0       0.0714    ---  0.0000000     0    0e+00   0    0
+## 5     THETA5  THETA  0         1.09    ---  0.0000000     0    0e+00   0    0
+## 6     THETA6  THETA  0        0.745    ---  0.0000000     0    0e+00   0    0
+## 7     THETA7  THETA  0        0.587    ---  0.0000000     0    0e+00   0    0
+## 8 OMEGA(2,1)  OMEGA  0 0.00 (fixed)      -  0.0000000     0    1e+10   1    0
+##   part_deriv_LL fr sr type Shrinkage  RSE        95\\% CI        item
+## 1   5.48200e-06 NA NA           0.00 3.55     2.11 - 2.43    theta_01
+## 2   9.29421e-06 NA NA           0.00 5.06     66.9 - 81.6    theta_02
+## 3   1.49913e-06 NA NA           0.00 6.04       413 - 524    theta_03
+## 4   4.28314e-02 NA NA           0.00 11.5 0.0553 - 0.0875    theta_04
+## 5   5.83685e-03 NA NA           0.00 7.85    0.925 - 1.26    theta_05
+## 6  -1.71198e-03 NA NA           0.00 17.1   0.495 - 0.995    theta_06
+## 7   1.51473e-03 NA NA           0.00 6.81   0.509 - 0.666    theta_07
+## 8   0.00000e+00 NA NA           0.00    -               - omega_02_01
 ##    Parameter  unit transform    Description estimate_untransf se_est_untransf
 ## 1         KA   1/h       LIN       KA (1/h)         2.2705000     8.05467e-02
 ## 2         CL   L/h       LIN       CL (L/h)        74.2674000     3.76134e+00
@@ -4618,7 +4560,7 @@ examples.</p>
 ## #   ETA1 &lt;dbl&gt;, ETA2 &lt;dbl&gt;, ETA3 &lt;dbl&gt;</code></pre>
 <div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" tabindex="-1"></a><span class="fu">try</span>(<span class="dv">1001</span> <span class="sc">%&gt;%</span> <span class="fu">superset</span>(<span class="at">project=</span><span class="fu">system.file</span>(<span class="st">&#39;project/model&#39;</span>,<span class="at">package=</span><span class="st">&#39;nonmemica&#39;</span>))) <span class="co"># no</span></span></code></pre></div>
 <pre><code>## Warning in file(con, &quot;r&quot;): cannot open file
-## &#39;C:/Users/tim.bergsma/AppData/Local/R/win-library/4.4/nonmemica/project/model/1001.mod&#39;:
+## &#39;C:/Users/tim.bergsma/AppData/Local/Programs/R/R-4.5.2/library/nonmemica/project/model/1001.mod&#39;:
 ## No such file or directory</code></pre>
 <pre><code>## Error in file(con, &quot;r&quot;) : cannot open the connection</code></pre>
 <div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" tabindex="-1"></a><span class="dv">1001</span> <span class="sc">%&gt;%</span> <span class="fu">superset</span>(<span class="at">project=</span><span class="fu">system.file</span>(<span class="st">&#39;project/model&#39;</span>,<span class="at">package=</span><span class="st">&#39;nonmemica&#39;</span>),<span class="at">ext=</span><span class="st">&quot;ctl&quot;</span>) <span class="sc">%&gt;%</span> as_tibble <span class="co"># yes</span></span></code></pre></div>
@@ -4739,7 +4681,8 @@ double class.</p>
 <span id="cb115-5"><a href="#cb115-5" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">col =</span> <span class="st">&quot;darkslategrey&quot;</span>) <span class="sc">+</span></span>
 <span id="cb115-6"><a href="#cb115-6" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(<span class="at">method=</span><span class="st">&#39;loess&#39;</span>, <span class="at">alpha=</span><span class="fl">0.33</span>) <span class="sc">+</span></span>
 <span id="cb115-7"><a href="#cb115-7" tabindex="-1"></a>  <span class="fu">facet_grid</span>(name<span class="sc">~</span>model)</span></code></pre></div>
-<pre><code>## `geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
+<pre><code>## `geom_smooth()` using formula
+## = &#39;y ~ x&#39;</code></pre>
 <p><img role="img" src="data:image/png;base64,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tArL0l29G2UF0NR7yLQKy9JdvRtlBdDUe8i0CsvSXb0bZQXQ1HvItArL0l29G2Xx3hdfrFgCK4AWY20F0GKsrQBajLUVQIuxtlWAag8bcbLu6U4+qz1/5/b2geeent3evuG1G38dWYR468iRkDxCbFsDqP7QZRd71gbqs1r7PL3nP/nQa09tmV8Xdl/HX0cWId46ciQkjxDE1gCqP/DOwT55/XfXxX1We9YK+uSB956uC7uv4731fEK8dORISB4hiK0BVH9kqNsq1wB9V7su672na011X2eFjlxCvHTkSkh6IYitAVR/6LKTteXhuVr73EfPVZ6/8/qHHuus0JFHiKeOTAnJIAQxti3oi/feXbEnrzqepwVdJcSvrcrTgmYQgliWPmhfHl6rPX/nwao9+fSS1nSOcgnx6u3lSEgWIYitG8W/6zssawP0Wa0vDb89DYcS93VW6MghxFtHjoTkEYIY03nQz29be+C3p+tK1y4Pr3nQNUK8deSYB80jxLZyJqkYayuAFmNtBdBirK0AWoy1FUCLsbYCaDHWVgBNYX/5219vHcJerACawgqg0awAmsIKoNGsABrDvnr/lev/n33to7985+bm5pUW0I7R9r+v3r+5+dpHW0co1gqgUeyzr/+ppfTLt3/cc6oA/er9b/TuYqusABrFWhyv//7vT/1nAOgXbevZgVtsjRVAo1h7jO+ayS+uh/iXIKCf3XT2ytYRSrUCaBz74uv/e2X0y7df+rXRgpaje5gVQOPYlz/6r7/76Ipp24hqLej129axibYCaCT7/c03OjYvf/lOB+iXb79yPfC/dB0kXaEtlK62Amgk++KmHQf9/toD/e+3f9yNmb5zc/NvP+qnmQqfq60AWoy1FUCLsbYCaDHWVgAtxtoKoMVYWwG0GGsrgBZjbQXQYqytAFqMtRVAi7G2/wevy20gEgyapwAAAABJRU5ErkJggg==" /><!-- --></p>
 <p><code>get_xpose_tables</code> is like get.xpose.tables from
 qpToolkit, but even more foolproof (non-xpose table names, column names
@@ -4792,13 +4735,16 @@ compile the runrecord.</p>
 ## 4 9/11       PK model 1 cmt - WT-CL SEX-CL
 ## 5 8/11 PK model 1 cmt - WT-CL allom SEX-CL</code></pre>
 <div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">&quot;run&quot;</span>, <span class="fu">c</span>(<span class="dv">100</span>,<span class="dv">103</span>,<span class="dv">105</span>)) <span class="sc">%&gt;%</span> <span class="fu">nm_runrecord_graph</span>()</span></code></pre></div>
-<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula = &#39;y ~ x&#39;</code></pre>
+<pre><code>## `geom_smooth()` using method
+## = &#39;loess&#39; and formula = &#39;y ~
+## x&#39;</code></pre>
 <p><img role="img" src="data:image/png;base64,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" /><!-- --></p>
 </div>
 <div id="process-an-scm-table" class="section level2">
 <h2>Process an SCM table</h2>
 <p>There is a 17-character limit to the covariate effect name! So
-consider using ‘short’ names.</p>
+consider using ‘short’ names. As of version 4.5.2, we try to accommodate
+longer names.</p>
 <div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1" tabindex="-1"></a><span class="fu">getOption</span>(<span class="st">&quot;qpExampleDir&quot;</span>) <span class="sc">%&gt;%</span> dir</span></code></pre></div>
 <pre><code>##  [1] &quot;acop.csv&quot;        &quot;binom.csv&quot;       &quot;bootstrap&quot;       &quot;example1&quot;       
 ##  [5] &quot;example1.csv&quot;    &quot;example1.ctl&quot;    &quot;example1.lst&quot;    &quot;example2&quot;       

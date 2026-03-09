@@ -5,181 +5,268 @@
 #' @export
 #' @keywords internal
 #' @family plots
-#' @param x object of dispatch
+#' @param data object of dispatch
 #' @param ... passed
-isoplot <- function(x, ...) UseMethod('isoplot')
+isoplot <- function(data, ...) UseMethod('isoplot')
 
 #' Plot Dataframe Isometrically
 #' 
 #' Plots 'data.frame' isometrically.
 #' Constrains axes to be identical;
 #' adds reference and trend lines.
-#' Exposes alpha and transformation
+#' Exposes alpha and transformation.
+
 #' @export
+#' @importFrom yamlet isometric
+#' @import ggplot2
 #' @keywords visualization
 #' @family plots
-#' @param x data.frame
+#' @param data data.frame
+#' @param x bareword for column mapped to x axis
+#' @param y bareword for column mapped to y axis
+#' @param alpha passed to \code{\link[ggplot2]{geom_point}}
+#' @param transform passed to \code{\link[ggplot2]{scale_x_continuous}} and \code{\link[ggplot2]{scale_y_continuous}}
 #' @param ... ignored
 #' @return ggplot
 #' @examples
-#' x %>% isoplot(DV, PRED)
-x %>% ggplot(aes(PRED, DV)) + 
-  geom_point(alpha = 0.5) + isometric() +
-  geom_smooth() + theme_bw() + 
-  geom_abline(intercept = 0, slope = 1) +
-  isometric()
-
-
-
+#' library(magrittr)
+#' library(yamlet)
+#' x <- 'extdata/modeling/xanomeline-mod.csv.gz' %>% 
+#' system.file(package = 'yamlet') %>% io_csv %>% filter(cp > 1) %>% resolve
+#' x %>% isoplot(PRED, DV, transform = 'log10')
 isoplot.data.frame <- function(
-    x, 
-    endpoint, versus, 
+    data, 
+    x, y, 
+    ..., 
     alpha = 0.5, 
-    log = T, 
-    trans = 'identity',
-    ... 
+    transform = 'identity'
   ){
-  xrange <- x %>% select( {{ versus }}) %>% extract2(1) %>% range(na.rm = T)
-  yrange <- x %>% select( {{ endpoint }}) %>% extract2(1) %>% range(na.rm = T)
-  min <- min(xrange[[1]], yrange[[1]])
-  max <- max(xrange[[2]], yrange[[2]])
-  
-  x %>%
-    ggplot(aes(x = {{ versus }}, y = {{ endpoint }} )) +
+  p <- data %>%
+    ggplot(aes(x = {{ x }}, y = {{ y }} )) +
     geom_abline(slope = 1, intercept = 0) +
     geom_point(alpha = alpha) + 
-    theme_bw() +
-    theme(aspect.ratio = 1) + 
     geom_smooth(method = 'lm', formula = 'y ~ x') +
-    scale_x_continuous(trans = trans, limits = c(min, max)) +
-    scale_y_continuous(trans = trans, limits = c(min, max))
+    theme_bw() +
+    isometric() +
+    scale_x_continuous(transform = transform) +
+    scale_y_continuous(transform = transform) 
+  p
 }
 
-library(magrittr)
-library(yamlet)
-library(wrangle)
-library(ggplot2)
-library(dplyr)
-library(metaplot)
-x <- 'extdata/modeling/xanomeline-mod.csv.gz' %>% 
-  system.file(package = 'yamlet') %>%
-  io_csv %>%
-  filter(cp > 1) %>%
-  resolve
+#' Plot Two Isoplots
+#' 
+#' Plots two isoplots.
+#' Generic, with method \code{\link{isopair.data.frame}}.
+#' @export
+#' @keywords internal
+#' @family plots
+#' @param data object of dispatch
+#' @param ... passed
+isopair <- function(data, ...) UseMethod('isopair')
 
+#' Plot Two Isoplots for Data.frame
+#' 
+#' Plots two isoplots for 'data.frame', typically side-by-side.
+#' @export
+#' @importFrom metaplot multiplot
+#' @importFrom rlang enquo quo_is_null
+#' @keywords visualization
+#' @family plots
+#' @param data data.frame
+#' @param x1 bareword for column mapped to x axis 1
+#' @param y1 bareword for column mapped to y axis 1
+#' @param x2 bareword for column mapped to x axis 2 (defaults to x1 internally)
+#' @param y2 bareword for column mapped to y axis 2 (defaults to y1 internally)
+#' @param alpha passed to \code{\link{isoplot}}, can be length 2
+#' @param transform passed to \code{\link{isoplot}}, chan be length 2
+#' @param ncol number of columns (1 or 2):  2 gives side-by-side layout
+#' @param ... ignored
+#' @return ggplot
+#' @examples
+#' library(magrittr)
+#' library(yamlet)
+#' x <- 'extdata/modeling/xanomeline-mod.csv.gz' %>% 
+#' system.file(package = 'yamlet') %>% io_csv %>% filter(cp > 1) %>% resolve
+#' x %>% isopair(PRED, DV, IPRED, DV)
 
-
-isopair <- function(
-    x, 
-    endpoint1, 
-    versus1, 
-    endpoint2, 
-    versus2, 
-    alpha = 0.5, # can be length 2
-    trans = 'identity',
-    ...
-  ){
-  alpha = rep(alpha, 2)
-  trans = rep(trans, 2)
+isopair.data.frame <- function(
+    data,
+    x1, y1,
+    x2 = NULL, y2 = NULL,
+    ...,
+    alpha = 0.5,
+    transform = "identity",
+    ncol = 2
+){
+  stopifnot(length(ncol) == 1, ncol %in% 1:2)
+  alpha <- rep(alpha, 2)
+  transform <- rep(transform, 2)
+  
+  x1q <- rlang::enquo(x1)
+  y1q <- rlang::enquo(y1)
+  
+  x2q <- rlang::enquo(x2)
+  y2q <- rlang::enquo(y2)
+  
+  if (rlang::quo_is_null(x2q)) x2q <- x1q
+  if (rlang::quo_is_null(y2q)) y2q <- y1q
+  
   multiplot(
-    isoplot(x, {{ endpoint1 }}, {{versus1}}, alpha = alpha[[1]], trans = trans[[1]], ...),
-    isoplot(x, {{ endpoint2 }}, {{versus2}}, alpha = alpha[[2]], trans = trans[[2]], ...) 
+    ncol = ncol,
+    isoplot(data, !!x1q, !!y1q, alpha = alpha[[1]], transform = transform[[1]], ...),
+    isoplot(data, !!x2q, !!y2q, alpha = alpha[[2]], transform = transform[[2]], ...)
   )
 }
 
+#' Plot a Trend
+#' 
+#' Plots a trend.
+#' Generic, with method \code{\link{trendplot.data.frame}}.
+#' @export
+#' @keywords internal
+#' @family plots
+#' @param data object of dispatch
+#' @param ... passed
+trendplot <- function(data, ...) UseMethod('trendplot')
 
-trendplot <- function(
-    x, 
-    endpoint, versus, 
+#' Plot a Trend for Dataframe
+#' 
+#' Plots a trend for 'data.frame'.
+#' By default adds y-axis symmetry.
+#' Adds reference and trend lines.
+#' Exposes alpha and transformation.
+#' @export
+#' @importFrom yamlet symmetric
+#' @keywords visualization
+#' @family plots
+#' @param data data.frame
+#' @param x bareword for column mapped to x axis
+#' @param y bareword for column mapped to y axis
+#' @param alpha passed to \code{\link[ggplot2]{geom_point}}
+#' @param transform_x passed to \code{\link[ggplot2]{scale_x_continuous}} 
+#' @param transform_y passed to \code{\link[ggplot2]{scale_x_continuous}} 
+#' @param ref passed to \code{\link[ggplot2]{geom_hline}} as \code{yintercept}
+#' @param aspect passed to \code{\link[ggplot2]{theme}} as \code{aspect.ratio}
+#' @param symmetric whether to enforce y-axis symmetry around zero, default if \code{transform = 'identity'}
+#' @param ... ignored
+#' @return ggplot
+#' @examples
+#' library(magrittr)
+#' library(yamlet)
+#' x <- 'extdata/modeling/xanomeline-mod.csv.gz' %>% 
+#' system.file(package = 'yamlet') %>% io_csv %>% filter(cp > 1) %>% resolve
+#' x %>% trendplot(TIME, IWRES, transform_x = 'log10')
+#' 
+
+trendplot.data.frame <- function(
+    data, x, y,  
+    ...,
     alpha = 0.5, 
-    log = T, 
-    trans = 'identity',
+    transform_x = 'identity',
+    transform_y = 'identity',
     ref = 0,
     aspect = 1,
-    ... 
+    symmetric = transform_y == 'identity'
 ){
-  trans <- rep(trans, 2)
-  x %>%
-    ggplot(aes(x = {{ versus }}, y = {{ endpoint }} )) +
+  p <- data %>%
+    ggplot(aes(x = {{ x }}, y = {{ y }} )) +
     geom_hline(yintercept = ref) +
     geom_point(alpha = alpha) + 
     theme_bw() +
-    theme(aspect.ratio = aspect) + 
-    geom_smooth(method = 'lm', formula = 'y ~ x') +
-    scale_y_continuous(trans = trans[[1]]) +
-    scale_x_continuous(trans = trans[[2]])
+    theme(aspect.ratio = aspect) +
+    geom_smooth(method = 'lm', formula = 'y ~ x') 
+  if(symmetric) p <- p + symmetric()
+  p <- p +
+    scale_x_continuous(transform = transform_x) +
+    scale_y_continuous(transform = transform_y) 
+  p
 }
 
-trendpair <- function(
-    x, 
-    endpoint1, 
-    versus1, 
-    endpoint2, 
-    versus2, 
+#' Plot Two Trendplots
+#' 
+#' Plots two trendplots.
+#' Generic, with method \code{\link{trendpair.data.frame}}.
+#' @export
+#' @keywords internal
+#' @family plots
+#' @param data object of dispatch
+#' @param ... passed
+trendpair <- function(data, ...) UseMethod('trendpair')
+
+#' Plot Two Trendplots for Data.frame
+#' 
+#' Plots two trendplots for 'data.frame', typically side-by-side.
+#' @export
+#' @keywords visualization
+#' @family plots
+#' @param data data.frame
+#' @param x1 bareword for column mapped to x axis 1
+#' @param y1 bareword for column mapped to y axis 1
+#' @param x2 bareword for column mapped to x axis 2 (defaults to x1 internally)
+#' @param y2 bareword for column mapped to y axis 2 (defaults to y1 internally)
+#' @param alpha passed to \code{\link{isoplot}}, can be length 2
+#' @param transform_x passed to \code{\link{trendplot}}, can be length 2
+#' @param transform_y passed to \code{\link{trendplot}}, can be length 2
+#' @param ref passed to \code{\link{trendplot}}, can be length 2
+#' @param aspect passed to \code{\link{trendplot}}, can be length 2
+#' @param ncol number of columns (1 or 2):  2 gives side-by-side layout
+#' @param ... ignored
+#' @return ggplot
+#' @examples
+#' library(magrittr)
+#' library(yamlet)
+#' x <- 'extdata/modeling/xanomeline-mod.csv.gz' %>% 
+#' system.file(package = 'yamlet') %>% io_csv %>% filter(cp > 1) %>% resolve
+#' x %>% trendpair(TIME, IWRES, TIME, IWRES, transform_x = c('identity', 'log10'))
+trendpair.data.frame <- function(
+    data, x1, y1,
+    x2 = NULL, y2 = NULL,
+    ...,
     alpha = 0.5, # can be length 2
-    trans1 = 'identity',
-    trans2 = 'identity',
+    transform_x = "identity",
+    transform_y = "identity",
     ref = 0,
     aspect = 1,
-    ...
+    ncol = 2
 ){
-  alpha = rep(alpha, 2)
-  trans1 = rep(trans1, 2)
-  trans2 = rep(trans2, 2)
-  ref = rep(ref, 2)
-  aspect = rep(aspect, 2)
+  stopifnot(length(ncol) == 1, ncol %in% 1:2)
+  
+  alpha <- rep(alpha, 2)
+  transform_x <- rep(transform_x, 2)
+  transform_y <- rep(transform_y, 2)
+  ref <- rep(ref, 2)
+  aspect <- rep(aspect, 2)
+  
+  # Capture user inputs
+  x1q <- rlang::enquo(x1)
+  y1q <- rlang::enquo(y1)
+  x2q <- rlang::enquo(x2)
+  y2q <- rlang::enquo(y2)
+  
+  # Default x2/y2 to x1/y1 if not provided
+  if (rlang::quo_is_null(x2q)) x2q <- x1q
+  if (rlang::quo_is_null(y2q)) y2q <- y1q
+  
   multiplot(
-    trendplot(x, {{ endpoint1 }}, {{versus1}}, alpha = alpha[[1]], trans = trans1, aspect = aspect[[1]], ref= ref[[1]], ...),
-    trendplot(x, {{ endpoint2 }}, {{versus2}}, alpha = alpha[[2]], trans = trans2, aspect = aspect[[2]], ref= ref[[2]], ...) 
+    ncol = ncol,
+    trendplot(
+      data, !!x1q, !!y1q,
+      alpha = alpha[[1]],
+      transform_x = transform_x[[1]],
+      transform_y = transform_y[[1]],
+      aspect = aspect[[1]],
+      ref = ref[[1]],
+      ...
+    ),
+    trendplot(
+      data, !!x2q, !!y2q,
+      alpha = alpha[[2]],
+      transform_x = transform_x[[2]],
+      transform_y = transform_y[[2]],
+      aspect = aspect[[2]],
+      ref = ref[[2]],
+      ...
+    )
   )
 }
-
-#'
-#' # Data Diagnostics
-#' 
-
-#'
-#' ## DV vs IPRED by ACTARM per VISIT
-#' 
-#+ DV-IPRED-ACTARM-VISIT, fig.width = 9.69, fig.height = 4.3, fig.cap = 'DV-IPRED-ACTARM-VISIT.png'
-#(
-  x %>%
-  ggplot(aes(IPRED, DV, color = ACTARM, pch = ACTARM)) + 
-    geom_point(alpha = .5, size = 1.5) +
-   # geom_point(alpha = .2, size = 2) +
-    scale_shape_manual(values = c(1,3))+
-    facet_wrap(~VISIT, ncol = 3) +
-  theme_bw() +
-  theme(aspect.ratio = 1, legend.position = 'top', legend.title = element_blank()) +
-  geom_abline(aes(slope = 1, intercept = 0))
-  #) %>% devsize(3,3,verbose = T)
-#'
-#' ## Observations vs. Individual Predictions
-#' 
-#+ DV-PRED, fig.width = 3.65, fig.height = 3.52, fig.cap = "x %>% isoplot(DV, PRED)"
-x %>% isoplot(DV, PRED)
-#'
-#' ## DV vs PRED log-log
-#+ DV-PRED-LOG, fig.width = 3.65, fig.height = 3.52, fig.cap = "x %>% isoplot(DV, PRED, trans = 'log10')"
-x %>% isoplot(DV, PRED, trans = 'log10')
-#'
-#' ## DV vs PRED and IPRED
-#'
-#+ DV-PRED-DV-IPRED, fig.width = 7.3, fig.height = 3.52, fig.cap = "x %>% isopair(DV, PRED, DV, IPRED)"
-x %>% isopair(DV, PRED, DV, IPRED)
-#'
-#' ## DV vs IPRED, untransformed and log-log
-#' 
-#+ DV-IPRED-DV-IPRED-notrans-log, fig.width = 7.3, fig.height = 3.52, fig.cap = "x %>% isopair(DV, IPRED, DV, IPRED, trans = c('identity','log10'))"
-x %>% isopair(DV, IPRED, DV, IPRED, trans = c('identity','log10'))
-#'
-#' ## IWRES vs TIME
-#' 
-#+ IWRES-TIME, fig.width = 3.65, fig.height = 3.52, fig.cap = "x %>% trendplot(IWRES, TIME)"
-x %>% trendplot(IWRES, TIME) #%>% devsize(3,3,verbose = T)
-#'
-#' ## IWRES vs TIME, untransformed and log-log
-#+ IWRES-TIME-IWRES-TIME-untrans-log, fig.width = 7.3, fig.height = 3.52, fig.cap = "x %>% trendpair(IWRES, TIME, IWRES, TIME, trans2 = c('identity', 'log10'))"
-x %>% trendpair(IWRES, TIME, IWRES, TIME, trans2 = c('identity', 'log10'))
-#'
 

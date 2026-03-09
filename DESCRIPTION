@@ -1,7 +1,7 @@
 Package: qptools
 Type: Package
 Title: Integrative Tools for Pharmacometrics
-Version: 4.5.2-2
+Version: 4.5.2-5
 Author: Klaas Prins, Tim Bergsma, Max Lagraauw, Jan Huisman, Undine Falkenhagen
 Maintainer: Klaas Prins <klaas.prins@qpharmetra.com>
 Description: Integrative tools for pharmacometrics.
@@ -9,7 +9,7 @@ License: GPL-3
 Encoding: UTF-8
 Imports: tidyselect, tidyr, dplyr, pmxTools, magrittr, 
  stringr, MASS, nonmemica (>= 1.0.7), ggplot2, yamlet (>= 1.1.2), 
- readr, tibble, spork
+ readr, tibble, spork, metaplot, rlang
 Suggests: xtable, knitr, wrangle, kableExtra, wrangle, tablet
 RoxygenNote: 7.3.3
 VignetteBuilder: knitr

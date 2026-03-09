@@ -69,20 +69,6 @@ library(dplyr)
 ``` r
 library(magrittr)
 library(yamlet)
-```
-
-```
-## 
-## Attaching package: 'yamlet'
-```
-
-```
-## The following object is masked from 'package:stats':
-## 
-##     filter
-```
-
-``` r
 library(wrangle)
 ```
 
@@ -3384,8 +3370,7 @@ do.call("rbind", tmp) %>%
 ```
 
 ```
-## `geom_smooth()` using formula
-## = 'y ~ x'
+## `geom_smooth()` using formula = 'y ~ x'
 ```
 
 ![](C:/project/devel/qptools/vignettes/qptools-introduction_files/figure-html/get_xpose_table-1.png)<!-- -->
@@ -3465,9 +3450,7 @@ paste0("run", c(100,103,105)) %>% nm_runrecord_graph()
 ```
 
 ```
-## `geom_smooth()` using method
-## = 'loess' and formula = 'y ~
-## x'
+## `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
 ```
 
 ![](C:/project/devel/qptools/vignettes/qptools-introduction_files/figure-html/unnamed-chunk-9-1.png)<!-- -->

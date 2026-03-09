@@ -105,7 +105,7 @@ find_diag_template = function(
      locpk = lst[grep("$", lst, fixed = TRUE)]
      
      # survey these for either $PK or $PRED
-     loc0 <- grep('([$]PK)|([$]PRED)', locpk)
+     loc0 <- grep('(^[$]PK)|(^[$]PRED)', locpk)
      
      # locations must be singular, positive, and definite
      stopifnot(unambiguous(loc0))

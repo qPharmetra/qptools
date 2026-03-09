@@ -573,7 +573,7 @@ format.nmpartab_ = function(
     # LOG
     y %<>% mutate_cond(
        transform=="LOG", 
-       estimate=exp(estimate_untransf) ,
+       estimate=exp(estimate_untransf) %>% myFormat(digits = digits) ,
        RSE = (sqrt(exp(se_est_untransf^2)-1) * 100) %>% myFormat(digits = digits),
        CI95 = 
           paste0(
@@ -588,7 +588,7 @@ format.nmpartab_ = function(
     # LOGIT
     y %<>% mutate_cond(
        transform=="LOGIT", 
-       estimate=logit_inv(estimate_untransf),
+       estimate=logit_inv(estimate_untransf) %>% myFormat(digits = digits),
        CI95 = paste0(
           logit_inv(estimate_untransf-se_est_untransf)%>% myFormat(digits = digits),
           ci.sep,

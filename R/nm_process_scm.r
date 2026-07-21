@@ -119,7 +119,9 @@ scm_table = function (x, direction, ...){
   x <- x[!grepl("MODEL", x)]
   # TTB 12/19/2025 Sometimes V3 and V4 have no separation;
   # perhaps recoverable if V4 shows negative:
-  x %<>% sub('(\\d)-(\\d)','\\1 -\\2',.)
+  # x %<>% sub('(\\d)-(\\d)','\\1 -\\2',.)
+  # TTB 07/20/2026 trying to solve the edge case with covariate ending in digit:
+  x %<>% sub("(PVAL.*\\d)-(\\d)", "\\1 -\\2", .)
   if (length(x) == 0) 
     return(data.frame(step = integer(0), model = character(0), 
                       ofvbase = numeric(0), ofvtest = numeric(0), dofv = numeric(0), 

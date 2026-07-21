@@ -101,35 +101,24 @@ find_diag_template = function(
      # For "$THETA  (-9,-6.16,5) ; 1. Tumor Growth Rate Constant; 1/week; LOG" 
      # str_squish removes second space following THETA
 
-     # find all the first lines of records
-     locpk = lst[grep("$", lst, fixed = TRUE)]
+     # Find NONMEM record lines: $ may be preceded by whitespace, but it must
+     # be the first non-blank character. Retain their original positions so
+     # text such as "$DES" in a comment cannot be mistaken for a record.
+     record_locs <- grep("^[[:space:]]*\\$", lst, perl = TRUE)
+     locpk <- lst[record_locs]
      
      # survey these for either $PK or $PRED
-     loc0 <- grep('(^[$]PK)|(^[$]PRED)', locpk)
+     loc0 <- grep('^[[:space:]]*\\$(PK|PRED)\\b', locpk, perl = TRUE)
      
      # locations must be singular, positive, and definite
      stopifnot(unambiguous(loc0))
      
-     # define start and end of pk/pred in lst as 
-     # all material following loc0
-     # up to but not including the location of the next record in locpk
-     
      stopifnot(length(locpk) >= loc0 + 1L)
  
-     # identify relevant text
-     tok1 <- locpk[[loc0]]
-     tok2 <- locpk[[loc0 + 1]]
-     
-     # find these tokens in the original text (whence they came)
-     # and select "inner" material
-     loc1 <- grep(tok1, lst, fixed = TRUE) + 1L
-     loc2 <- grep(tok2, lst, fixed = TRUE) - 1L
-     
-     # apparently loc2 can have more than one "hit"
-     # retain the index closest to loc1
-     
-     closest <- whichClosestToZero(abs(loc1 - loc2))
-     loc2 <- loc2[[closest]]
+     # Select text up to the next control record by original line position.
+     # This avoids matching record-like text in comments or metadata.
+     loc1 <- record_locs[[loc0]] + 1L
+     loc2 <- record_locs[[loc0 + 1L]] - 1L
      
      stopifnot(unambiguous(loc2))
      stopifnot(unambiguous(loc1))
